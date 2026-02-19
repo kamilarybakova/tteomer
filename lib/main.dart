@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'features/auth/auth_screen.dart';
+import 'features/auth/presentation/pages/auth_screen.dart';
 import 'l10n/app_localizations.dart';
 
 void main() {

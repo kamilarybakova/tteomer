@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../core/theme/app_colors.dart';
-import '../../core/widgets/button_widget.dart';
-import '../../l10n/app_localizations.dart';
+import 'package:tteomer/features/auth/presentation/pages/log_in_screen.dart';
+import 'package:tteomer/features/auth/presentation/pages/sign_up_screen.dart';
+import '../../../../core/theme/app_colors.dart';
+import '../../../../core/widgets/button_widget.dart';
+import '../../../../l10n/app_localizations.dart';
 
 class AuthScreen extends StatefulWidget {
   const AuthScreen({super.key});
@@ -47,7 +49,14 @@ class _AuthScreenState extends State<AuthScreen> {
               ButtonWidget(
                 text: t.login,
                 filled: true,
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const LogInScreen(),
+                    ),
+                  );
+                },
               ),
 
               const SizedBox(height: 16),
@@ -55,7 +64,14 @@ class _AuthScreenState extends State<AuthScreen> {
               ButtonWidget(
                 text: t.register,
                 filled: false,
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const SignUpScreen(),
+                    ),
+                  );
+                },
               ),
 
               const Spacer(flex: 2),

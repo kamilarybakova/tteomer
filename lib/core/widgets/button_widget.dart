@@ -8,13 +8,13 @@ import '../theme/app_colors.dart';
 class ButtonWidget extends StatelessWidget {
   final String text;
   final bool filled;
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   const ButtonWidget({
     super.key,
     required this.text,
     required this.filled,
-    required this.onTap,
+    this.onTap,
   });
 
   @override

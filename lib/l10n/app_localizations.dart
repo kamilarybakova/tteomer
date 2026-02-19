@@ -105,17 +105,173 @@ abstract class AppLocalizations {
   /// **'Bişkek Türkiye Türkçesi Öğretim Merkezi'**
   String get appTitle;
 
+  /// No description provided for @register.
+  ///
+  /// In en, this message translates to:
+  /// **'Создать аккаунт'**
+  String get register;
+
+  /// No description provided for @signUpTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Создать аккаунт'**
+  String get signUpTitle;
+
+  /// No description provided for @nickname.
+  ///
+  /// In en, this message translates to:
+  /// **'Ник'**
+  String get nickname;
+
+  /// No description provided for @enterNickname.
+  ///
+  /// In en, this message translates to:
+  /// **'Введите ник'**
+  String get enterNickname;
+
+  /// No description provided for @email.
+  ///
+  /// In en, this message translates to:
+  /// **'Почта'**
+  String get email;
+
+  /// No description provided for @enterEmail.
+  ///
+  /// In en, this message translates to:
+  /// **'Введите почту'**
+  String get enterEmail;
+
+  /// No description provided for @password.
+  ///
+  /// In en, this message translates to:
+  /// **'Пароль'**
+  String get password;
+
+  /// No description provided for @acceptTerms.
+  ///
+  /// In en, this message translates to:
+  /// **'Я принимаю условия использования\nи политику конфиденциальности.'**
+  String get acceptTerms;
+
+  /// No description provided for @alreadyHaveAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Уже есть аккаунт?'**
+  String get alreadyHaveAccount;
+
   /// No description provided for @login.
   ///
   /// In en, this message translates to:
   /// **'Войти'**
   String get login;
 
-  /// No description provided for @register.
+  /// No description provided for @createAccount.
   ///
   /// In en, this message translates to:
   /// **'Создать аккаунт'**
-  String get register;
+  String get createAccount;
+
+  /// No description provided for @forgotPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Забыли пароль?'**
+  String get forgotPassword;
+
+  /// No description provided for @noAccount.
+  ///
+  /// In en, this message translates to:
+  /// **'Нет аккаунта?'**
+  String get noAccount;
+
+  /// No description provided for @enterGroupCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Введите код группы'**
+  String get enterGroupCode;
+
+  /// No description provided for @send.
+  ///
+  /// In en, this message translates to:
+  /// **'Отправить'**
+  String get send;
+
+  /// No description provided for @resendCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Отправить код снова'**
+  String get resendCode;
+
+  /// No description provided for @resendWithTimer.
+  ///
+  /// In en, this message translates to:
+  /// **'Отправить код снова {time}'**
+  String resendWithTimer(Object time);
+
+  /// No description provided for @forgotPasswordTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Забыли пароль?'**
+  String get forgotPasswordTitle;
+
+  /// No description provided for @forgotPasswordDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Пожалуйста, введите адрес электронной почты, связанный с вашей учетной записью.'**
+  String get forgotPasswordDesc;
+
+  /// No description provided for @sendCode.
+  ///
+  /// In en, this message translates to:
+  /// **'Отправить код'**
+  String get sendCode;
+
+  /// No description provided for @rememberPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Вспомнили пароль?'**
+  String get rememberPassword;
+
+  /// No description provided for @verifyEmailTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Проверьте вашу почту'**
+  String get verifyEmailTitle;
+
+  /// No description provided for @verifyEmailDesc.
+  ///
+  /// In en, this message translates to:
+  /// **'Мы отправили код на почту {email}'**
+  String verifyEmailDesc(Object email);
+
+  /// No description provided for @resetPasswordTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Сбросить пароль'**
+  String get resetPasswordTitle;
+
+  /// No description provided for @enterNewPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Введите новый пароль'**
+  String get enterNewPassword;
+
+  /// No description provided for @newPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Новый пароль'**
+  String get newPassword;
+
+  /// No description provided for @repeatPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Повторите ввод нового пароля'**
+  String get repeatPassword;
+
+  /// No description provided for @resetPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'Сбросить пароль'**
+  String get resetPassword;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

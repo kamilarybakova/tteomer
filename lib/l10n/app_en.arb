@@ -1,6 +1,42 @@
 {
   "@@locale": "en",
   "appTitle": "Bişkek Türkiye Türkçesi Öğretim Merkezi",
+  "register": "Создать аккаунт",
+  "signUpTitle": "Создать аккаунт",
+  "nickname": "Ник",
+  "enterNickname": "Введите ник",
+  "email": "Почта",
+  "enterEmail": "Введите почту",
+  "password": "Пароль",
+  "acceptTerms": "Я принимаю условия использования\nи политику конфиденциальности.",
+  "alreadyHaveAccount": "Уже есть аккаунт?",
   "login": "Войти",
-  "register": "Создать аккаунт"
+  "createAccount": "Создать аккаунт",
+  "forgotPassword": "Забыли пароль?",
+  "noAccount": "Нет аккаунта?",
+  "enterGroupCode": "Введите код группы",
+  "send": "Отправить",
+  "resendCode": "Отправить код снова",
+  "resendWithTimer": "Отправить код снова {time}",
+  "@resendWithTimer": {
+    "placeholders": {
+      "time": {}
+    }
+  },
+  "forgotPasswordTitle": "Забыли пароль?",
+  "forgotPasswordDesc": "Пожалуйста, введите адрес электронной почты, связанный с вашей учетной записью.",
+  "sendCode": "Отправить код",
+  "rememberPassword": "Вспомнили пароль?",
+  "verifyEmailTitle": "Проверьте вашу почту",
+  "verifyEmailDesc": "Мы отправили код на почту {email}",
+  "@verifyEmailDesc": {
+    "placeholders": {
+      "email": {}
+    }
+  },
+  "resetPasswordTitle": "Сбросить пароль",
+  "enterNewPassword": "Введите новый пароль",
+  "newPassword": "Новый пароль",
+  "repeatPassword": "Повторите ввод нового пароля",
+  "resetPassword": "Сбросить пароль"
 }
