@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:tteomer/features/auth/domain/usecases/reset_password_usecase.dart';
@@ -21,21 +22,23 @@ class AuthNotifier extends StateNotifier<AuthState> {
     required this.storage,
   }) : super(AuthInitial());
 
+  String _extractError(Object e) {
+    if (e is DioException) {
+      final data = e.response?.data;
+      return data?['errors']?['detail'] ?? data?['detail'] ?? 'Unknown error';
+    }
+    return e.toString();
+  }
+
   Future<void> login(String email, String password) async {
     try {
       state = AuthLoading();
-
-      final tokens = await loginUseCase(
-        email: email,
-        password: password,
-      );
-
+      final tokens = await loginUseCase(email: email, password: password);
       await storage.write(key: 'access_token', value: tokens.accessToken);
       await storage.write(key: 'refresh_token', value: tokens.refreshToken);
-
       state = AuthSuccess(tokens);
     } catch (e) {
-      state = AuthError(e.toString());
+      state = AuthError(_extractError(e));
     }
   }
 
@@ -57,7 +60,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
       );
       state = AuthRegistered();
     } catch (e) {
-      state = AuthError(e.toString());
+      state = AuthError(_extractError(e));
     }
   }
 
@@ -67,7 +70,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
       await resetPasswordUseCase(email: email);
       state = ResetPasswordEmailSent();
     } catch (e) {
-      state = AuthError(e.toString());
+      state = AuthError(_extractError(e));
     }
   }
 
@@ -78,14 +81,10 @@ class AuthNotifier extends StateNotifier<AuthState> {
   }) async {
     try {
       state = AuthLoading();
-      await resetPasswordConfirmUseCase(
-        email: email,
-        code: code,
-        password: password,
-      );
+      await resetPasswordConfirmUseCase(email: email, code: code, password: password);
       state = ResetPasswordSuccess();
     } catch (e) {
-      state = AuthError(e.toString());
+      state = AuthError(_extractError(e));
     }
   }
 }

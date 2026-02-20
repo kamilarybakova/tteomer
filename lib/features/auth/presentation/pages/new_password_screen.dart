@@ -59,9 +59,7 @@ class _NewPasswordScreenState extends ConsumerState<NewPasswordScreen> {
       }
 
       if (next is AuthError) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(next.message)),
-        );
+        AppToast.show(context, next.message);
       }
     });
 

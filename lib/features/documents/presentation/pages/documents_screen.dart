@@ -35,6 +35,7 @@ class _DocumentsScreenState extends ConsumerState<DocumentsScreen> {
         title: Text(l10n.tabDocs),
         centerTitle: true,
         backgroundColor: const Color(0xFFF3F3F3),
+        automaticallyImplyLeading: false,
       ),
       body: Column(
         children: [

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tteomer/features/auth/presentation/utils/auth_text_field.dart';
 import 'package:tteomer/features/auth/presentation/utils/field_label.dart';
 import 'package:tteomer/features/auth/presentation/pages/sign_up_screen.dart';
+import '../../../../core/widgets/app_toast.dart';
 import '../../../../core/widgets/button_widget.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../main_navigation_screen.dart';
@@ -24,6 +25,24 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
   bool obscure = true;
 
   @override
+  void initState() {
+    super.initState();
+    emailController.addListener(() => setState(() {}));
+    passwordController.addListener(() => setState(() {}));
+  }
+
+  @override
+  void dispose() {
+    emailController.dispose();
+    passwordController.dispose();
+    super.dispose();
+  }
+
+  bool get _canSubmit =>
+      emailController.text.trim().isNotEmpty &&
+          passwordController.text.trim().isNotEmpty;
+
+  @override
   Widget build(BuildContext context) {
     final t = AppLocalizations.of(context)!;
     const primary = Color(0xFF4C63D2);
@@ -41,9 +60,7 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
       }
 
       if (next is AuthError) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(next.message)),
-        );
+        AppToast.show(context, next.message);
       }
     });
 
@@ -67,8 +84,6 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
                 ),
               ),
               const SizedBox(height: 32),
-
-              /// EMAIL
               FieldLabel(t.email),
               const SizedBox(height: 8),
               AuthTextField(
@@ -76,10 +91,7 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
                 hint: 'helloworld@gmail.com',
                 suffix: const Icon(Icons.check_circle, color: primary),
               ),
-
               const SizedBox(height: 20),
-
-              /// PASSWORD
               FieldLabel(t.password),
               const SizedBox(height: 8),
               AuthTextField(
@@ -94,8 +106,6 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
                   onPressed: () => setState(() => obscure = !obscure),
                 ),
               ),
-
-              /// FORGOT PASSWORD
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
@@ -113,28 +123,22 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
                   ),
                 ),
               ),
-
               const SizedBox(height: 8),
-
-              /// 🔥 LOGIN BUTTON
               ButtonWidget(
                 text: authState is AuthLoading ? 'Loading...' : t.login,
                 filled: true,
-                onTap: authState is AuthLoading
+                onTap: (authState is AuthLoading || !_canSubmit)
                     ? null
                     : () {
-                  final email = emailController.text.trim();
-                  final password = passwordController.text.trim();
-
                   ref
                       .read(authNotifierProvider.notifier)
-                      .login(email, password);
+                      .login(
+                    emailController.text.trim(),
+                    passwordController.text.trim(),
+                  );
                 },
               ),
-
               const Spacer(),
-
-              /// SIGN UP
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -151,8 +155,8 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
                         ),
                       );
                     },
-                    child: const Text(
-                      'Create account',
+                    child: Text(
+                      t.createAccount,
                       style: TextStyle(
                         color: primary,
                         fontWeight: FontWeight.w600,
@@ -162,7 +166,6 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
                   ),
                 ],
               ),
-
               const SizedBox(height: 24),
             ],
           ),

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
+import '../../../../core/widgets/app_toast.dart';
 import '../../../../core/widgets/button_widget.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../main_navigation_screen.dart';
@@ -88,9 +89,7 @@ class _GroupCodeScreenState extends ConsumerState<GroupCodeScreen> {
       }
 
       if (next is AuthError) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(next.message)),
-        );
+        AppToast.show(context, next.message);
       }
     });
 

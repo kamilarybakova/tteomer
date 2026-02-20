@@ -50,7 +50,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 text: t.login,
                 filled: true,
                 onTap: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) => const LogInScreen(),
@@ -65,7 +65,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 text: t.register,
                 filled: false,
                 onTap: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (context) => const SignUpScreen(),
