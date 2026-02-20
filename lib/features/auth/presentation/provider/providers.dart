@@ -1,6 +1,13 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/network/dio_client.dart';
+import '../../../../core/storage/secure_storage_provider.dart';
+import '../../../documents/data/datasource/materials_remote_datasource.dart';
+import '../../../documents/data/repository/materials_repository_impl.dart';
+import '../../../documents/domain/usecase/get_categories_usecase.dart';
+import '../../../documents/domain/usecase/get_materials_usecase.dart';
+import '../../../documents/presentation/provider/materials_notifier.dart';
+import '../../../documents/presentation/provider/materials_state.dart';
 import '../../data/datasources/auth_remote_datasource.dart';
 import '../../data/repository/auth_repository_impl.dart';
 import '../../domain/repositories/auth_repository.dart';
@@ -46,5 +53,36 @@ StateNotifierProvider<AuthNotifier, AuthState>((ref) {
     registerUseCase: ref.read(registerUseCaseProvider),
     resetPasswordUseCase: ref.read(resetPasswordUseCaseProvider),
     resetPasswordConfirmUseCase: ref.read(resetPasswordConfirmUseCaseProvider),
+    storage: ref.read(secureStorageProvider),
+  );
+});
+
+final materialsRemoteDataSourceProvider = Provider(
+      (ref) => MaterialsRemoteDataSourceImpl(ref.read(dioProvider)),
+);
+
+final materialsRepositoryProvider = Provider(
+      (ref) => MaterialsRepositoryImpl(
+    ref.read(materialsRemoteDataSourceProvider),
+  ),
+);
+
+final getMaterialsUseCaseProvider = Provider(
+      (ref) => GetMaterialsUseCase(
+    ref.read(materialsRepositoryProvider),
+  ),
+);
+
+final getCategoriesUseCaseProvider = Provider(
+      (ref) => GetCategoriesUseCase(
+    ref.read(materialsRepositoryProvider),
+  ),
+);
+
+final materialsNotifierProvider =
+StateNotifierProvider<MaterialsNotifier, MaterialsState>((ref) {
+  return MaterialsNotifier(
+    getMaterials: ref.read(getMaterialsUseCaseProvider),
+    getCategories: ref.read(getCategoriesUseCaseProvider),
   );
 });

@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:tteomer/features/auth/domain/usecases/reset_password_usecase.dart';
 import '../../domain/usecases/login_usecase.dart';
 import '../../domain/usecases/register_usecase.dart';
@@ -10,18 +11,28 @@ class AuthNotifier extends StateNotifier<AuthState> {
   final RegisterUseCase registerUseCase;
   final ResetPasswordUseCase resetPasswordUseCase;
   final ResetPasswordConfirmUseCase resetPasswordConfirmUseCase;
+  final FlutterSecureStorage storage;
 
   AuthNotifier({
     required this.loginUseCase,
     required this.registerUseCase,
     required this.resetPasswordUseCase,
     required this.resetPasswordConfirmUseCase,
+    required this.storage,
   }) : super(AuthInitial());
 
   Future<void> login(String email, String password) async {
     try {
       state = AuthLoading();
-      final tokens = await loginUseCase(email: email, password: password);
+
+      final tokens = await loginUseCase(
+        email: email,
+        password: password,
+      );
+
+      await storage.write(key: 'access_token', value: tokens.accessToken);
+      await storage.write(key: 'refresh_token', value: tokens.refreshToken);
+
       state = AuthSuccess(tokens);
     } catch (e) {
       state = AuthError(e.toString());

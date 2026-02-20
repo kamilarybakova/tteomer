@@ -41,8 +41,6 @@ class AuthInterceptor extends Interceptor {
       final storage = ref.read(secureStorageProvider);
       await storage.delete(key: 'access_token');
       await storage.delete(key: 'refresh_token');
-      // ref.read(isAuthenticatedProvider.notifier).state = false;
-      // ref.read(authViewModelProvider.notifier).logout();
     }
 
     handler.next(err);
