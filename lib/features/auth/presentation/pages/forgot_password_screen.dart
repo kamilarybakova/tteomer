@@ -2,17 +2,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tteomer/features/auth/presentation/pages/verify_email_screen.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/widgets/app_toast.dart';
 import '../../../../core/widgets/button_widget.dart';
 import '../../../../l10n/app_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ForgotPasswordScreen extends StatefulWidget {
+import '../provider/auth_state.dart';
+import '../provider/providers.dart';
+
+class ForgotPasswordScreen extends ConsumerStatefulWidget {
   const ForgotPasswordScreen({super.key});
 
   @override
-  State<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
+  ConsumerState<ForgotPasswordScreen> createState() => _ForgotPasswordScreenState();
 }
 
-class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
+class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
   final controller = TextEditingController();
   final focusNode = FocusNode();
 
@@ -34,6 +39,26 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     const primary = Color(0xFF4C63D2);
+
+    ref.listen<AuthState>(authNotifierProvider, (prev, next) {
+      if (next is ResetPasswordEmailSent) {
+        final email = controller.text.trim();
+        AppToast.show(context, 'Код был отправлен на почту $email');
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (_) => VerifyEmailScreen(email: email),
+          ),
+        );
+      }
+
+      if (next is AuthError) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(next.message)),
+        );
+      }
+    });
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -153,13 +178,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
 
   void _onSend() {
     final email = controller.text.trim();
-    debugPrint('Send reset code to: $email');
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => VerifyEmailScreen(email: email)
-      ),
-    );
+    ref.read(authNotifierProvider.notifier).resetPassword(email);
   }
 }

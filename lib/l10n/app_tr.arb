@@ -28,5 +28,15 @@
   "enterNewPassword": "Yeni şifre girin",
   "newPassword": "Yeni şifre",
   "repeatPassword": "Yeni şifreyi tekrar girin",
-  "resetPassword": "Şifreyi sıfırla"
+  "resetPassword": "Şifreyi sıfırla",
+  "emptyDictionaryTitle": "Словарь пуст",
+  "emptyDictionarySubtitle": "Добавьте первые слова, чтобы начать обучение",
+  "searchHint": "Поиск слов",
+  "tabHome": "Ana sayfa",
+  "tabDictionary": "Sözlük",
+  "tabDocs": "Belgeler",
+  "firstName": "Ad",
+  "enterName": "Adınızı girin",
+  "lastName": "Soyad",
+  "enterLastName": "Soyadınızı girin"
 }

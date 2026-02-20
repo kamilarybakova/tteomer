@@ -98,4 +98,34 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get resetPassword => 'Сырсөздү өзгөртүү';
+
+  @override
+  String get emptyDictionaryTitle => 'Словарь пуст';
+
+  @override
+  String get emptyDictionarySubtitle => 'Добавьте первые слова, чтобы начать обучение';
+
+  @override
+  String get searchHint => 'Поиск слов';
+
+  @override
+  String get tabHome => 'Башкы бет';
+
+  @override
+  String get tabDictionary => 'Сөздүк';
+
+  @override
+  String get tabDocs => 'Документтер';
+
+  @override
+  String get firstName => 'Атыңыз';
+
+  @override
+  String get lastName => 'Фамилияңыз';
+
+  @override
+  String get enterName => 'Атыңызды жазыңыз';
+
+  @override
+  String get enterLastName => 'Фамилияңызды жазыңыз';
 }

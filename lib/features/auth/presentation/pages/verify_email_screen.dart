@@ -162,7 +162,7 @@ class _VerifyEmailScreenState extends State<VerifyEmailScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const NewPasswordScreen(),
+        builder: (context) => NewPasswordScreen(email: widget.email, code: code),
       ),
     );
   }

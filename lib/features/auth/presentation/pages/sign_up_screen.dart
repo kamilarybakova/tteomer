@@ -15,7 +15,8 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-  final nicknameController = TextEditingController();
+  final nameController = TextEditingController();
+  final lastNameController = TextEditingController();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -51,26 +52,31 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
               const SizedBox(height: 32),
 
-              FieldLabel(t.nickname),
-              const SizedBox(height: 8),
+              FieldLabel(t.firstName),
               AuthTextField(
-                controller: nicknameController,
-                hint: t.enterNickname,
+                controller: nameController,
+                hint: t.enterName,
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 16),
+
+              FieldLabel(t.lastName),
+              AuthTextField(
+                controller: lastNameController,
+                hint: t.enterLastName,
+              ),
+
+              const SizedBox(height: 16),
 
               FieldLabel(t.email),
-              const SizedBox(height: 8),
               AuthTextField(
                 controller: emailController,
                 hint: t.enterEmail,
               ),
 
-              const SizedBox(height: 20),
+              const SizedBox(height: 16),
 
               FieldLabel(t.password),
-              const SizedBox(height: 8),
               AuthTextField(
                 controller: passwordController,
                 hint: '••••••••',
@@ -132,7 +138,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const GroupCodeScreen(),
+                      builder: (context) => GroupCodeScreen(
+                        email: emailController.text,
+                        password: passwordController.text,
+                        firstName: nameController.text,
+                        lastName: lastNameController.text,
+                      ),
                     ),
                   );
                 },

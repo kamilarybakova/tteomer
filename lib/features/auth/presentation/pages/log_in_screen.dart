@@ -1,19 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tteomer/features/auth/presentation/utils/auth_text_field.dart';
 import 'package:tteomer/features/auth/presentation/utils/field_label.dart';
 import 'package:tteomer/features/auth/presentation/pages/sign_up_screen.dart';
 import '../../../../core/widgets/button_widget.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../../../../main_navigation_screen.dart';
+import '../provider/auth_state.dart';
+import '../provider/providers.dart';
 import 'forgot_password_screen.dart';
 
-class LogInScreen extends StatefulWidget {
+class LogInScreen extends ConsumerStatefulWidget {
   const LogInScreen({super.key});
 
   @override
-  State<LogInScreen> createState() => _LogInScreenState();
+  ConsumerState<LogInScreen> createState() => _LogInScreenState();
 }
 
-class _LogInScreenState extends State<LogInScreen> {
+class _LogInScreenState extends ConsumerState<LogInScreen> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
 
@@ -24,6 +28,25 @@ class _LogInScreenState extends State<LogInScreen> {
     final t = AppLocalizations.of(context)!;
     const primary = Color(0xFF4C63D2);
 
+    final authState = ref.watch(authNotifierProvider);
+
+    ref.listen<AuthState>(authNotifierProvider, (prev, next) {
+      if (next is AuthSuccess) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (_) => const MainNavigationScreen(),
+          ),
+        );
+      }
+
+      if (next is AuthError) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(next.message)),
+        );
+      }
+    });
+
     return Scaffold(
       backgroundColor: const Color(0xFFF3F3F3),
       body: SafeArea(
@@ -32,8 +55,6 @@ class _LogInScreenState extends State<LogInScreen> {
           child: Column(
             children: [
               const SizedBox(height: 40),
-
-              /// TITLE
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -45,7 +66,6 @@ class _LogInScreenState extends State<LogInScreen> {
                   ),
                 ),
               ),
-
               const SizedBox(height: 32),
 
               /// EMAIL
@@ -83,7 +103,7 @@ class _LogInScreenState extends State<LogInScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const ForgotPasswordScreen(),
+                        builder: (_) => const ForgotPasswordScreen(),
                       ),
                     );
                   },
@@ -96,16 +116,25 @@ class _LogInScreenState extends State<LogInScreen> {
 
               const SizedBox(height: 8),
 
-              /// BUTTON
+              /// 🔥 LOGIN BUTTON
               ButtonWidget(
-                text: t.login,
+                text: authState is AuthLoading ? 'Loading...' : t.login,
                 filled: true,
-                onTap: () {},
+                onTap: authState is AuthLoading
+                    ? null
+                    : () {
+                  final email = emailController.text.trim();
+                  final password = passwordController.text.trim();
+
+                  ref
+                      .read(authNotifierProvider.notifier)
+                      .login(email, password);
+                },
               ),
 
               const Spacer(),
 
-              /// BOTTOM LINK
+              /// SIGN UP
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -118,13 +147,13 @@ class _LogInScreenState extends State<LogInScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const SignUpScreen(),
+                          builder: (_) => const SignUpScreen(),
                         ),
                       );
                     },
-                    child: Text(
-                      t.createAccount,
-                      style: const TextStyle(
+                    child: const Text(
+                      'Create account',
+                      style: TextStyle(
                         color: primary,
                         fontWeight: FontWeight.w600,
                         decoration: TextDecoration.underline,
@@ -142,3 +171,4 @@ class _LogInScreenState extends State<LogInScreen> {
     );
   }
 }
+

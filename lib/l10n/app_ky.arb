@@ -28,5 +28,15 @@
   "enterNewPassword": "Жаңы сырсөздү киргизиңиз",
   "newPassword": "Жаңы сырсөз",
   "repeatPassword": "Жаңы сырсөздү кайра киргизиңиз",
-  "resetPassword": "Сырсөздү өзгөртүү"
+  "resetPassword": "Сырсөздү өзгөртүү",
+  "emptyDictionaryTitle": "Словарь пуст",
+  "emptyDictionarySubtitle": "Добавьте первые слова, чтобы начать обучение",
+  "searchHint": "Поиск слов",
+  "tabHome": "Башкы бет",
+  "tabDictionary": "Сөздүк",
+  "tabDocs": "Документтер",
+  "firstName": "Атыңыз",
+  "enterName": "Атыңызды жазыңыз",
+  "lastName": "Фамилияңыз",
+  "enterLastName": "Фамилияңызды жазыңыз"
 }

@@ -1,3 +1,3 @@
 class AppConfig {
-  static const apiBaseUrl = 'https://lexi-learning-app-backend.fly.dev';
+  static const apiBaseUrl = 'https://tteomerproject.fly.dev';
 }

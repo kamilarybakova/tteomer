@@ -1,18 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tteomer/features/auth/presentation/pages/log_in_screen.dart';
 import '../../../../core/theme/app_colors.dart';
+import '../../../../core/widgets/app_toast.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../core/widgets/button_widget.dart';
+import '../provider/auth_state.dart';
+import '../provider/providers.dart';
 
-class NewPasswordScreen extends StatefulWidget {
-  const NewPasswordScreen({super.key});
+class NewPasswordScreen extends ConsumerStatefulWidget {
+  final String email;
+  final String code;
+
+  const NewPasswordScreen({
+    super.key,
+    required this.email,
+    required this.code,
+  });
 
   @override
-  State<NewPasswordScreen> createState() => _NewPasswordScreenState();
+  ConsumerState<NewPasswordScreen> createState() => _NewPasswordScreenState();
 }
 
-class _NewPasswordScreenState extends State<NewPasswordScreen> {
+class _NewPasswordScreenState extends ConsumerState<NewPasswordScreen> {
   final passwordController = TextEditingController();
   final confirmController = TextEditingController();
 
@@ -35,6 +46,24 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+
+    ref.listen<AuthState>(authNotifierProvider, (prev, next) {
+      if (next is ResetPasswordSuccess) {
+        AppToast.show(context, 'Пароль был сброшен');
+
+        Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(builder: (_) => const LogInScreen()),
+              (_) => false,
+        );
+      }
+
+      if (next is AuthError) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(next.message)),
+        );
+      }
+    });
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -151,10 +180,13 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
   }
 
   void _submit() {
-    final password = passwordController.text;
-    debugPrint('NEW PASSWORD: $password');
+    final password = passwordController.text.trim();
 
-    // TODO: API reset password
+    ref.read(authNotifierProvider.notifier).resetPasswordConfirm(
+      email: widget.email,
+      code: widget.code,
+      password: password,
+    );
   }
 }
 

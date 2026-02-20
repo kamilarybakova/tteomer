@@ -38,5 +38,15 @@
   "enterNewPassword": "Введите новый пароль",
   "newPassword": "Новый пароль",
   "repeatPassword": "Повторите ввод нового пароля",
-  "resetPassword": "Сбросить пароль"
+  "resetPassword": "Сбросить пароль",
+  "emptyDictionaryTitle": "Словарь пуст",
+  "emptyDictionarySubtitle": "Добавьте первые слова, чтобы начать обучение",
+  "searchHint": "Поиск слов",
+  "tabHome": "Главная",
+  "tabDictionary": "Словарь",
+  "tabDocs": "Документы",
+  "firstName": "Имя",
+  "enterName": "Введите ваше имя",
+  "lastName": "Фамилия",
+  "enterLastName": "Введите вашу фамилию"
 }

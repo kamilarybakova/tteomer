@@ -98,4 +98,34 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get resetPassword => 'Şifreyi sıfırla';
+
+  @override
+  String get emptyDictionaryTitle => 'Словарь пуст';
+
+  @override
+  String get emptyDictionarySubtitle => 'Добавьте первые слова, чтобы начать обучение';
+
+  @override
+  String get searchHint => 'Поиск слов';
+
+  @override
+  String get tabHome => 'Ana sayfa';
+
+  @override
+  String get tabDictionary => 'Sözlük';
+
+  @override
+  String get tabDocs => 'Belgeler';
+
+  @override
+  String get firstName => 'Ad';
+
+  @override
+  String get lastName => 'Soyad';
+
+  @override
+  String get enterName => 'Adınızı girin';
+
+  @override
+  String get enterLastName => 'Soyadınızı girin';
 }

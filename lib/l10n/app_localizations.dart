@@ -272,6 +272,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Сбросить пароль'**
   String get resetPassword;
+
+  /// No description provided for @emptyDictionaryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Словарь пуст'**
+  String get emptyDictionaryTitle;
+
+  /// No description provided for @emptyDictionarySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Добавьте первые слова, чтобы начать обучение'**
+  String get emptyDictionarySubtitle;
+
+  /// No description provided for @searchHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Поиск слов'**
+  String get searchHint;
+
+  /// No description provided for @tabHome.
+  ///
+  /// In en, this message translates to:
+  /// **'Главная'**
+  String get tabHome;
+
+  /// No description provided for @tabDictionary.
+  ///
+  /// In en, this message translates to:
+  /// **'Словарь'**
+  String get tabDictionary;
+
+  /// No description provided for @tabDocs.
+  ///
+  /// In en, this message translates to:
+  /// **'Документы'**
+  String get tabDocs;
+
+  /// No description provided for @firstName.
+  ///
+  /// In en, this message translates to:
+  /// **'Имя'**
+  String get firstName;
+
+  /// No description provided for @lastName.
+  ///
+  /// In en, this message translates to:
+  /// **'Фамилия'**
+  String get lastName;
+
+  /// No description provided for @enterName.
+  ///
+  /// In en, this message translates to:
+  /// **'Введите ваше имя'**
+  String get enterName;
+
+  /// No description provided for @enterLastName.
+  ///
+  /// In en, this message translates to:
+  /// **'Введите вашу фамилию'**
+  String get enterLastName;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

@@ -98,4 +98,34 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get resetPassword => 'Сбросить пароль';
+
+  @override
+  String get emptyDictionaryTitle => 'Словарь пуст';
+
+  @override
+  String get emptyDictionarySubtitle => 'Добавьте первые слова, чтобы начать обучение';
+
+  @override
+  String get searchHint => 'Поиск слов';
+
+  @override
+  String get tabHome => 'Главная';
+
+  @override
+  String get tabDictionary => 'Словарь';
+
+  @override
+  String get tabDocs => 'Документы';
+
+  @override
+  String get firstName => 'Имя';
+
+  @override
+  String get lastName => 'Фамилия';
+
+  @override
+  String get enterName => 'Введите ваше имя';
+
+  @override
+  String get enterLastName => 'Введите вашу фамилию';
 }

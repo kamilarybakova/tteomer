@@ -1,19 +1,34 @@
 import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
 import '../../../../core/widgets/button_widget.dart';
 import '../../../../l10n/app_localizations.dart';
+import '../../../../main_navigation_screen.dart';
+import '../provider/auth_state.dart';
+import '../provider/providers.dart';
 
-class GroupCodeScreen extends StatefulWidget {
-  const GroupCodeScreen({super.key});
+class GroupCodeScreen extends ConsumerStatefulWidget {
+  final String email;
+  final String password;
+  final String firstName;
+  final String lastName;
+
+  const GroupCodeScreen({
+    super.key,
+    required this.email,
+    required this.password,
+    required this.firstName,
+    required this.lastName,
+  });
 
   @override
-  State<GroupCodeScreen> createState() => _GroupCodeScreenState();
+  ConsumerState<GroupCodeScreen> createState() => _GroupCodeScreenState();
 }
 
-class _GroupCodeScreenState extends State<GroupCodeScreen> {
+class _GroupCodeScreenState extends ConsumerState<GroupCodeScreen> {
   final TextEditingController controller = TextEditingController();
   final FocusNode focusNode = FocusNode();
 
@@ -62,7 +77,22 @@ class _GroupCodeScreenState extends State<GroupCodeScreen> {
   @override
   Widget build(BuildContext context) {
     final t = AppLocalizations.of(context)!;
-    const primary = Color(0xFF4C63D2);
+    ref.listen<AuthState>(authNotifierProvider, (prev, next) {
+      if (next is AuthRegistered) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const MainNavigationScreen(),
+          ),
+        );
+      }
+
+      if (next is AuthError) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(next.message)),
+        );
+      }
+    });
 
     return GestureDetector(
       behavior: HitTestBehavior.opaque,
@@ -101,10 +131,10 @@ class _GroupCodeScreenState extends State<GroupCodeScreen> {
               GestureDetector(
                 onTap: _showKeyboard,
                 child: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: PinCodeTextField(
                     appContext: context,
-                    length: 4,
+                    length: 7,
                     controller: controller,
                     focusNode: focusNode,
                     autoFocus: true,
@@ -118,8 +148,8 @@ class _GroupCodeScreenState extends State<GroupCodeScreen> {
                     pinTheme: PinTheme(
                       shape: PinCodeFieldShape.box,
                       borderRadius: BorderRadius.circular(14),
-                      fieldHeight: 64,
-                      fieldWidth: 64,
+                      fieldHeight: 48,
+                      fieldWidth: 48,
                       activeFillColor: Colors.white,
                       inactiveFillColor: Colors.white,
                       selectedFillColor: Colors.white,
@@ -142,7 +172,7 @@ class _GroupCodeScreenState extends State<GroupCodeScreen> {
                 child: ButtonWidget(
                   text: t.send,
                   filled: true,
-                  onTap: controller.text.length == 4 ? _onSend : null,
+                  onTap: controller.text.length == 7 ? _onSend : null,
                 ),
               ),
 
@@ -164,6 +194,14 @@ class _GroupCodeScreenState extends State<GroupCodeScreen> {
   }
 
   void _onSend() {
-    // TODO: вызвать Bloc / API
+    final groupCode = controller.text.trim();
+
+    ref.read(authNotifierProvider.notifier).register(
+      email: widget.email,
+      password: widget.password,
+      firstName: widget.firstName,
+      lastName: widget.lastName,
+      groupCode: groupCode,
+    );
   }
 }
