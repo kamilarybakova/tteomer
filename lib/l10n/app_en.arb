@@ -48,5 +48,31 @@
   "firstName": "Имя",
   "lastName": "Фамилия",
   "enterName": "Введите ваше имя",
-  "enterLastName": "Введите вашу фамилию"
+  "enterLastName": "Введите вашу фамилию",
+  "scanFromPhoto": "Сканировать с фото",
+  "addManually": "Добавить вручную",
+  "pasteText": "Вставить текст",
+
+  "manualInputHint": "Введите одно или несколько слов\n(каждое с новой строки)",
+  "check": "Проверить",
+  "detectedWords": "Найденные слова",
+
+  "scanText": "Сканировать",
+  "scan": "Отсканируйте текст",
+  "scanError": "Ошибка сканирования",
+
+  "reviewWordsTitle": "Проверьте слова ({count})",
+  "@reviewWordsTitle": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+
+  "addWordsButton": "Добавить {count} слов",
+  "@addWordsButton": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "addWords": "Добавить слова"
 }

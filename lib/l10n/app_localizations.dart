@@ -332,6 +332,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Введите вашу фамилию'**
   String get enterLastName;
+
+  /// No description provided for @scanFromPhoto.
+  ///
+  /// In en, this message translates to:
+  /// **'Сканировать с фото'**
+  String get scanFromPhoto;
+
+  /// No description provided for @addManually.
+  ///
+  /// In en, this message translates to:
+  /// **'Добавить вручную'**
+  String get addManually;
+
+  /// No description provided for @pasteText.
+  ///
+  /// In en, this message translates to:
+  /// **'Вставить текст'**
+  String get pasteText;
+
+  /// No description provided for @manualInputHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Введите одно или несколько слов\n(каждое с новой строки)'**
+  String get manualInputHint;
+
+  /// No description provided for @check.
+  ///
+  /// In en, this message translates to:
+  /// **'Проверить'**
+  String get check;
+
+  /// No description provided for @detectedWords.
+  ///
+  /// In en, this message translates to:
+  /// **'Найденные слова'**
+  String get detectedWords;
+
+  /// No description provided for @scanText.
+  ///
+  /// In en, this message translates to:
+  /// **'Сканировать'**
+  String get scanText;
+
+  /// No description provided for @scan.
+  ///
+  /// In en, this message translates to:
+  /// **'Отсканируйте текст'**
+  String get scan;
+
+  /// No description provided for @scanError.
+  ///
+  /// In en, this message translates to:
+  /// **'Ошибка сканирования'**
+  String get scanError;
+
+  /// No description provided for @reviewWordsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Проверьте слова ({count})'**
+  String reviewWordsTitle(int count);
+
+  /// No description provided for @addWordsButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Добавить {count} слов'**
+  String addWordsButton(int count);
+
+  /// No description provided for @addWords.
+  ///
+  /// In en, this message translates to:
+  /// **'Добавить слова'**
+  String get addWords;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

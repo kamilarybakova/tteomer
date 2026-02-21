@@ -32,7 +32,7 @@ class DocumentsList extends ConsumerWidget {
   Widget _buildList(List materials, WidgetRef ref) {
     final filtered = selectedCategory == null
         ? materials
-        : materials.where((m) => m.category.id == selectedCategory).toList();
+        : materials.where((m) => m.category?.id == selectedCategory);
 
     final pinned = filtered.where((e) => e.isPinned).toList();
     final normal = filtered.where((e) => !e.isPinned).toList();
@@ -82,7 +82,7 @@ class _MaterialCard extends StatelessWidget {
           style: const TextStyle(fontWeight: FontWeight.w600),
         ),
         subtitle: Text(
-          '${material.category.name} • ${material.fileSizeMb}',
+          '${material.category?.name ?? "Все"} • ${material.fileSizeMb}',
         ),
         trailing: const Icon(Icons.arrow_forward_ios, size: 16),
         onTap: () async {

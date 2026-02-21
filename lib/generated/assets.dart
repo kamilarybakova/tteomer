@@ -2,6 +2,9 @@
 class Assets {
   Assets._();
 
+  static const String fontsSFProDisplayBold = 'assets/fonts/SF-Pro-Display-Bold.otf';
+  static const String fontsSFProDisplayMedium = 'assets/fonts/SF-Pro-Display-Medium.otf';
+  static const String fontsSFProDisplayRegular = 'assets/fonts/SF-Pro-Display-Regular.otf';
   static const String imagesLogo = 'assets/images/logo.png';
 
 }

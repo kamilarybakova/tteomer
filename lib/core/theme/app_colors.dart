@@ -7,7 +7,7 @@ class AppColors {
    * Base backgrounds
    * ======================= */
 
-  static const Color backgroundPrimary = Color(0xFF0E0F14);
+  static const Color backgroundPrimary = Color(0xFFF3F3F3);
   static const Color backgroundSecondary = Color(0xFF161822);
   static const Color backgroundCard = Color(0xFF1E2130);
   static const Color backgroundNav = Color(0xFF11131A);

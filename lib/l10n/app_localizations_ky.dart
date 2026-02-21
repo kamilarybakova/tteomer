@@ -128,4 +128,44 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get enterLastName => 'Фамилияңызды жазыңыз';
+
+  @override
+  String get scanFromPhoto => 'Сканировать с фото';
+
+  @override
+  String get addManually => 'Добавить вручную';
+
+  @override
+  String get pasteText => 'Вставить текст';
+
+  @override
+  String get manualInputHint => 'Введите одно или несколько слов\n(каждое с новой строки)';
+
+  @override
+  String get check => 'Проверить';
+
+  @override
+  String get detectedWords => 'Найденные слова';
+
+  @override
+  String get scanText => 'Сканировать';
+
+  @override
+  String get scan => 'Отсканируйте текст';
+
+  @override
+  String get scanError => 'Ошибка сканирования';
+
+  @override
+  String reviewWordsTitle(int count) {
+    return 'Проверьте слова ($count)';
+  }
+
+  @override
+  String addWordsButton(int count) {
+    return 'Добавить $count слов';
+  }
+
+  @override
+  String get addWords => 'Добавить слова';
 }
