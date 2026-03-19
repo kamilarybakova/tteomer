@@ -7,7 +7,7 @@ abstract class AuthRemoteDataSource {
     required String password,
   });
 
-  Future<void> register({
+  Future<AuthResponseModel> register({
     required String email,
     required String password,
     required String firstName,
@@ -48,14 +48,14 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  Future<void> register({
+  Future<AuthResponseModel> register({
     required String email,
     required String password,
     required String firstName,
     required String lastName,
     required String groupCode,
   }) async {
-    await dio.post(
+    final response = await dio.post(
       '/api/v1/auth/register/',
       data: {
         'email': email,
@@ -65,6 +65,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
         'group_code': groupCode,
       },
     );
+
+    return AuthResponseModel.fromJson(response.data);
   }
 
   @override

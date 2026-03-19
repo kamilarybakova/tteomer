@@ -79,12 +79,12 @@ class DictionaryBody extends ConsumerWidget {
       DictionaryError(:final message) =>
           Center(child: Text(message)),
 
-      DictionaryData(:final words, :final isUpdating) =>
+      DictionaryData(:final words, :final topics, :final isUpdating) =>
           Stack(
             children: [
               words.isEmpty
                   ? const EmptyDictionary()
-                  : DictionaryContent(words: words),
+                  : DictionaryContent(words: words, topics: topics),
 
               if (isUpdating)
                 const Positioned(

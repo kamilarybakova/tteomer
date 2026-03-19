@@ -168,4 +168,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get addWords => 'Добавить слова';
+
+  @override
+  String get settings => 'Настройки';
+
+  @override
+  String get language => 'Язык';
+
+  @override
+  String get logout => 'Выйти';
+
+  @override
+  String get selectLanguage => 'Выберите язык';
+
+  @override
+  String get langRussian => 'Русский';
+
+  @override
+  String get langTurkish => 'Türkçe';
+
+  @override
+  String get langKyrgyz => 'Кыргызча';
 }

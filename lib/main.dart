@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tteomer/core/widgets/language_picker_sheet.dart';
 
 import 'auth_gate.dart';
+import 'core/utils/locale_state.dart';
 import 'l10n/app_localizations.dart';
 
 void main() {
@@ -13,34 +14,38 @@ void main() {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
   @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  Locale _locale = const Locale('ru');
+
+  void _setLocale(Locale locale) {
+    LocaleState.current = locale;
+    setState(() => _locale = locale);
+  }
+
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'TTOM',
-      theme: ThemeData(
-        fontFamily: 'SFProDisplay',
+    return LocaleController(
+      setLocale: (Locale locale) {
+        _setLocale(locale);
+      },
+      child: MaterialApp(
+        title: 'TTOM',
+        theme: ThemeData(
+          fontFamily: 'SFProDisplay',
+        ),
+        debugShowCheckedModeBanner: false,
+        locale: _locale,
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: const AuthGate(),
       ),
-      debugShowCheckedModeBanner: false,
-
-      locale: const Locale('ru'),
-
-      supportedLocales: const [
-        Locale('ru'),
-        Locale('tr'),
-        Locale('ky'),
-      ],
-
-      localizationsDelegates: const [
-        AppLocalizations.delegate,
-        GlobalMaterialLocalizations.delegate,
-        GlobalWidgetsLocalizations.delegate,
-        GlobalCupertinoLocalizations.delegate,
-      ],
-
-      home: const AuthGate(),
     );
   }
 }

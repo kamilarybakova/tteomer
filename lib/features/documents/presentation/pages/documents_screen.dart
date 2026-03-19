@@ -26,6 +26,15 @@ class _DocumentsScreenState extends ConsumerState<DocumentsScreen> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    Future.microtask(() {
+      ref.read(materialsNotifierProvider.notifier).load();
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
 

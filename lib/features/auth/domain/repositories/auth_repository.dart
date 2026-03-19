@@ -6,7 +6,7 @@ abstract class AuthRepository {
     required String password,
   });
 
-  Future<void> register({
+  Future<AuthTokens> register({
     required String email,
     required String password,
     required String firstName,

@@ -130,42 +130,63 @@ class AppLocalizationsTr extends AppLocalizations {
   String get enterLastName => 'Soyadınızı girin';
 
   @override
-  String get scanFromPhoto => 'Сканировать с фото';
+  String get scanFromPhoto => 'Fotoğraftan tara';
 
   @override
-  String get addManually => 'Добавить вручную';
+  String get addManually => 'Manuel ekle';
 
   @override
-  String get pasteText => 'Вставить текст';
+  String get pasteText => 'Metin yapıştır';
 
   @override
-  String get manualInputHint => 'Введите одно или несколько слов\n(каждое с новой строки)';
+  String get manualInputHint => 'Bir veya birden fazla kelime girin\n(her satıra bir kelime)';
 
   @override
-  String get check => 'Проверить';
+  String get check => 'Kontrol et';
 
   @override
-  String get detectedWords => 'Найденные слова';
+  String get detectedWords => 'Bulunan kelimeler';
 
   @override
-  String get scanText => 'Сканировать';
+  String get scanText => 'Tara';
 
   @override
-  String get scan => 'Отсканируйте текст';
+  String get scan => 'Metni tarayın';
 
   @override
-  String get scanError => 'Ошибка сканирования';
+  String get scanError => 'Tarama hatası';
 
   @override
   String reviewWordsTitle(int count) {
-    return 'Проверьте слова ($count)';
+    return 'Kelimeleri kontrol edin ($count)';
   }
 
   @override
   String addWordsButton(int count) {
-    return 'Добавить $count слов';
+    return '$count kelime ekle';
   }
 
   @override
-  String get addWords => 'Добавить слова';
+  String get addWords => 'Kelime ekle';
+
+  @override
+  String get settings => 'Ayarlar';
+
+  @override
+  String get language => 'Dil';
+
+  @override
+  String get logout => 'Çıkış yap';
+
+  @override
+  String get selectLanguage => 'Dil seçin';
+
+  @override
+  String get langRussian => 'Rusça';
+
+  @override
+  String get langTurkish => 'Türkçe';
+
+  @override
+  String get langKyrgyz => 'Kırgızca';
 }

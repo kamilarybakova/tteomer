@@ -137,7 +137,7 @@ class _GroupCodeScreenState extends ConsumerState<GroupCodeScreen> {
                     controller: controller,
                     focusNode: focusNode,
                     autoFocus: true,
-                    keyboardType: TextInputType.number,
+                    keyboardType: TextInputType.text,
                     animationType: AnimationType.fade,
                     enableActiveFill: true,
                     textStyle: const TextStyle(

@@ -130,42 +130,63 @@ class AppLocalizationsKy extends AppLocalizations {
   String get enterLastName => 'Фамилияңызды жазыңыз';
 
   @override
-  String get scanFromPhoto => 'Сканировать с фото';
+  String get scanFromPhoto => 'Сүрөттөн скандоо';
 
   @override
-  String get addManually => 'Добавить вручную';
+  String get addManually => 'Кол менен кошуу';
 
   @override
-  String get pasteText => 'Вставить текст';
+  String get pasteText => 'Текст чаптоо';
 
   @override
-  String get manualInputHint => 'Введите одно или несколько слов\n(каждое с новой строки)';
+  String get manualInputHint => 'Бир же бирнече сөз жазыңыз\n(ар бир сап үчүн бир сөз)';
 
   @override
-  String get check => 'Проверить';
+  String get check => 'Текшерүү';
 
   @override
-  String get detectedWords => 'Найденные слова';
+  String get detectedWords => 'Табылган сөздөр';
 
   @override
-  String get scanText => 'Сканировать';
+  String get scanText => 'Скандоо';
 
   @override
-  String get scan => 'Отсканируйте текст';
+  String get scan => 'Текстти скандаңыз';
 
   @override
-  String get scanError => 'Ошибка сканирования';
+  String get scanError => 'Скандоо катасы';
 
   @override
   String reviewWordsTitle(int count) {
-    return 'Проверьте слова ($count)';
+    return 'Сөздөрдү текшериңиз ($count)';
   }
 
   @override
   String addWordsButton(int count) {
-    return 'Добавить $count слов';
+    return '$count сөз кошуу';
   }
 
   @override
-  String get addWords => 'Добавить слова';
+  String get addWords => 'Сөз кошуу';
+
+  @override
+  String get settings => 'Жөндөөлөр';
+
+  @override
+  String get language => 'Тил';
+
+  @override
+  String get logout => 'Чыгуу';
+
+  @override
+  String get selectLanguage => 'Тилди тандаңыз';
+
+  @override
+  String get langRussian => 'Орусча';
+
+  @override
+  String get langTurkish => 'Түркчө';
+
+  @override
+  String get langKyrgyz => 'Кыргызча';
 }

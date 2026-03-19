@@ -14,7 +14,7 @@ class WordModel extends Word {
   factory WordModel.fromJson(Map<String, dynamic> json) {
     return WordModel(
       word: json['turkish'] as String,
-      translation: (json['russian'] as String?) ?? '',
+      translation: (json['translation'] as String?) ?? '',
       partOfSpeech: (json['part_of_speech'] as String?) ?? '',
       level: (json['level'] as String?) ?? '',
       topic: (json['topic'] as String?) ?? '',

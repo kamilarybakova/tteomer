@@ -404,6 +404,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Добавить слова'**
   String get addWords;
+
+  /// No description provided for @settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Настройки'**
+  String get settings;
+
+  /// No description provided for @language.
+  ///
+  /// In en, this message translates to:
+  /// **'Язык'**
+  String get language;
+
+  /// No description provided for @logout.
+  ///
+  /// In en, this message translates to:
+  /// **'Выйти'**
+  String get logout;
+
+  /// No description provided for @selectLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Выберите язык'**
+  String get selectLanguage;
+
+  /// No description provided for @langRussian.
+  ///
+  /// In en, this message translates to:
+  /// **'Русский'**
+  String get langRussian;
+
+  /// No description provided for @langTurkish.
+  ///
+  /// In en, this message translates to:
+  /// **'Türkçe'**
+  String get langTurkish;
+
+  /// No description provided for @langKyrgyz.
+  ///
+  /// In en, this message translates to:
+  /// **'Кыргызча'**
+  String get langKyrgyz;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

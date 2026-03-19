@@ -38,5 +38,34 @@
   "firstName": "Ad",
   "enterName": "Adınızı girin",
   "lastName": "Soyad",
-  "enterLastName": "Soyadınızı girin"
+  "enterLastName": "Soyadınızı girin",
+  "settings": "Ayarlar",
+  "language": "Dil",
+  "logout": "Çıkış yap",
+  "selectLanguage": "Dil seçin",
+  "langRussian": "Rusça",
+  "langTurkish": "Türkçe",
+  "langKyrgyz": "Kırgızca",
+  "scanFromPhoto": "Fotoğraftan tara",
+  "addManually": "Manuel ekle",
+  "pasteText": "Metin yapıştır",
+  "manualInputHint": "Bir veya birden fazla kelime girin\n(her satıra bir kelime)",
+  "check": "Kontrol et",
+  "detectedWords": "Bulunan kelimeler",
+  "scanText": "Tara",
+  "scan": "Metni tarayın",
+  "scanError": "Tarama hatası",
+  "reviewWordsTitle": "Kelimeleri kontrol edin ({count})",
+  "@reviewWordsTitle": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "addWordsButton": "{count} kelime ekle",
+  "@addWordsButton": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "addWords": "Kelime ekle"
 }

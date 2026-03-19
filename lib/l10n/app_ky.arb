@@ -38,5 +38,34 @@
   "firstName": "Атыңыз",
   "enterName": "Атыңызды жазыңыз",
   "lastName": "Фамилияңыз",
-  "enterLastName": "Фамилияңызды жазыңыз"
+  "enterLastName": "Фамилияңызды жазыңыз",
+  "settings": "Жөндөөлөр",
+  "language": "Тил",
+  "logout": "Чыгуу",
+  "selectLanguage": "Тилди тандаңыз",
+  "langRussian": "Орусча",
+  "langTurkish": "Түркчө",
+  "langKyrgyz": "Кыргызча",
+  "scanFromPhoto": "Сүрөттөн скандоо",
+  "addManually": "Кол менен кошуу",
+  "pasteText": "Текст чаптоо",
+  "manualInputHint": "Бир же бирнече сөз жазыңыз\n(ар бир сап үчүн бир сөз)",
+  "check": "Текшерүү",
+  "detectedWords": "Табылган сөздөр",
+  "scanText": "Скандоо",
+  "scan": "Текстти скандаңыз",
+  "scanError": "Скандоо катасы",
+  "reviewWordsTitle": "Сөздөрдү текшериңиз ({count})",
+  "@reviewWordsTitle": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "addWordsButton": "{count} сөз кошуу",
+  "@addWordsButton": {
+    "placeholders": {
+      "count": { "type": "int" }
+    }
+  },
+  "addWords": "Сөз кошуу"
 }

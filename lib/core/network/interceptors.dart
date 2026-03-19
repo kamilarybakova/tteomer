@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../storage/secure_storage_provider.dart';
+import '../utils/locale_state.dart';
 
 class RetryInterceptor extends Interceptor {
   @override
@@ -27,6 +28,8 @@ class AuthInterceptor extends Interceptor {
     if (token != null && token.isNotEmpty) {
       options.headers['Authorization'] = 'Bearer $token';
     }
+
+    options.headers['Accept-Language'] = LocaleState.current.languageCode;
 
     handler.next(options);
   }

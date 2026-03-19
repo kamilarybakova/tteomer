@@ -51,13 +51,15 @@ class AuthNotifier extends StateNotifier<AuthState> {
   }) async {
     try {
       state = AuthLoading();
-      await registerUseCase(
+      final tokens = await registerUseCase(
         email: email,
         password: password,
         firstName: firstName,
         lastName: lastName,
         groupCode: groupCode,
       );
+      await storage.write(key: 'access_token', value: tokens.accessToken);
+      await storage.write(key: 'refresh_token', value: tokens.refreshToken);
       state = AuthRegistered();
     } catch (e) {
       state = AuthError(_extractError(e));

@@ -74,5 +74,12 @@
       "count": { "type": "int" }
     }
   },
-  "addWords": "Добавить слова"
+  "addWords": "Добавить слова",
+  "settings": "Настройки",
+  "language": "Язык",
+  "logout": "Выйти",
+  "selectLanguage": "Выберите язык",
+  "langRussian": "Русский",
+  "langTurkish": "Türkçe",
+  "langKyrgyz": "Кыргызча"
 }
