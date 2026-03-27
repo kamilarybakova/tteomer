@@ -6,6 +6,15 @@ class AuthResponseModel extends AuthTokens {
     required super.refreshToken,
   });
 
+  // factory AuthResponseModel.fromJson(Map<String, dynamic> json) {
+  //   final data = json['data'];
+  //
+  //   return AuthResponseModel(
+  //     accessToken: data['access'],
+  //     refreshToken: data['refresh'],
+  //   );
+  // }
+
   factory AuthResponseModel.fromJson(Map<String, dynamic> json) {
     return AuthResponseModel(
       accessToken: json['access'],

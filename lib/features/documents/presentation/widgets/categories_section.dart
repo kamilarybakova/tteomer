@@ -1,7 +1,5 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tteomer/core/theme/app_colors.dart';
 
 import '../../../auth/presentation/provider/providers.dart';
 import '../provider/materials_state.dart';
@@ -27,8 +25,9 @@ class CategoriesSection extends ConsumerWidget {
     return SizedBox(
       height: 60,
       child: ListView.separated(
-        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         scrollDirection: Axis.horizontal,
+        physics: const BouncingScrollPhysics(),
         itemCount: categories.length + 1,
         separatorBuilder: (_, __) => const SizedBox(width: 8),
         itemBuilder: (_, i) {
@@ -41,6 +40,7 @@ class CategoriesSection extends ConsumerWidget {
           }
 
           final cat = categories[i - 1];
+
           return _Chip(
             label: cat.name,
             selected: selectedCategory == cat.id,
@@ -63,20 +63,46 @@ class _Chip extends StatelessWidget {
     required this.onTap,
   });
 
+  Color _getColor(String text) {
+    final colors = [
+      Colors.blue,
+      Colors.purple,
+      Colors.orange,
+      Colors.green,
+      Colors.teal,
+      Colors.indigo,
+      Colors.pink,
+    ];
+
+    return colors[text.hashCode.abs() % colors.length];
+  }
+
   @override
   Widget build(BuildContext context) {
-    return ChoiceChip(
-      label: Text(label),
-      selected: selected,
-      onSelected: (_) => onTap(),
-      backgroundColor: Colors.white,
-      selectedColor: AppColors.accent,
-      checkmarkColor: selected ? Colors.white : AppColors.textSecondary,
-      labelStyle: TextStyle(
-        color: selected ? Colors.white : AppColors.textSecondary,
-      ),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(12),
+    final color = _getColor(label);
+
+    return GestureDetector(
+      onTap: onTap,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        curve: Curves.easeInOut,
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+        decoration: BoxDecoration(
+          color: selected ? color : color.withOpacity(0.12),
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: selected ? color : color.withOpacity(0.3),
+          ),
+        ),
+        transform: Matrix4.identity()
+          ..scale(selected ? 1.05 : 1.0),
+        child: Text(
+          label,
+          style: TextStyle(
+            color: selected ? Colors.white : color,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
       ),
     );
   }

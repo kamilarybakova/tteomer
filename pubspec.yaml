@@ -50,6 +50,8 @@ dependencies:
   google_mlkit_commons: ^0.11.0
   google_mlkit_text_recognition: ^0.15.0
   shared_preferences: ^2.5.4
+  webview_flutter: ^4.13.1
+  no_screenshot: ^1.0.0
 
 dev_dependencies:
   flutter_test:

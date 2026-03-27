@@ -53,9 +53,31 @@ class _WordsList extends StatelessWidget {
   }
 }
 
-class _SearchField extends StatelessWidget {
+class _SearchField extends ConsumerStatefulWidget {
   const _SearchField({required this.ref});
+
   final WidgetRef ref;
+
+  @override
+  ConsumerState<_SearchField> createState() => _SearchFieldState();
+}
+
+class _SearchFieldState extends ConsumerState<_SearchField> {
+  final controller = TextEditingController();
+  final focusNode = FocusNode();
+
+  bool isFocused = false;
+
+  @override
+  void initState() {
+    super.initState();
+
+    focusNode.addListener(() {
+      setState(() {
+        isFocused = focusNode.hasFocus;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -63,26 +85,101 @@ class _SearchField extends StatelessWidget {
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16),
-      child: TextField(
-        onChanged: (value) {
-          ref.read(wordsVmProvider.notifier).searchWords(value);
-        },
-        decoration: InputDecoration(
-          hintText: l10n.searchHint,
-          prefixIcon: const Icon(Icons.search),
-          filled: true,
-          fillColor: AppColors.backgroundPrimary,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(16),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(20),
+          border: Border.all(
+            color: isFocused
+                ? AppColors.accent
+                : Colors.grey.withOpacity(0.2),
+            width: isFocused ? 1.5 : 1,
           ),
-          enabledBorder: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(16),
-            borderSide: BorderSide(color: Colors.grey.shade300),
-          ),
-          focusedBorder: const OutlineInputBorder(
-            borderRadius: BorderRadius.all(Radius.circular(16)),
-            borderSide: BorderSide(color: AppColors.accent, width: 1.5),
-          ),
+          boxShadow: [
+            if (isFocused)
+              BoxShadow(
+                color: AppColors.accent.withOpacity(0.15),
+                blurRadius: 12,
+                offset: const Offset(0, 4),
+              )
+            else
+              BoxShadow(
+                color: Colors.black.withOpacity(0.04),
+                blurRadius: 10,
+                offset: const Offset(0, 4),
+              ),
+          ],
+        ),
+        child: Row(
+          children: [
+            /// ИКОНКА
+            Container(
+              width: 36,
+              height: 36,
+              decoration: BoxDecoration(
+                color: isFocused
+                    ? AppColors.accent.withOpacity(0.1)
+                    : Colors.grey.withOpacity(0.1),
+                shape: BoxShape.circle,
+              ),
+              child: Icon(
+                Icons.search,
+                color: isFocused
+                    ? AppColors.accent
+                    : Colors.grey,
+              ),
+            ),
+
+            const SizedBox(width: 10),
+
+            /// INPUT
+            Expanded(
+              child: TextField(
+                controller: controller,
+                focusNode: focusNode,
+                onChanged: (value) {
+                  widget.ref
+                      .read(wordsVmProvider.notifier)
+                      .searchWords(value);
+                  setState(() {});
+                },
+                decoration: InputDecoration(
+                  hintText: l10n.searchHint,
+                  border: InputBorder.none,
+                  hintStyle: TextStyle(
+                    color: Colors.grey.shade400,
+                  ),
+                ),
+              ),
+            ),
+
+            /// CLEAR BUTTON
+            if (controller.text.isNotEmpty)
+              GestureDetector(
+                onTap: () {
+                  controller.clear();
+                  widget.ref
+                      .read(wordsVmProvider.notifier)
+                      .searchWords('');
+                  setState(() {});
+                },
+                child: Container(
+                  width: 28,
+                  height: 28,
+                  decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.15),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.close,
+                    size: 16,
+                    color: Colors.black54,
+                  ),
+                ),
+              ),
+          ],
         ),
       ),
     );
@@ -105,29 +202,44 @@ class _CategoriesChips extends ConsumerStatefulWidget {
 class _CategoriesChipsState extends ConsumerState<_CategoriesChips> {
   int selectedIndex = 0;
 
+  Color _getColor(String category) {
+    final colors = [
+      Colors.blue,
+      Colors.purple,
+      Colors.orange,
+      Colors.green,
+      Colors.teal,
+      Colors.indigo,
+      Colors.pink,
+      Colors.amber,
+    ];
+
+    final hash = category.hashCode;
+    return colors[hash.abs() % colors.length];
+  }
+
   @override
   Widget build(BuildContext context) {
     final categories = widget.categories;
 
     return SizedBox(
-      height: 40,
+      height: 44,
       child: ListView.separated(
         padding: const EdgeInsets.symmetric(horizontal: 16),
         scrollDirection: Axis.horizontal,
         itemCount: categories.length,
         separatorBuilder: (_, __) => const SizedBox(width: 8),
         itemBuilder: (_, index) {
-          final isSelected = index == selectedIndex;
           final category = categories[index];
+          final isSelected = index == selectedIndex;
+          final color = _getColor(category);
 
-          return ChoiceChip(
-            label: Text(category),
-            selected: isSelected,
-            showCheckmark: false,
-            onSelected: (_) {
+          return GestureDetector(
+            onTap: () {
               setState(() => selectedIndex = index);
 
-              final notifier = widget.ref.read(wordsVmProvider.notifier);
+              final notifier =
+              widget.ref.read(wordsVmProvider.notifier);
 
               if (category == 'All') {
                 notifier.loadWords();
@@ -135,16 +247,32 @@ class _CategoriesChipsState extends ConsumerState<_CategoriesChips> {
                 notifier.loadByTopic(category);
               }
             },
-            backgroundColor: Colors.white,
-            selectedColor: AppColors.accent,
-            labelStyle: TextStyle(
-              color: isSelected
-                  ? Colors.white
-                  : AppColors.textSecondary,
-              fontWeight: FontWeight.w500,
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 200),
+              curve: Curves.easeInOut,
+              padding: const EdgeInsets.symmetric(
+                horizontal: 16,
+                vertical: 10,
+              ),
+              decoration: BoxDecoration(
+                color: isSelected
+                    ? color
+                    : color.withOpacity(0.12),
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(
+                  color: isSelected
+                      ? color
+                      : color.withOpacity(0.3),
+                ),
+              ),
+              child: Text(
+                category,
+                style: TextStyle(
+                  color: isSelected ? Colors.white : color,
+                  fontWeight: FontWeight.w600,
+                  fontSize: 14,
+                ),
+              ),
             ),
           );
         },

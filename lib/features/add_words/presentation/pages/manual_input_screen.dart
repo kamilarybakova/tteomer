@@ -4,7 +4,7 @@ import 'package:tteomer/core/theme/app_colors.dart';
 import 'package:tteomer/features/add_words/presentation/widgets/word_item.dart';
 
 import '../../../../l10n/app_localizations.dart';
-import '../state/add_words_viewmodel.dart';
+import '../state/add_words_notifier.dart';
 import '../widgets/drag_handle.dart';
 
 class AddManuallyBottomSheet extends ConsumerStatefulWidget {

@@ -7,7 +7,7 @@ import '../../domain/repositories/dictionary_repository.dart';
 import '../../domain/usecases/get_dictionary.dart';
 
 import 'dictionary_state.dart';
-import 'dictionary_view_model.dart';
+import 'dictionary_notifier.dart';
 
 final dictionaryRemoteDatasourceProvider = Provider(
       (ref) => DictionaryRemoteDatasource(

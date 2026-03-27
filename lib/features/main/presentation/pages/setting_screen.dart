@@ -3,8 +3,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:tteomer/features/auth/presentation/pages/auth_screen.dart';
 
-import '../../core/widgets/language_picker_sheet.dart';
-import '../../l10n/app_localizations.dart';
+import '../../../../core/widgets/language_picker_sheet.dart';
+import '../../../../l10n/app_localizations.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});

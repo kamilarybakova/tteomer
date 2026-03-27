@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import '../../l10n/app_localizations.dart';
 import 'features/dictionary/presentation/pages/dictionary_screen.dart';
 import 'features/documents/presentation/pages/documents_screen.dart';
-import 'features/main/home_screen.dart';
+import 'features/main/presentation/pages/home_screen.dart';
 
 class MainNavigationScreen extends StatefulWidget {
   const MainNavigationScreen({super.key});

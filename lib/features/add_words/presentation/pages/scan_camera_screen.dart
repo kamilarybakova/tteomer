@@ -6,7 +6,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 
 import '../../../../l10n/app_localizations.dart';
-import '../state/add_words_viewmodel.dart';
+import '../state/add_words_notifier.dart';
 import '../utils/ocr_utils.dart';
 import 'scan_preview_screen.dart';
 

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../l10n/app_localizations.dart';
-import '../state/add_words_viewmodel.dart';
+import '../state/add_words_notifier.dart';
 
 class ScanPreviewScreen extends ConsumerWidget {
   const ScanPreviewScreen({super.key});

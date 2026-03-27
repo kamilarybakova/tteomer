@@ -1,4 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tteomer/features/main/presentation/state/main_notifier.dart';
+import 'package:tteomer/features/main/presentation/state/main_state.dart';
 
 import '../../../../core/network/dio_client.dart';
 import '../../../../core/storage/secure_storage_provider.dart';
@@ -8,6 +10,10 @@ import '../../../documents/domain/usecase/get_categories_usecase.dart';
 import '../../../documents/domain/usecase/get_materials_usecase.dart';
 import '../../../documents/presentation/provider/materials_notifier.dart';
 import '../../../documents/presentation/provider/materials_state.dart';
+import '../../../main/data/datasource/main_remote_datasource.dart';
+import '../../../main/data/repository/main_repository_impl.dart';
+import '../../../main/domain/repository/main_repository.dart';
+import '../../../main/domain/usecase/fetch_news_usecase.dart';
 import '../../data/datasources/auth_remote_datasource.dart';
 import '../../data/repository/auth_repository_impl.dart';
 import '../../domain/repositories/auth_repository.dart';
@@ -15,7 +21,7 @@ import '../../domain/usecases/login_usecase.dart';
 import '../../domain/usecases/register_usecase.dart';
 import '../../domain/usecases/reset_password_confirm_usecase.dart';
 import '../../domain/usecases/reset_password_usecase.dart';
-import 'auth_cubit.dart';
+import 'auth_notifier.dart';
 import 'auth_state.dart';
 
 // DataSource
@@ -84,5 +90,28 @@ StateNotifierProvider<MaterialsNotifier, MaterialsState>((ref) {
   return MaterialsNotifier(
     getMaterials: ref.read(getMaterialsUseCaseProvider),
     getCategories: ref.read(getCategoriesUseCaseProvider),
+  );
+});
+
+final newsRemoteDataSourceProvider = Provider<MainRemoteDatasource>((ref) {
+  return MainRemoteDatasourceImpl(ref.read(dioProvider));
+});
+
+final newsRepositoryProvider = Provider<MainRepository>((ref) {
+  return MainRepositoryImpl(
+    ref.read(newsRemoteDataSourceProvider),
+  );
+});
+
+final fetchNewsUseCaseProvider = Provider((ref) {
+  return FetchNewsUseCase(
+    ref.read(newsRepositoryProvider),
+  );
+});
+
+final mainNotifierProvider =
+StateNotifierProvider<MainNotifier, NewsState>((ref) {
+  return MainNotifier(
+    ref.read(fetchNewsUseCaseProvider),
   );
 });

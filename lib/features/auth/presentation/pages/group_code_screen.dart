@@ -131,36 +131,39 @@ class _GroupCodeScreenState extends ConsumerState<GroupCodeScreen> {
                 onTap: _showKeyboard,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: PinCodeTextField(
-                    appContext: context,
-                    length: 7,
+                  child: TextField(
                     controller: controller,
                     focusNode: focusNode,
-                    autoFocus: true,
+                    autofocus: true,
+                    textAlign: TextAlign.center,
+                    maxLength: 20,
                     keyboardType: TextInputType.text,
-                    animationType: AnimationType.fade,
-                    enableActiveFill: true,
-                    textStyle: const TextStyle(
+                    style: const TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.w600,
+                      letterSpacing: 8,
                     ),
-                    pinTheme: PinTheme(
-                      shape: PinCodeFieldShape.box,
-                      borderRadius: BorderRadius.circular(14),
-                      fieldHeight: 48,
-                      fieldWidth: 48,
-                      activeFillColor: Colors.white,
-                      inactiveFillColor: Colors.white,
-                      selectedFillColor: Colors.white,
-                      inactiveColor: Colors.grey.shade300,
-                      selectedColor: Colors.black54,
-                      activeColor: Colors.black54,
+                    decoration: InputDecoration(
+                      counterText: '',
+                      filled: true,
+                      fillColor: Colors.white,
+                      contentPadding: const EdgeInsets.symmetric(vertical: 14),
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(14),
+                        borderSide: BorderSide(color: Colors.grey.shade300),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(14),
+                        borderSide: BorderSide(color: Colors.grey.shade300),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(14),
+                        borderSide: const BorderSide(color: Colors.black54),
+                      ),
                     ),
                     onChanged: (_) => setState(() {}),
-                    onCompleted: (value) {
-                      debugPrint('CODE: $value');
-                    },
-                  ),
+                    onSubmitted: (_) => _onSend(),
+                  )
                 ),
               ),
 
@@ -171,7 +174,7 @@ class _GroupCodeScreenState extends ConsumerState<GroupCodeScreen> {
                 child: ButtonWidget(
                   text: t.send,
                   filled: true,
-                  onTap: controller.text.length == 7 ? _onSend : null,
+                  onTap: controller.text.isNotEmpty ? _onSend : null,
                 ),
               ),
 
