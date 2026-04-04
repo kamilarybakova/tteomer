@@ -9,7 +9,7 @@ class AppLocalizationsKy extends AppLocalizations {
   AppLocalizationsKy([String locale = 'ky']) : super(locale);
 
   @override
-  String get appTitle => 'Бишкек Түркия Түрк Тили Окутуу Борбору';
+  String get appTitle => 'Бишкек Түркия Түркчөсүн Үйрөтүү Борбору';
 
   @override
   String get register => 'Аккаунт түзүү';
@@ -18,22 +18,22 @@ class AppLocalizationsKy extends AppLocalizations {
   String get signUpTitle => 'Аккаунт түзүү';
 
   @override
-  String get nickname => 'Ник';
+  String get nickname => 'Никнейм';
 
   @override
-  String get enterNickname => 'Ник жазыңыз';
+  String get enterNickname => 'Никнейм киргизиңиз';
 
   @override
   String get email => 'Почта';
 
   @override
-  String get enterEmail => 'Почтаны жазыңыз';
+  String get enterEmail => 'Почтаңызды киргизиңиз';
 
   @override
-  String get password => 'Сыр сөз';
+  String get password => 'Сырсөз';
 
   @override
-  String get acceptTerms => 'Колдонуу шарттарын жана купуялык саясатын кабыл алам.';
+  String get acceptTerms => 'Мен колдонуу шарттарын\nжана купуялык саясатын кабыл алам.';
 
   @override
   String get alreadyHaveAccount => 'Аккаунтуңуз барбы?';
@@ -45,7 +45,7 @@ class AppLocalizationsKy extends AppLocalizations {
   String get createAccount => 'Аккаунт түзүү';
 
   @override
-  String get forgotPassword => 'Сыр сөздү унуттуңузбу?';
+  String get forgotPassword => 'Сырсөздү унуттуңузбу?';
 
   @override
   String get noAccount => 'Аккаунтуңуз жокпу?';
@@ -68,27 +68,27 @@ class AppLocalizationsKy extends AppLocalizations {
   String get forgotPasswordTitle => 'Сырсөздү унуттуңузбу?';
 
   @override
-  String get forgotPasswordDesc => 'Сураныч, аккаунтуңузга байланышкан электрондук почтаны киргизиңиз.';
+  String get forgotPasswordDesc => 'Аккаунтуңузга байланышкан электрондук почта дарегин киргизиңиз.';
 
   @override
   String get sendCode => 'Код жөнөтүү';
 
   @override
-  String get rememberPassword => 'Сырсөздү эстедиңизби?';
+  String get rememberPassword => 'Сырсөзүңүздү эстедиңизби?';
 
   @override
   String get verifyEmailTitle => 'Почтаңызды текшериңиз';
 
   @override
   String verifyEmailDesc(Object email) {
-    return 'Биз кодду бул почтага жөнөттүк: $email';
+    return 'Биз кодду $email дарегине жөнөттүк';
   }
 
   @override
-  String get resetPasswordTitle => 'Сырсөздү калыбына келтирүү';
+  String get resetPasswordTitle => 'Сырсөздү баштапкы абалга келтирүү';
 
   @override
-  String get enterNewPassword => 'Жаңы сырсөздү киргизиңиз';
+  String get enterNewPassword => 'Жаңы сырсөз киргизиңиз';
 
   @override
   String get newPassword => 'Жаңы сырсөз';
@@ -97,16 +97,16 @@ class AppLocalizationsKy extends AppLocalizations {
   String get repeatPassword => 'Жаңы сырсөздү кайра киргизиңиз';
 
   @override
-  String get resetPassword => 'Сырсөздү өзгөртүү';
+  String get resetPassword => 'Сырсөздү баштапкы абалга келтирүү';
 
   @override
-  String get emptyDictionaryTitle => 'Словарь пуст';
+  String get emptyDictionaryTitle => 'Сөздүк бош';
 
   @override
-  String get emptyDictionarySubtitle => 'Добавьте первые слова, чтобы начать обучение';
+  String get emptyDictionarySubtitle => 'Окууну баштоо үчүн биринчи сөздөрдү кошуңуз';
 
   @override
-  String get searchHint => 'Поиск слов';
+  String get searchHint => 'Сөз издөө';
 
   @override
   String get tabHome => 'Башкы бет';
@@ -118,19 +118,19 @@ class AppLocalizationsKy extends AppLocalizations {
   String get tabDocs => 'Документтер';
 
   @override
-  String get firstName => 'Атыңыз';
+  String get firstName => 'Аты';
 
   @override
-  String get lastName => 'Фамилияңыз';
+  String get lastName => 'Фамилия';
 
   @override
-  String get enterName => 'Атыңызды жазыңыз';
+  String get enterName => 'Атыңызды киргизиңиз';
 
   @override
-  String get enterLastName => 'Фамилияңызды жазыңыз';
+  String get enterLastName => 'Фамилияңызды киргизиңиз';
 
   @override
-  String get scanFromPhoto => 'Сүрөттөн скандоо';
+  String get scanFromPhoto => 'Сүрөттөн сканерлөө';
 
   @override
   String get addManually => 'Кол менен кошуу';
@@ -139,7 +139,7 @@ class AppLocalizationsKy extends AppLocalizations {
   String get pasteText => 'Текст чаптоо';
 
   @override
-  String get manualInputHint => 'Бир же бирнече сөз жазыңыз\n(ар бир сап үчүн бир сөз)';
+  String get manualInputHint => 'Бир же бирнече сөз киргизиңиз\n(ар бири жаңы сапта)';
 
   @override
   String get check => 'Текшерүү';
@@ -148,13 +148,13 @@ class AppLocalizationsKy extends AppLocalizations {
   String get detectedWords => 'Табылган сөздөр';
 
   @override
-  String get scanText => 'Скандоо';
+  String get scanText => 'Сканерлөө';
 
   @override
-  String get scan => 'Текстти скандаңыз';
+  String get scan => 'Текстти сканерлеңиз';
 
   @override
-  String get scanError => 'Скандоо катасы';
+  String get scanError => 'Сканерлөө катасы';
 
   @override
   String reviewWordsTitle(int count) {
@@ -167,7 +167,7 @@ class AppLocalizationsKy extends AppLocalizations {
   }
 
   @override
-  String get addWords => 'Сөз кошуу';
+  String get addWords => 'Сөздөр кошуу';
 
   @override
   String get settings => 'Жөндөөлөр';
@@ -179,14 +179,44 @@ class AppLocalizationsKy extends AppLocalizations {
   String get logout => 'Чыгуу';
 
   @override
-  String get selectLanguage => 'Тилди тандаңыз';
+  String get selectLanguage => 'Тил тандаңыз';
 
   @override
   String get langRussian => 'Орусча';
 
   @override
-  String get langTurkish => 'Түркчө';
+  String get langTurkish => 'Türkçe';
 
   @override
   String get langKyrgyz => 'Кыргызча';
+
+  @override
+  String get welcomeTitle => 'Кош келиңиздер 👋';
+
+  @override
+  String get sectionNews => 'Жаңылыктар жана Жарыялар';
+
+  @override
+  String get welcomeSubtitle => 'Tteomer\'ге';
+
+  @override
+  String get sectionContacts => 'Байланыштар';
+
+  @override
+  String get registerButton => 'Катталуу';
+
+  @override
+  String get contactSite => 'Сайт';
+
+  @override
+  String get contactInstagram => 'Instagram';
+
+  @override
+  String get contactFacebook => 'Facebook';
+
+  @override
+  String get contactYoutube => 'YouTube';
+
+  @override
+  String get save => 'Cактоо';
 }

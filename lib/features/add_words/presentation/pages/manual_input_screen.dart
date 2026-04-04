@@ -157,7 +157,7 @@ class _AddManuallyBottomSheetState
                       width: double.infinity,
                       child: ElevatedButton.icon(
                         onPressed: _submit,
-                        label: Text('Save'),
+                        label: Text(l10n?.save ?? 'Save'),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.accent,
                           foregroundColor: Colors.white,

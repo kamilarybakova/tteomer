@@ -9,7 +9,7 @@ class AppLocalizationsTr extends AppLocalizations {
   AppLocalizationsTr([String locale = 'tr']) : super(locale);
 
   @override
-  String get appTitle => 'Bișkek Türkiye Türkçesi Öğretim Merkezi';
+  String get appTitle => 'Bişkek Türkiye Türkçesi Öğretim Merkezi';
 
   @override
   String get register => 'Hesap oluştur';
@@ -18,10 +18,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String get signUpTitle => 'Hesap oluştur';
 
   @override
-  String get nickname => 'Takma ad';
+  String get nickname => 'Kullanıcı adı';
 
   @override
-  String get enterNickname => 'Takma ad girin';
+  String get enterNickname => 'Kullanıcı adı girin';
 
   @override
   String get email => 'E-posta';
@@ -33,10 +33,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String get password => 'Şifre';
 
   @override
-  String get acceptTerms => 'Kullanım şartlarını ve gizlilik politikasını kabul ediyorum.';
+  String get acceptTerms => 'Kullanım koşullarını\nve gizlilik politikasını kabul ediyorum.';
 
   @override
-  String get alreadyHaveAccount => 'Zaten hesabın var mı?';
+  String get alreadyHaveAccount => 'Zaten hesabınız var mı?';
 
   @override
   String get login => 'Giriş yap';
@@ -45,10 +45,10 @@ class AppLocalizationsTr extends AppLocalizations {
   String get createAccount => 'Hesap oluştur';
 
   @override
-  String get forgotPassword => 'Şifreni mi unuttun?';
+  String get forgotPassword => 'Şifremi unuttum?';
 
   @override
-  String get noAccount => 'Hesabın yok mu?';
+  String get noAccount => 'Hesabınız yok mu?';
 
   @override
   String get enterGroupCode => 'Grup kodunu girin';
@@ -65,13 +65,13 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
-  String get forgotPasswordTitle => 'Şifrenizi mi unuttunuz?';
+  String get forgotPasswordTitle => 'Şifremi unuttum?';
 
   @override
   String get forgotPasswordDesc => 'Lütfen hesabınızla ilişkili e-posta adresini girin.';
 
   @override
-  String get sendCode => 'Kodu gönder';
+  String get sendCode => 'Kod gönder';
 
   @override
   String get rememberPassword => 'Şifrenizi hatırladınız mı?';
@@ -81,7 +81,7 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String verifyEmailDesc(Object email) {
-    return 'Kodu şu e-postaya gönderdik: $email';
+    return 'Kodu $email adresine gönderdik';
   }
 
   @override
@@ -100,13 +100,13 @@ class AppLocalizationsTr extends AppLocalizations {
   String get resetPassword => 'Şifreyi sıfırla';
 
   @override
-  String get emptyDictionaryTitle => 'Словарь пуст';
+  String get emptyDictionaryTitle => 'Sözlük boş';
 
   @override
-  String get emptyDictionarySubtitle => 'Добавьте первые слова, чтобы начать обучение';
+  String get emptyDictionarySubtitle => 'Öğrenmeye başlamak için ilk kelimeleri ekleyin';
 
   @override
-  String get searchHint => 'Поиск слов';
+  String get searchHint => 'Kelime ara';
 
   @override
   String get tabHome => 'Ana sayfa';
@@ -139,7 +139,7 @@ class AppLocalizationsTr extends AppLocalizations {
   String get pasteText => 'Metin yapıştır';
 
   @override
-  String get manualInputHint => 'Bir veya birden fazla kelime girin\n(her satıra bir kelime)';
+  String get manualInputHint => 'Bir veya birden fazla kelime girin\n(her biri yeni satırdan)';
 
   @override
   String get check => 'Kontrol et';
@@ -189,4 +189,34 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get langKyrgyz => 'Kırgızca';
+
+  @override
+  String get welcomeTitle => 'Hoş geldiniz 👋';
+
+  @override
+  String get sectionNews => 'Haberler ve Duyurular';
+
+  @override
+  String get welcomeSubtitle => 'Tteomer\'e';
+
+  @override
+  String get sectionContacts => 'İletişim';
+
+  @override
+  String get registerButton => 'Kayıt ol';
+
+  @override
+  String get contactSite => 'Site';
+
+  @override
+  String get contactInstagram => 'Instagram';
+
+  @override
+  String get contactFacebook => 'Facebook';
+
+  @override
+  String get contactYoutube => 'YouTube';
+
+  @override
+  String get save => 'Kaydet';
 }

@@ -446,6 +446,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Кыргызча'**
   String get langKyrgyz;
+
+  /// No description provided for @welcomeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Добро пожаловать 👋'**
+  String get welcomeTitle;
+
+  /// No description provided for @sectionNews.
+  ///
+  /// In en, this message translates to:
+  /// **'Новости и объявления'**
+  String get sectionNews;
+
+  /// No description provided for @welcomeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'в Tteomer'**
+  String get welcomeSubtitle;
+
+  /// No description provided for @sectionContacts.
+  ///
+  /// In en, this message translates to:
+  /// **'Контакты'**
+  String get sectionContacts;
+
+  /// No description provided for @registerButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Зарегистрироваться'**
+  String get registerButton;
+
+  /// No description provided for @contactSite.
+  ///
+  /// In en, this message translates to:
+  /// **'Сайт'**
+  String get contactSite;
+
+  /// No description provided for @contactInstagram.
+  ///
+  /// In en, this message translates to:
+  /// **'Instagram'**
+  String get contactInstagram;
+
+  /// No description provided for @contactFacebook.
+  ///
+  /// In en, this message translates to:
+  /// **'Facebook'**
+  String get contactFacebook;
+
+  /// No description provided for @contactYoutube.
+  ///
+  /// In en, this message translates to:
+  /// **'YouTube'**
+  String get contactYoutube;
+
+  /// No description provided for @save.
+  ///
+  /// In en, this message translates to:
+  /// **'Сохранить'**
+  String get save;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

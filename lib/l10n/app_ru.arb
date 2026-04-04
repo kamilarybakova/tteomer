@@ -81,5 +81,15 @@
   "selectLanguage": "Выберите язык",
   "langRussian": "Русский",
   "langTurkish": "Türkçe",
-  "langKyrgyz": "Кыргызча"
+  "langKyrgyz": "Кыргызча",
+  "welcomeTitle": "Добро пожаловать 👋",
+  "welcomeSubtitle": "в Tteomer",
+  "sectionNews": "Новости и объявления",
+  "sectionContacts": "Контакты",
+  "registerButton": "Зарегистрироваться",
+  "contactSite": "Сайт",
+  "contactInstagram": "Instagram",
+  "contactFacebook": "Facebook",
+  "contactYoutube": "YouTube",
+  "save": "Сохранить"
 }

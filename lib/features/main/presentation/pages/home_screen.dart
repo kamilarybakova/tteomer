@@ -24,7 +24,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     super.initState();
     _newsPageController = PageController(viewportFraction: 1);
 
-
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(mainNotifierProvider.notifier).fetchNews();
     });
@@ -78,10 +77,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(24),
               gradient: const LinearGradient(
-                colors: [
-                  Color(0xFF6C63FF),
-                  Color(0xFF8E7BFF),
-                ],
+                colors: [Color(0xFF6C63FF), Color(0xFF8E7BFF)],
               ),
             ),
             child: Row(
@@ -100,21 +96,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ),
                 const SizedBox(width: 16),
-                const Expanded(
+                Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Добро пожаловать 👋',
-                        style: TextStyle(
+                        l10n.welcomeTitle,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 16,
                         ),
                       ),
-                      SizedBox(height: 4),
+                      const SizedBox(height: 4),
                       Text(
-                        'в Tteomer',
-                        style: TextStyle(
+                        l10n.welcomeSubtitle,
+                        style: const TextStyle(
                           color: Colors.white,
                           fontSize: 22,
                           fontWeight: FontWeight.w700,
@@ -129,15 +125,16 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
           const SizedBox(height: 20),
 
-          if (newsState.status == NewsStatus.loading)
-            const SizedBox(
-              height: 200,
-              child: Center(child: CircularProgressIndicator()),
-            ),
+          if (newsState.status == NewsStatus.loading) ...[
+            _SectionTitle(l10n.sectionNews),
+            const SizedBox(height: 12),
+            const _NewsShimmer(),
+            const SizedBox(height: 20),
+          ],
 
           if (newsState.status == NewsStatus.success &&
               newsState.news.isNotEmpty) ...[
-            const _SectionTitle('Новости и объявления'),
+            _SectionTitle(l10n.sectionNews),
             const SizedBox(height: 12),
 
             SizedBox(
@@ -270,10 +267,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   ),
                 ],
               ),
-              child: const Center(
+              child: Center(
                 child: Text(
-                  'Зарегистрироваться',
-                  style: TextStyle(
+                  l10n.registerButton,
+                  style: const TextStyle(
                     color: Colors.white,
                     fontWeight: FontWeight.w700,
                     fontSize: 16,
@@ -285,7 +282,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
           const SizedBox(height: 24),
 
-          const _SectionTitle('Контакты'),
+          _SectionTitle(l10n.sectionContacts),
           const SizedBox(height: 12),
           GridView.count(
             shrinkWrap: true,
@@ -296,28 +293,30 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             childAspectRatio: 3.2,
             children: [
               _ContactTile(
-                title: 'Сайт',
+                title: l10n.contactSite,
                 icon: Icons.language,
                 color: const Color(0xFF6C63FF),
                 onTap: () => _openUrl('https://biskektomer.com/'),
               ),
               _ContactTile(
-                title: 'Instagram',
+                title: l10n.contactInstagram,
                 icon: Icons.camera_alt_outlined,
                 color: const Color(0xFFE1306C),
-                onTap: () => _openUrl('https://www.instagram.com/tteomer_bishkek'),
+                onTap: () =>
+                    _openUrl('https://www.instagram.com/tteomer_bishkek'),
               ),
               _ContactTile(
-                title: 'Facebook',
+                title: l10n.contactFacebook,
                 icon: Icons.facebook,
                 color: const Color(0xFF1877F2),
                 onTap: () => _openUrl('https://facebook.com/yourpage'),
               ),
               _ContactTile(
-                title: 'YouTube',
+                title: l10n.contactYoutube,
                 icon: Icons.play_circle_outline,
                 color: const Color(0xFFFF0000),
-                onTap: () => _openUrl('https://youtube.com/@biskektteomer2887'),
+                onTap: () =>
+                    _openUrl('https://youtube.com/@biskektteomer2887'),
               ),
             ],
           ),
@@ -328,6 +327,122 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     );
   }
 }
+
+class _NewsShimmer extends StatefulWidget {
+  const _NewsShimmer();
+
+  @override
+  State<_NewsShimmer> createState() => _NewsShimmerState();
+}
+
+class _NewsShimmerState extends State<_NewsShimmer>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+  late final Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 1200),
+    )..repeat();
+
+    _animation = Tween<double>(begin: -1.5, end: 1.5).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
+    );
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AnimatedBuilder(
+      animation: _animation,
+      builder: (context, _) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            _ShimmerBox(
+              width: double.infinity,
+              height: 200,
+              borderRadius: 24,
+              shimmerValue: _animation.value,
+            ),
+            const SizedBox(height: 12),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(
+                3,
+                    (i) => _ShimmerBox(
+                  width: i == 0 ? 20 : 8,
+                  height: 8,
+                  borderRadius: 4,
+                  shimmerValue: _animation.value,
+                  margin: const EdgeInsets.symmetric(horizontal: 4),
+                ),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}
+
+class _ShimmerBox extends StatelessWidget {
+  final double width;
+  final double height;
+  final double borderRadius;
+  final double shimmerValue;
+  final EdgeInsets? margin;
+
+  const _ShimmerBox({
+    required this.width,
+    required this.height,
+    required this.borderRadius,
+    required this.shimmerValue,
+    this.margin,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: width,
+      height: height,
+      margin: margin,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(borderRadius),
+        gradient: LinearGradient(
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+          stops: const [0.0, 0.5, 1.0],
+          colors: const [
+            Color(0xFFE0E0E0),
+            Color(0xFFF5F5F5),
+            Color(0xFFE0E0E0),
+          ],
+          transform: _SlideGradient(shimmerValue),
+        ),
+      ),
+    );
+  }
+}
+
+class _SlideGradient extends GradientTransform {
+  final double value;
+  const _SlideGradient(this.value);
+
+  @override
+  Matrix4? transform(Rect bounds, {TextDirection? textDirection}) {
+    return Matrix4.translationValues(bounds.width * value, 0, 0);
+  }
+}
+
 class _SectionTitle extends StatelessWidget {
   final String title;
 

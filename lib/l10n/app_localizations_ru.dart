@@ -189,4 +189,34 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get langKyrgyz => 'Кыргызча';
+
+  @override
+  String get welcomeTitle => 'Добро пожаловать 👋';
+
+  @override
+  String get sectionNews => 'Новости и объявления';
+
+  @override
+  String get welcomeSubtitle => 'в Tteomer';
+
+  @override
+  String get sectionContacts => 'Контакты';
+
+  @override
+  String get registerButton => 'Зарегистрироваться';
+
+  @override
+  String get contactSite => 'Сайт';
+
+  @override
+  String get contactInstagram => 'Instagram';
+
+  @override
+  String get contactFacebook => 'Facebook';
+
+  @override
+  String get contactYoutube => 'YouTube';
+
+  @override
+  String get save => 'Сохранить';
 }

@@ -1,3 +1,3 @@
 class AppConfig {
-  static const apiBaseUrl = 'https://tomer.fly.dev';
+  static const apiBaseUrl = 'https://167.86.127.114.sslip.io';
 }
