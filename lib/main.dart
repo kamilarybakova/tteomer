@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:no_screenshot/no_screenshot.dart';
 import 'package:tteomer/core/widgets/language_picker_sheet.dart';
 
 import 'auth_gate.dart';
+import 'core/storage/shared_prefs_service.dart';
 import 'core/utils/locale_state.dart';
 import 'l10n/app_localizations.dart';
 
 void main() async {
   // await NoScreenshot.instance.screenshotOff();
+  WidgetsFlutterBinding.ensureInitialized();
+  await SharedPrefsService.getInstance();
   runApp(
     const ProviderScope(
       child: MyApp(),

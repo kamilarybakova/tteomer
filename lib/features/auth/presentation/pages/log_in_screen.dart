@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tteomer/features/auth/presentation/utils/auth_text_field.dart';
 import 'package:tteomer/features/auth/presentation/utils/field_label.dart';
 import 'package:tteomer/features/auth/presentation/pages/sign_up_screen.dart';
+import '../../../../core/storage/shared_prefs_service.dart';
 import '../../../../core/widgets/app_toast.dart';
 import '../../../../core/widgets/button_widget.dart';
 import '../../../../l10n/app_localizations.dart';
@@ -23,12 +24,46 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
   final passwordController = TextEditingController();
 
   bool obscure = true;
+  bool rememberMe = false;
 
   @override
   void initState() {
     super.initState();
     emailController.addListener(() => setState(() {}));
     passwordController.addListener(() => setState(() {}));
+    _loadSavedCredentials();
+  }
+
+  Future<void> _loadSavedCredentials() async {
+    final prefs = await SharedPrefsService.getInstance();
+    final savedEmail = prefs.getEmail();
+    final savedPassword = prefs.getPassword();
+
+    if (savedEmail != null && savedPassword != null) {
+      setState(() {
+        emailController.text = savedEmail;
+        passwordController.text = savedPassword;
+        rememberMe = true;
+      });
+    }
+  }
+
+  Future<void> _handleLogin() async {
+    final prefs = await SharedPrefsService.getInstance();
+
+    if (rememberMe) {
+      await prefs.saveCredentials(
+        email: emailController.text.trim(),
+        password: passwordController.text.trim(),
+      );
+    } else {
+      await prefs.clearAll();
+    }
+
+    ref.read(authNotifierProvider.notifier).login(
+      emailController.text.trim(),
+      passwordController.text.trim(),
+    );
   }
 
   @override
@@ -106,22 +141,51 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
                   onPressed: () => setState(() => obscure = !obscure),
                 ),
               ),
-              Align(
-                alignment: Alignment.centerRight,
-                child: TextButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => const ForgotPasswordScreen(),
-                      ),
-                    );
-                  },
-                  child: Text(
-                    t.forgotPassword,
-                    style: const TextStyle(color: Colors.grey),
+              const SizedBox(height: 4),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // Чекбокс "Запомнить меня"
+                  GestureDetector(
+                    onTap: () => setState(() => rememberMe = !rememberMe),
+                    child: Row(
+                      children: [
+                        SizedBox(
+                          width: 24,
+                          height: 24,
+                          child: Checkbox(
+                            value: rememberMe,
+                            onChanged: (val) =>
+                                setState(() => rememberMe = val ?? false),
+                            activeColor: primary,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 8),
+                        const Text(
+                          'Запомнить меня',
+                          style: TextStyle(color: Colors.grey, fontSize: 13),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const ForgotPasswordScreen(),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      t.forgotPassword,
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                  ),
+                ],
               ),
               const SizedBox(height: 8),
               ButtonWidget(
@@ -129,14 +193,7 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
                 filled: true,
                 onTap: (authState is AuthLoading || !_canSubmit)
                     ? null
-                    : () {
-                  ref
-                      .read(authNotifierProvider.notifier)
-                      .login(
-                    emailController.text.trim(),
-                    passwordController.text.trim(),
-                  );
-                },
+                    : _handleLogin,
               ),
               const Spacer(),
               Row(
@@ -157,7 +214,7 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
                     },
                     child: Text(
                       t.createAccount,
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: primary,
                         fontWeight: FontWeight.w600,
                         decoration: TextDecoration.underline,
@@ -174,4 +231,3 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
     );
   }
 }
-
