@@ -6,6 +6,7 @@ import 'package:tteomer/features/main/presentation/pages/setting_screen.dart';
 import 'package:tteomer/l10n/app_localizations.dart';
 import '../../../auth/presentation/provider/providers.dart';
 import '../state/main_state.dart';
+import 'news_detail_screen.dart';
 
 class HomeScreen extends ConsumerStatefulWidget {
   const HomeScreen({super.key});
@@ -21,7 +22,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _newsPageController = PageController(viewportFraction: 0.88);
+    _newsPageController = PageController(viewportFraction: 1);
 
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -72,7 +73,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.all(16),
         children: [
-          /// ─── HEADER ─────────────────────────────
           Container(
             padding: const EdgeInsets.all(20),
             decoration: BoxDecoration(
@@ -129,7 +129,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
           const SizedBox(height: 20),
 
-          /// ─── NEWS BLOCK ─────────────────────────────
           if (newsState.status == NewsStatus.loading)
             const SizedBox(
               height: 200,
@@ -155,69 +154,75 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                   return AnimatedScale(
                     scale: _currentNewsPage == index ? 1.0 : 0.95,
                     duration: const Duration(milliseconds: 300),
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 6),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(24),
-                        image: DecorationImage(
-                          image: NetworkImage(news.image),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => NewsDetailScreen(
+                              title: news.title,
+                              description: news.description,
+                              image: news.image,
+                              tag: news.tag,
+                            ),
+                          ),
+                        );
+                      },
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(24),
-                          gradient: LinearGradient(
-                            begin: Alignment.topCenter,
-                            end: Alignment.bottomCenter,
-                            colors: [
-                              Colors.transparent,
-                              Colors.black.withOpacity(0.7),
-                            ],
+                          image: DecorationImage(
+                            image: NetworkImage(news.image),
+                            fit: BoxFit.cover,
                           ),
                         ),
-                        padding: const EdgeInsets.all(20),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            if (news.tag.isNotEmpty)
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 10,
-                                  vertical: 4,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: AppColors.accent,
-                                  borderRadius: BorderRadius.circular(20),
-                                ),
-                                child: Text(
-                                  news.tag,
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.w600,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(24),
+                            gradient: LinearGradient(
+                              begin: Alignment.topCenter,
+                              end: Alignment.bottomCenter,
+                              colors: [
+                                Colors.transparent,
+                                Colors.black.withOpacity(0.7),
+                              ],
+                            ),
+                          ),
+                          padding: const EdgeInsets.all(20),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              if (news.tag.isNotEmpty)
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 4,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.accent,
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: Text(
+                                    news.tag,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                 ),
+                              const SizedBox(height: 8),
+                              Text(
+                                news.title,
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w700,
+                                ),
                               ),
-                            const SizedBox(height: 8),
-                            Text(
-                              news.title,
-                              style: const TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w700,
-                              ),
-                            ),
-                            const SizedBox(height: 4),
-                            Text(
-                              news.description,
-                              style: TextStyle(
-                                color: Colors.white.withOpacity(0.85),
-                                fontSize: 13,
-                              ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
@@ -250,7 +255,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             const SizedBox(height: 20),
           ],
 
-          /// ─── REGISTER BUTTON ─────────────────────────────
           GestureDetector(
             onTap: () => _openUrl('https://biskektomer.com/#'),
             child: Container(
@@ -281,42 +285,41 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
           const SizedBox(height: 24),
 
-          /// ─── CONTACTS ─────────────────────────────
           const _SectionTitle('Контакты'),
           const SizedBox(height: 12),
-
-          SizedBox(
-            height: 80,
-            child: ListView(
-              scrollDirection: Axis.horizontal,
-              physics: const BouncingScrollPhysics(),
-              children: [
-                _ContactTile(
-                  title: 'Сайт',
-                  icon: Icons.language,
-                  color: const Color(0xFF6C63FF),
-                  onTap: () => _openUrl('https://biskektomer.com/'),
-                ),
-                _ContactTile(
-                  title: 'Instagram',
-                  icon: Icons.camera_alt_outlined,
-                  color: const Color(0xFFE1306C),
-                  onTap: () => _openUrl('https://www.instagram.com/tteomer_bishkek'),
-                ),
-                _ContactTile(
-                  title: 'Facebook',
-                  icon: Icons.facebook,
-                  color: const Color(0xFF1877F2),
-                  onTap: () => _openUrl('https://facebook.com/yourpage'),
-                ),
-                _ContactTile(
-                  title: 'YouTube',
-                  icon: Icons.play_circle_outline,
-                  color: const Color(0xFFFF0000),
-                  onTap: () => _openUrl('https://youtube.com/@biskektteomer2887'),
-                ),
-              ],
-            ),
+          GridView.count(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            crossAxisCount: 2,
+            mainAxisSpacing: 12,
+            crossAxisSpacing: 12,
+            childAspectRatio: 3.2,
+            children: [
+              _ContactTile(
+                title: 'Сайт',
+                icon: Icons.language,
+                color: const Color(0xFF6C63FF),
+                onTap: () => _openUrl('https://biskektomer.com/'),
+              ),
+              _ContactTile(
+                title: 'Instagram',
+                icon: Icons.camera_alt_outlined,
+                color: const Color(0xFFE1306C),
+                onTap: () => _openUrl('https://www.instagram.com/tteomer_bishkek'),
+              ),
+              _ContactTile(
+                title: 'Facebook',
+                icon: Icons.facebook,
+                color: const Color(0xFF1877F2),
+                onTap: () => _openUrl('https://facebook.com/yourpage'),
+              ),
+              _ContactTile(
+                title: 'YouTube',
+                icon: Icons.play_circle_outline,
+                color: const Color(0xFFFF0000),
+                onTap: () => _openUrl('https://youtube.com/@biskektteomer2887'),
+              ),
+            ],
           ),
 
           const SizedBox(height: 100),
@@ -360,39 +363,41 @@ class _ContactTile extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 80,
-        margin: const EdgeInsets.only(right: 12),
+        height: 70,
+        padding: const EdgeInsets.symmetric(horizontal: 16),
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(20),
+          borderRadius: BorderRadius.circular(16),
           color: Colors.white,
           boxShadow: [
             BoxShadow(
               color: color.withOpacity(0.12),
-              blurRadius: 12,
+              blurRadius: 10,
               offset: const Offset(0, 4),
             ),
           ],
         ),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+        child: Row(
           children: [
             Container(
-              width: 40,
-              height: 40,
+              width: 42,
+              height: 42,
               decoration: BoxDecoration(
                 color: color.withOpacity(0.1),
-                shape: BoxShape.circle,
+                borderRadius: BorderRadius.circular(12),
               ),
-              child: Icon(icon, color: color, size: 20),
+              child: Icon(icon, color: color, size: 22),
             ),
-            const SizedBox(height: 6),
-            Text(
-              title,
-              style: const TextStyle(
-                fontSize: 11,
-                fontWeight: FontWeight.w600,
+            const SizedBox(width: 12),
+            Expanded(
+              child: Text(
+                title,
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
+            const Icon(Icons.chevron_right, size: 18),
           ],
         ),
       ),
