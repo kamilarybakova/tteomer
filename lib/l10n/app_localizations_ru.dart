@@ -118,6 +118,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get tabDocs => 'Документы';
 
   @override
+  String get tabTranslator => 'Переводчик';
+
+  @override
   String get firstName => 'Имя';
 
   @override
@@ -219,4 +222,48 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get save => 'Сохранить';
+
+  @override
+  String get translator_title => 'Переводчик';
+
+  @override
+  String get instant_translation => 'Мгновенный перевод';
+
+  @override
+  String get ai_translator => 'AI Переводчик';
+
+  @override
+  String get enter_text_hint => 'Введите текст для перевода...';
+
+  @override
+  String symbols_count(Object count) {
+    return '$count символов';
+  }
+
+  @override
+  String get clear => 'Очистить';
+
+  @override
+  String get translation_error => 'Ошибка перевода. Проверьте API-ключ или подключение.';
+
+  @override
+  String get copy => 'Копировать';
+
+  @override
+  String get copied => 'Скопировано в буфер обмена';
+
+  @override
+  String added_to_dictionary(Object word) {
+    return '«$word» добавлено в словарь';
+  }
+
+  @override
+  String add_to_dictionary(Object word) {
+    return 'Добавить «$word» в словарь';
+  }
+
+  @override
+  String added(Object word) {
+    return '«$word» добавлено!';
+  }
 }

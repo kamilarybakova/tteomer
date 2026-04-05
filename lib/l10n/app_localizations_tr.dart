@@ -118,6 +118,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get tabDocs => 'Belgeler';
 
   @override
+  String get tabTranslator => 'Çevirmen';
+
+  @override
   String get firstName => 'Ad';
 
   @override
@@ -219,4 +222,48 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get save => 'Kaydet';
+
+  @override
+  String get translator_title => 'Çevirmen';
+
+  @override
+  String get instant_translation => 'Anında çeviri';
+
+  @override
+  String get ai_translator => 'AI Çevirmen';
+
+  @override
+  String get enter_text_hint => 'Çevirmek için metin girin...';
+
+  @override
+  String symbols_count(Object count) {
+    return '$count karakter';
+  }
+
+  @override
+  String get clear => 'Temizle';
+
+  @override
+  String get translation_error => 'Çeviri hatası. API anahtarını veya bağlantıyı kontrol edin.';
+
+  @override
+  String get copy => 'Kopyala';
+
+  @override
+  String get copied => 'Panoya kopyalandı';
+
+  @override
+  String added_to_dictionary(Object word) {
+    return '«$word» sözlüğe eklendi';
+  }
+
+  @override
+  String add_to_dictionary(Object word) {
+    return '«$word» sözlüğe ekle';
+  }
+
+  @override
+  String added(Object word) {
+    return '«$word» eklendi!';
+  }
 }

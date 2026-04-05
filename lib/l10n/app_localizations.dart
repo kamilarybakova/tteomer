@@ -309,6 +309,12 @@ abstract class AppLocalizations {
   /// **'Документы'**
   String get tabDocs;
 
+  /// No description provided for @tabTranslator.
+  ///
+  /// In en, this message translates to:
+  /// **'Переводчик'**
+  String get tabTranslator;
+
   /// No description provided for @firstName.
   ///
   /// In en, this message translates to:
@@ -506,6 +512,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Сохранить'**
   String get save;
+
+  /// No description provided for @translator_title.
+  ///
+  /// In en, this message translates to:
+  /// **'Переводчик'**
+  String get translator_title;
+
+  /// No description provided for @instant_translation.
+  ///
+  /// In en, this message translates to:
+  /// **'Мгновенный перевод'**
+  String get instant_translation;
+
+  /// No description provided for @ai_translator.
+  ///
+  /// In en, this message translates to:
+  /// **'AI Переводчик'**
+  String get ai_translator;
+
+  /// No description provided for @enter_text_hint.
+  ///
+  /// In en, this message translates to:
+  /// **'Введите текст для перевода...'**
+  String get enter_text_hint;
+
+  /// No description provided for @symbols_count.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} символов'**
+  String symbols_count(Object count);
+
+  /// No description provided for @clear.
+  ///
+  /// In en, this message translates to:
+  /// **'Очистить'**
+  String get clear;
+
+  /// No description provided for @translation_error.
+  ///
+  /// In en, this message translates to:
+  /// **'Ошибка перевода. Проверьте API-ключ или подключение.'**
+  String get translation_error;
+
+  /// No description provided for @copy.
+  ///
+  /// In en, this message translates to:
+  /// **'Копировать'**
+  String get copy;
+
+  /// No description provided for @copied.
+  ///
+  /// In en, this message translates to:
+  /// **'Скопировано в буфер обмена'**
+  String get copied;
+
+  /// No description provided for @added_to_dictionary.
+  ///
+  /// In en, this message translates to:
+  /// **'«{word}» добавлено в словарь'**
+  String added_to_dictionary(Object word);
+
+  /// No description provided for @add_to_dictionary.
+  ///
+  /// In en, this message translates to:
+  /// **'Добавить «{word}» в словарь'**
+  String add_to_dictionary(Object word);
+
+  /// No description provided for @added.
+  ///
+  /// In en, this message translates to:
+  /// **'«{word}» добавлено!'**
+  String added(Object word);
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

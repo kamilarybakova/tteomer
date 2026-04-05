@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tteomer/features/translator/presentation/screens/translator_screen.dart';
 import '../../l10n/app_localizations.dart';
 import 'features/dictionary/presentation/pages/dictionary_screen.dart';
 import 'features/documents/presentation/pages/documents_screen.dart';
@@ -21,6 +22,7 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
     const HomeScreen(),
     const DictionaryScreen(),
     const DocumentsScreen(),
+    const TranslatorScreen(),
   ];
 
   @override
@@ -74,6 +76,11 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                         icon: const Icon(Icons.description_outlined),
                         activeIcon: const Icon(Icons.description),
                         label: l10n.tabDocs,
+                      ),
+                      BottomNavigationBarItem(
+                        icon: const Icon(Icons.wordpress_outlined),
+                        activeIcon: const Icon(Icons.wordpress),
+                        label: l10n.tabTranslator,
                       ),
                     ],
                   ),

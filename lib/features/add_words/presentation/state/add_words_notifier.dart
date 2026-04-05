@@ -41,6 +41,12 @@ class AddWordsViewModel extends StateNotifier<List<String>> {
     state = words;
   }
 
+  void addWord(String word) {
+    if (word.trim().isEmpty) return;
+    if (state.contains(word.trim())) return;
+    state = [...state, word.trim()];
+  }
+
   void removeWord(int index) {
     final list = [...state];
     list.removeAt(index);

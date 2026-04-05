@@ -26,6 +26,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(mainNotifierProvider.notifier).fetchNews();
+      ref.read(mainNotifierProvider.notifier).checkRegistrationStatus();
     });
   }
 
@@ -47,286 +48,295 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final l10n = AppLocalizations.of(context)!;
     final newsState = ref.watch(mainNotifierProvider);
 
-    return Scaffold(
-      backgroundColor: const Color(0xFFF6F7FB),
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        title: Text(
-          l10n.tabHome,
-          style: const TextStyle(fontWeight: FontWeight.w700),
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: const Color(0xFFF6F7FB),
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          automaticallyImplyLeading: false,
+          centerTitle: true,
+          elevation: 0,
+          title: Text(
+            l10n.tabHome,
+            style: const TextStyle(fontWeight: FontWeight.w700),
+          ),
+          actions: [
+            IconButton(
+              icon: const Icon(Icons.settings_outlined),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const SettingsScreen()),
+                );
+              },
+            ),
+          ],
         ),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.settings_outlined),
-            onPressed: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (_) => const SettingsScreen()),
-              );
-            },
-          ),
-        ],
-      ),
-      body: ListView(
-        physics: const BouncingScrollPhysics(),
-        padding: const EdgeInsets.all(16),
-        children: [
-          Container(
-            padding: const EdgeInsets.all(20),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(24),
-              gradient: const LinearGradient(
-                colors: [Color(0xFF6C63FF), Color(0xFF8E7BFF)],
-              ),
-            ),
-            child: Row(
-              children: [
-                Container(
-                  width: 60,
-                  height: 60,
-                  decoration: const BoxDecoration(
-                    color: Colors.white,
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.school,
-                    color: Color(0xFF6C63FF),
-                    size: 30,
-                  ),
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        l10n.welcomeTitle,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 16,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        l10n.welcomeSubtitle,
-                        style: const TextStyle(
-                          color: Colors.white,
-                          fontSize: 22,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-
-          const SizedBox(height: 20),
-
-          if (newsState.status == NewsStatus.loading) ...[
-            _SectionTitle(l10n.sectionNews),
-            const SizedBox(height: 12),
-            const _NewsShimmer(),
-            const SizedBox(height: 20),
-          ],
-
-          if (newsState.status == NewsStatus.success &&
-              newsState.news.isNotEmpty) ...[
-            _SectionTitle(l10n.sectionNews),
-            const SizedBox(height: 12),
-
-            SizedBox(
-              height: 200,
-              child: PageView.builder(
-                controller: _newsPageController,
-                itemCount: newsState.news.length,
-                onPageChanged: (index) {
-                  setState(() => _currentNewsPage = index);
-                },
-                itemBuilder: (context, index) {
-                  final news = newsState.news[index];
-
-                  return AnimatedScale(
-                    scale: _currentNewsPage == index ? 1.0 : 0.95,
-                    duration: const Duration(milliseconds: 300),
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => NewsDetailScreen(
-                              title: news.title,
-                              description: news.description,
-                              image: news.image,
-                              tag: news.tag,
-                            ),
-                          ),
-                        );
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(24),
-                          image: DecorationImage(
-                            image: NetworkImage(news.image),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                        child: Container(
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(24),
-                            gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                Colors.transparent,
-                                Colors.black.withOpacity(0.7),
-                              ],
-                            ),
-                          ),
-                          padding: const EdgeInsets.all(20),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.end,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              if (news.tag.isNotEmpty)
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 10,
-                                    vertical: 4,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: AppColors.accent,
-                                    borderRadius: BorderRadius.circular(20),
-                                  ),
-                                  child: Text(
-                                    news.tag,
-                                    style: const TextStyle(
-                                      color: Colors.white,
-                                      fontSize: 11,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  ),
-                                ),
-                              const SizedBox(height: 8),
-                              Text(
-                                news.title,
-                                style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w700,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-
-            const SizedBox(height: 12),
-
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(
-                newsState.news.length,
-                    (index) => AnimatedContainer(
-                  duration: const Duration(milliseconds: 300),
-                  margin: const EdgeInsets.symmetric(horizontal: 4),
-                  width: _currentNewsPage == index ? 20 : 8,
-                  height: 8,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(4),
-                    color: _currentNewsPage == index
-                        ? AppColors.accent
-                        : Colors.grey.shade300,
-                  ),
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 20),
-          ],
-
-          GestureDetector(
-            onTap: () => _openUrl('https://biskektomer.com/#'),
-            child: Container(
-              padding: const EdgeInsets.symmetric(vertical: 16),
+        body: ListView(
+          physics: const BouncingScrollPhysics(),
+          padding: const EdgeInsets.all(16),
+          children: [
+            // Welcome banner
+            Container(
+              padding: const EdgeInsets.all(20),
               decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: AppColors.accent,
-                boxShadow: [
-                  BoxShadow(
-                    color: AppColors.accent.withOpacity(0.3),
-                    blurRadius: 12,
-                    offset: const Offset(0, 6),
+                borderRadius: BorderRadius.circular(24),
+                gradient: const LinearGradient(
+                  colors: [Color(0xFF6C63FF), Color(0xFF8E7BFF)],
+                ),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    width: 60,
+                    height: 60,
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Icons.school,
+                      color: Color(0xFF6C63FF),
+                      size: 30,
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          l10n.welcomeTitle,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          l10n.welcomeSubtitle,
+                          style: const TextStyle(
+                            color: Colors.white,
+                            fontSize: 22,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
-              child: Center(
-                child: Text(
-                  l10n.registerButton,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                    fontSize: 16,
+            ),
+
+            const SizedBox(height: 20),
+
+            // Шиммер пока грузятся новости
+            if (newsState.status == NewsStatus.loading) ...[
+              _SectionTitle(l10n.sectionNews),
+              const SizedBox(height: 12),
+              const _NewsShimmer(),
+              const SizedBox(height: 20),
+            ],
+
+            if (newsState.status == NewsStatus.success &&
+                newsState.news.isNotEmpty) ...[
+              _SectionTitle(l10n.sectionNews),
+              const SizedBox(height: 12),
+
+              SizedBox(
+                height: 200,
+                child: PageView.builder(
+                  controller: _newsPageController,
+                  itemCount: newsState.news.length,
+                  onPageChanged: (index) {
+                    setState(() => _currentNewsPage = index);
+                  },
+                  itemBuilder: (context, index) {
+                    final news = newsState.news[index];
+
+                    return AnimatedScale(
+                      scale: _currentNewsPage == index ? 1.0 : 0.95,
+                      duration: const Duration(milliseconds: 300),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => NewsDetailScreen(
+                                title: news.title,
+                                description: news.description,
+                                image: news.image,
+                                tag: news.tag,
+                              ),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(24),
+                            image: DecorationImage(
+                              image: NetworkImage(news.image),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(24),
+                              gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  Colors.transparent,
+                                  Colors.black.withOpacity(0.7),
+                                ],
+                              ),
+                            ),
+                            padding: const EdgeInsets.all(20),
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                if (news.tag.isNotEmpty)
+                                  Container(
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 10,
+                                      vertical: 4,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      color: AppColors.accent,
+                                      borderRadius: BorderRadius.circular(20),
+                                    ),
+                                    child: Text(
+                                      news.tag,
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 11,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                const SizedBox(height: 8),
+                                Text(
+                                  news.title,
+                                  style: const TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+
+              const SizedBox(height: 12),
+
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(
+                  newsState.news.length,
+                      (index) => AnimatedContainer(
+                    duration: const Duration(milliseconds: 300),
+                    margin: const EdgeInsets.symmetric(horizontal: 4),
+                    width: _currentNewsPage == index ? 20 : 8,
+                    height: 8,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(4),
+                      color: _currentNewsPage == index
+                          ? AppColors.accent
+                          : Colors.grey.shade300,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ),
 
-          const SizedBox(height: 24),
-
-          _SectionTitle(l10n.sectionContacts),
-          const SizedBox(height: 12),
-          GridView.count(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            crossAxisCount: 2,
-            mainAxisSpacing: 12,
-            crossAxisSpacing: 12,
-            childAspectRatio: 3.2,
-            children: [
-              _ContactTile(
-                title: l10n.contactSite,
-                icon: Icons.language,
-                color: const Color(0xFF6C63FF),
-                onTap: () => _openUrl('https://biskektomer.com/'),
-              ),
-              _ContactTile(
-                title: l10n.contactInstagram,
-                icon: Icons.camera_alt_outlined,
-                color: const Color(0xFFE1306C),
-                onTap: () =>
-                    _openUrl('https://www.instagram.com/tteomer_bishkek'),
-              ),
-              _ContactTile(
-                title: l10n.contactFacebook,
-                icon: Icons.facebook,
-                color: const Color(0xFF1877F2),
-                onTap: () => _openUrl('https://facebook.com/yourpage'),
-              ),
-              _ContactTile(
-                title: l10n.contactYoutube,
-                icon: Icons.play_circle_outline,
-                color: const Color(0xFFFF0000),
-                onTap: () =>
-                    _openUrl('https://youtube.com/@biskektteomer2887'),
-              ),
+              const SizedBox(height: 20),
             ],
-          ),
 
-          const SizedBox(height: 100),
-        ],
+            if (newsState.isRegistrationOpen == true) ...[
+              GestureDetector(
+                onTap: () => _openUrl('https://biskektomer.com/#'),
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 16),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: AppColors.accent,
+                    boxShadow: [
+                      BoxShadow(
+                        color: AppColors.accent.withOpacity(0.3),
+                        blurRadius: 12,
+                        offset: const Offset(0, 6),
+                      ),
+                    ],
+                  ),
+                  child: Center(
+                    child: Text(
+                      l10n.registerButton,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w700,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 24),
+            ],
+
+            _SectionTitle(l10n.sectionContacts),
+            const SizedBox(height: 12),
+            GridView.count(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              crossAxisCount: 2,
+              mainAxisSpacing: 12,
+              crossAxisSpacing: 12,
+              childAspectRatio: 3.2,
+              children: [
+                _ContactTile(
+                  title: l10n.contactSite,
+                  icon: Icons.language,
+                  color: const Color(0xFF6C63FF),
+                  onTap: () => _openUrl('https://biskektomer.com/'),
+                ),
+                _ContactTile(
+                  title: l10n.contactInstagram,
+                  icon: Icons.camera_alt_outlined,
+                  color: const Color(0xFFE1306C),
+                  onTap: () =>
+                      _openUrl('https://www.instagram.com/tteomer_bishkek'),
+                ),
+                _ContactTile(
+                  title: l10n.contactFacebook,
+                  icon: Icons.facebook,
+                  color: const Color(0xFF1877F2),
+                  onTap: () => _openUrl('https://facebook.com/yourpage'),
+                ),
+                _ContactTile(
+                  title: l10n.contactYoutube,
+                  icon: Icons.play_circle_outline,
+                  color: const Color(0xFFFF0000),
+                  onTap: () =>
+                      _openUrl('https://youtube.com/@biskektteomer2887'),
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 100),
+          ],
+        ),
       ),
     );
   }
 }
+
+// ─────────────────────────── SHIMMER ───────────────────────────
 
 class _NewsShimmer extends StatefulWidget {
   const _NewsShimmer();
@@ -442,6 +452,8 @@ class _SlideGradient extends GradientTransform {
     return Matrix4.translationValues(bounds.width * value, 0, 0);
   }
 }
+
+// ─────────────────────────── WIDGETS ───────────────────────────
 
 class _SectionTitle extends StatelessWidget {
   final String title;

@@ -45,6 +45,7 @@
   "tabHome": "Главная",
   "tabDictionary": "Словарь",
   "tabDocs": "Документы",
+  "tabTranslator": "Переводчик",
   "firstName": "Имя",
   "lastName": "Фамилия",
   "enterName": "Введите ваше имя",
@@ -91,5 +92,17 @@
   "contactInstagram": "Instagram",
   "contactFacebook": "Facebook",
   "contactYoutube": "YouTube",
-  "save": "Сохранить"
+  "save": "Сохранить",
+  "translator_title": "Переводчик",
+  "instant_translation": "Мгновенный перевод",
+  "ai_translator": "AI Переводчик",
+  "enter_text_hint": "Введите текст для перевода...",
+  "symbols_count": "{count} символов",
+  "clear": "Очистить",
+  "translation_error": "Ошибка перевода. Проверьте API-ключ или подключение.",
+  "copy": "Копировать",
+  "copied": "Скопировано в буфер обмена",
+  "added_to_dictionary": "«{word}» добавлено в словарь",
+  "add_to_dictionary": "Добавить «{word}» в словарь",
+  "added": "«{word}» добавлено!"
 }

@@ -118,6 +118,9 @@ class AppLocalizationsKy extends AppLocalizations {
   String get tabDocs => 'Документтер';
 
   @override
+  String get tabTranslator => 'Которуу';
+
+  @override
   String get firstName => 'Аты';
 
   @override
@@ -219,4 +222,48 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get save => 'Cактоо';
+
+  @override
+  String get translator_title => 'Котормочу';
+
+  @override
+  String get instant_translation => 'Ыкчам котормо';
+
+  @override
+  String get ai_translator => 'AI котормочу';
+
+  @override
+  String get enter_text_hint => 'Которуу үчүн текстти жазыңыз...';
+
+  @override
+  String symbols_count(Object count) {
+    return '$count белги';
+  }
+
+  @override
+  String get clear => 'Тазалоо';
+
+  @override
+  String get translation_error => 'Которуу катасы. API-ачкычты же байланышты текшериңиз.';
+
+  @override
+  String get copy => 'Көчүрүү';
+
+  @override
+  String get copied => 'Алмашуу буферине көчүрүлдү';
+
+  @override
+  String added_to_dictionary(Object word) {
+    return '«$word» сөздүккө кошулду';
+  }
+
+  @override
+  String add_to_dictionary(Object word) {
+    return '«$word» сөздүккө кошуу';
+  }
+
+  @override
+  String added(Object word) {
+    return '«$word» кошулду!';
+  }
 }

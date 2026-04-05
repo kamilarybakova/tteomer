@@ -87,5 +87,18 @@
   "contactInstagram": "Instagram",
   "contactFacebook": "Facebook",
   "contactYoutube": "YouTube",
-  "save": "Kaydet"
+  "save": "Kaydet",
+  "tabTranslator": "Çevirmen",
+  "translator_title": "Çevirmen",
+  "instant_translation": "Anında çeviri",
+  "ai_translator": "AI Çevirmen",
+  "enter_text_hint": "Çevirmek için metin girin...",
+  "symbols_count": "{count} karakter",
+  "clear": "Temizle",
+  "translation_error": "Çeviri hatası. API anahtarını veya bağlantıyı kontrol edin.",
+  "copy": "Kopyala",
+  "copied": "Panoya kopyalandı",
+  "added_to_dictionary": "«{word}» sözlüğe eklendi",
+  "add_to_dictionary": "«{word}» sözlüğe ekle",
+  "added": "«{word}» eklendi!"
 }

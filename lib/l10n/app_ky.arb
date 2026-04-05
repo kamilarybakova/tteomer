@@ -45,6 +45,7 @@
   "tabHome": "Башкы бет",
   "tabDictionary": "Сөздүк",
   "tabDocs": "Документтер",
+  "tabTranslator": "Которуу",
   "firstName": "Аты",
   "enterName": "Атыңызды киргизиңиз",
   "lastName": "Фамилия",
@@ -87,5 +88,17 @@
   "contactInstagram": "Instagram",
   "contactFacebook": "Facebook",
   "contactYoutube": "YouTube",
-  "save": "Cактоо"
+  "save": "Cактоо",
+  "translator_title": "Котормочу",
+  "instant_translation": "Ыкчам котормо",
+  "ai_translator": "AI котормочу",
+  "enter_text_hint": "Которуу үчүн текстти жазыңыз...",
+  "symbols_count": "{count} белги",
+  "clear": "Тазалоо",
+  "translation_error": "Которуу катасы. API-ачкычты же байланышты текшериңиз.",
+  "copy": "Көчүрүү",
+  "copied": "Алмашуу буферине көчүрүлдү",
+  "added_to_dictionary": "«{word}» сөздүккө кошулду",
+  "add_to_dictionary": "«{word}» сөздүккө кошуу",
+  "added": "«{word}» кошулду!"
 }

@@ -1,4 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tteomer/features/main/domain/usecase/fetch_registration_status.dart';
 import 'package:tteomer/features/main/presentation/state/main_notifier.dart';
 import 'package:tteomer/features/main/presentation/state/main_state.dart';
 
@@ -109,9 +110,16 @@ final fetchNewsUseCaseProvider = Provider((ref) {
   );
 });
 
+final fetchRegistrationStatusProvider = Provider((ref) {
+  return FetchRegistrationStatus(
+    ref.read(newsRepositoryProvider),
+  );
+});
+
 final mainNotifierProvider =
 StateNotifierProvider<MainNotifier, NewsState>((ref) {
   return MainNotifier(
     ref.read(fetchNewsUseCaseProvider),
+    ref.read(fetchRegistrationStatusProvider),
   );
 });
