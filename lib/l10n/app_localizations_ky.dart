@@ -266,4 +266,42 @@ class AppLocalizationsKy extends AppLocalizations {
   String added(Object word) {
     return '«$word» кошулду!';
   }
+
+  @override
+  String get deleteWord => 'Сөздү өчүрүү?';
+
+  @override
+  String deleteWordContent(String word) {
+    return '«$word» сөздүгүңүздөн өчүрүлөт.';
+  }
+
+  @override
+  String get cancel => 'Жок';
+
+  @override
+  String get delete => 'Өчүрүү';
+
+  @override
+  String get deleteSwipeLabel => 'Өчүрүү';
+
+  @override
+  String get dictionaryEmpty => 'Сөздүк бош';
+
+  @override
+  String get dictionaryEmptySubtitle => 'Котормочу аркылуу сөз кошуңуз';
+
+  @override
+  String get categoryAll => 'Баары';
+
+  @override
+  String get clearDictionary => 'Сөздүктү тазалоо?';
+
+  @override
+  String get clearDictionaryContent => 'Бардык сөздөр биротола өчүрүлөт.';
+
+  @override
+  String get clearDictionaryConfirm => 'Баарын өчүрүү';
+
+  @override
+  String get clearDictionaryTooltip => 'Сөздүктү тазалоо';
 }

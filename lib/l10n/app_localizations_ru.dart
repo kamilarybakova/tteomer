@@ -266,4 +266,42 @@ class AppLocalizationsRu extends AppLocalizations {
   String added(Object word) {
     return '«$word» добавлено!';
   }
+
+  @override
+  String get deleteWord => 'Удалить слово?';
+
+  @override
+  String deleteWordContent(String word) {
+    return '«$word» будет удалено из вашего словаря.';
+  }
+
+  @override
+  String get cancel => 'Отмена';
+
+  @override
+  String get delete => 'Удалить';
+
+  @override
+  String get deleteSwipeLabel => 'Удалить';
+
+  @override
+  String get dictionaryEmpty => 'Словарь пуст';
+
+  @override
+  String get dictionaryEmptySubtitle => 'Добавьте слова через переводчик';
+
+  @override
+  String get categoryAll => 'Все';
+
+  @override
+  String get clearDictionary => 'Очистить словарь?';
+
+  @override
+  String get clearDictionaryContent => 'Все слова будут удалены безвозвратно.';
+
+  @override
+  String get clearDictionaryConfirm => 'Удалить всё';
+
+  @override
+  String get clearDictionaryTooltip => 'Очистить словарь';
 }

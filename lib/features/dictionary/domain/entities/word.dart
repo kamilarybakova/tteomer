@@ -1,4 +1,5 @@
 class Word {
+  final int wordId;
   final String word;
   final String translation;
   final String? partOfSpeech;
@@ -8,6 +9,7 @@ class Word {
   final DateTime createdAt;
 
   const Word({
+    required this.wordId,
     required this.word,
     required this.translation,
     required this.partOfSpeech,

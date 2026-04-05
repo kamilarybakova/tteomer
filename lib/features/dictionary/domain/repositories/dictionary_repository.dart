@@ -6,4 +6,6 @@ abstract class DictionaryRepository {
     String? topic,
     String? search,
   });
+  Future<void> deleteWord(int id);
+  Future<void> clearDictionary();
 }

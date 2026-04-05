@@ -2,6 +2,7 @@ import '../../domain/entities/word.dart';
 
 class WordModel extends Word {
   const WordModel({
+    required super.wordId,
     required super.word,
     required super.translation,
     required super.partOfSpeech,
@@ -13,6 +14,7 @@ class WordModel extends Word {
 
   factory WordModel.fromJson(Map<String, dynamic> json) {
     return WordModel(
+      wordId: json['id'] as int,
       word: json['turkish'] as String,
       translation: (json['translation'] as String?) ?? '',
       partOfSpeech: (json['part_of_speech'] as String?) ?? '',

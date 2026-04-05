@@ -20,4 +20,14 @@ class DictionaryRepositoryImpl implements DictionaryRepository {
       search: search,
     );
   }
+
+  @override
+  Future<void> clearDictionary() {
+    return remoteDatasource.clearDictionary();
+  }
+
+  @override
+  Future<void> deleteWord(int id) {
+    return remoteDatasource.deleteWord(id);
+  }
 }

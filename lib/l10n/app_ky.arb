@@ -100,5 +100,22 @@
   "copied": "Алмашуу буферине көчүрүлдү",
   "added_to_dictionary": "«{word}» сөздүккө кошулду",
   "add_to_dictionary": "«{word}» сөздүккө кошуу",
-  "added": "«{word}» кошулду!"
+  "added": "«{word}» кошулду!",
+  "deleteWord": "Сөздү өчүрүү?",
+  "deleteWordContent": "«{word}» сөздүгүңүздөн өчүрүлөт.",
+  "@deleteWordContent": {
+    "placeholders": {
+      "word": {"type": "String"}
+    }
+  },
+  "cancel": "Жок",
+  "delete": "Өчүрүү",
+  "deleteSwipeLabel": "Өчүрүү",
+  "dictionaryEmpty": "Сөздүк бош",
+  "dictionaryEmptySubtitle": "Котормочу аркылуу сөз кошуңуз",
+  "categoryAll": "Баары",
+  "clearDictionary": "Сөздүктү тазалоо?",
+  "clearDictionaryContent": "Бардык сөздөр биротола өчүрүлөт.",
+  "clearDictionaryConfirm": "Баарын өчүрүү",
+  "clearDictionaryTooltip": "Сөздүктү тазалоо"
 }

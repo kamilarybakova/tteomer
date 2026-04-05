@@ -100,5 +100,22 @@
   "copied": "Panoya kopyalandı",
   "added_to_dictionary": "«{word}» sözlüğe eklendi",
   "add_to_dictionary": "«{word}» sözlüğe ekle",
-  "added": "«{word}» eklendi!"
+  "added": "«{word}» eklendi!",
+  "deleteWord": "Kelimeyi sil?",
+  "deleteWordContent": "«{word}» sözlüğünüzden silinecek.",
+  "@deleteWordContent": {
+    "placeholders": {
+      "word": {"type": "String"}
+    }
+  },
+  "cancel": "İptal",
+  "delete": "Sil",
+  "deleteSwipeLabel": "Sil",
+  "dictionaryEmpty": "Sözlük boş",
+  "dictionaryEmptySubtitle": "Çevirici aracılığıyla kelime ekleyin",
+  "categoryAll": "Tümü",
+  "clearDictionary": "Sözlüğü temizle?",
+  "clearDictionaryContent": "Tüm kelimeler kalıcı olarak silinecek.",
+  "clearDictionaryConfirm": "Tümünü sil",
+  "clearDictionaryTooltip": "Sözlüğü temizle"
 }

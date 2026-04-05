@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -13,22 +14,10 @@ class DictionaryScreen extends ConsumerStatefulWidget {
   const DictionaryScreen({super.key});
 
   @override
-  ConsumerState<DictionaryScreen> createState() =>
-      _DictionaryScreenState();
+  ConsumerState<DictionaryScreen> createState() => _DictionaryScreenState();
 }
 
-class _DictionaryScreenState
-    extends ConsumerState<DictionaryScreen> {
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-
-    Future.microtask(() {
-      ref.read(wordsVmProvider.notifier).loadWords();
-    });
-  }
-
+class _DictionaryScreenState extends ConsumerState<DictionaryScreen> {
   @override
   void initState() {
     super.initState();
@@ -37,9 +26,37 @@ class _DictionaryScreenState
     });
   }
 
+  Future<void> _confirmClearAll(BuildContext context) async {
+    final l10n = AppLocalizations.of(context)!;
+
+    final confirmed = await showCupertinoDialog<bool>(
+      context: context,
+      builder: (ctx) => CupertinoAlertDialog(
+        title: Text(l10n.clearDictionaryContent),
+        actions: [
+          CupertinoDialogAction(
+            onPressed: () => Navigator.pop(ctx, false),
+            child: Text(l10n.cancel),
+          ),
+          CupertinoDialogAction(
+            isDestructiveAction: true,
+            onPressed: () => Navigator.pop(ctx, true),
+            child: Text(l10n.clearDictionaryConfirm),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed == true) {
+      await ref.read(wordsVmProvider.notifier).clearDictionary();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
+    final state = ref.watch(wordsVmProvider);
+    final hasWords = state is DictionaryData && state.words.isNotEmpty;
 
     return Scaffold(
       backgroundColor: const Color(0xFFF3F3F3),
@@ -47,6 +64,20 @@ class _DictionaryScreenState
         backgroundColor: const Color(0xFFF3F3F3),
         title: Text(l10n.tabDictionary),
         actions: [
+          if (hasWords)
+            IconButton(
+              tooltip: 'Очистить словарь',
+              icon: Container(
+                width: 36,
+                height: 36,
+                child: const Icon(
+                  Icons.delete_sweep_rounded,
+                  color: Color(0xFFFF3B30),
+                  size: 22,
+                ),
+              ),
+              onPressed: () => _confirmClearAll(context),
+            ),
           IconButton(
             onPressed: () async {
               await showModalBottomSheet(
@@ -57,8 +88,8 @@ class _DictionaryScreenState
               );
             },
             icon: const Icon(Icons.add),
-          )
-        ]
+          ),
+        ],
       ),
       body: const DictionaryBody(),
     );
@@ -85,7 +116,6 @@ class DictionaryBody extends ConsumerWidget {
               words.isEmpty
                   ? const EmptyDictionary()
                   : DictionaryContent(words: words, topics: topics),
-
               if (isUpdating)
                 const Positioned(
                   top: 0,

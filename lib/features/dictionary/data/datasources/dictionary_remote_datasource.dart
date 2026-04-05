@@ -22,4 +22,12 @@ class DictionaryRemoteDatasource {
     final results = response.data['data']['results'] as List;
     return results.map((e) => WordModel.fromJson(e)).toList();
   }
+
+  Future<void> deleteWord(int id) async {
+    await dio.delete('/api/v1/dictionary/dictionary/$id/');
+  }
+
+  Future<void> clearDictionary() async {
+    await dio.delete('/api/v1/dictionary/dictionary/clear/');
+  }
 }

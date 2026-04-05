@@ -104,5 +104,22 @@
   "copied": "Скопировано в буфер обмена",
   "added_to_dictionary": "«{word}» добавлено в словарь",
   "add_to_dictionary": "Добавить «{word}» в словарь",
-  "added": "«{word}» добавлено!"
+  "added": "«{word}» добавлено!",
+  "deleteWord": "Удалить слово?",
+  "deleteWordContent": "«{word}» будет удалено из вашего словаря.",
+  "@deleteWordContent": {
+    "placeholders": {
+      "word": {"type": "String"}
+    }
+  },
+  "cancel": "Отмена",
+  "delete": "Удалить",
+  "deleteSwipeLabel": "Удалить",
+  "dictionaryEmpty": "Словарь пуст",
+  "dictionaryEmptySubtitle": "Добавьте слова через переводчик",
+  "categoryAll": "Все",
+  "clearDictionary": "Очистить словарь?",
+  "clearDictionaryContent": "Все слова будут удалены безвозвратно.",
+  "clearDictionaryConfirm": "Удалить всё",
+  "clearDictionaryTooltip": "Очистить словарь"
 }

@@ -584,6 +584,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'«{word}» добавлено!'**
   String added(Object word);
+
+  /// No description provided for @deleteWord.
+  ///
+  /// In en, this message translates to:
+  /// **'Удалить слово?'**
+  String get deleteWord;
+
+  /// No description provided for @deleteWordContent.
+  ///
+  /// In en, this message translates to:
+  /// **'«{word}» будет удалено из вашего словаря.'**
+  String deleteWordContent(String word);
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Отмена'**
+  String get cancel;
+
+  /// No description provided for @delete.
+  ///
+  /// In en, this message translates to:
+  /// **'Удалить'**
+  String get delete;
+
+  /// No description provided for @deleteSwipeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Удалить'**
+  String get deleteSwipeLabel;
+
+  /// No description provided for @dictionaryEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'Словарь пуст'**
+  String get dictionaryEmpty;
+
+  /// No description provided for @dictionaryEmptySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Добавьте слова через переводчик'**
+  String get dictionaryEmptySubtitle;
+
+  /// No description provided for @categoryAll.
+  ///
+  /// In en, this message translates to:
+  /// **'Все'**
+  String get categoryAll;
+
+  /// No description provided for @clearDictionary.
+  ///
+  /// In en, this message translates to:
+  /// **'Очистить словарь?'**
+  String get clearDictionary;
+
+  /// No description provided for @clearDictionaryContent.
+  ///
+  /// In en, this message translates to:
+  /// **'Все слова будут удалены безвозвратно.'**
+  String get clearDictionaryContent;
+
+  /// No description provided for @clearDictionaryConfirm.
+  ///
+  /// In en, this message translates to:
+  /// **'Удалить всё'**
+  String get clearDictionaryConfirm;
+
+  /// No description provided for @clearDictionaryTooltip.
+  ///
+  /// In en, this message translates to:
+  /// **'Очистить словарь'**
+  String get clearDictionaryTooltip;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

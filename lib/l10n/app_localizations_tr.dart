@@ -266,4 +266,42 @@ class AppLocalizationsTr extends AppLocalizations {
   String added(Object word) {
     return '«$word» eklendi!';
   }
+
+  @override
+  String get deleteWord => 'Kelimeyi sil?';
+
+  @override
+  String deleteWordContent(String word) {
+    return '«$word» sözlüğünüzden silinecek.';
+  }
+
+  @override
+  String get cancel => 'İptal';
+
+  @override
+  String get delete => 'Sil';
+
+  @override
+  String get deleteSwipeLabel => 'Sil';
+
+  @override
+  String get dictionaryEmpty => 'Sözlük boş';
+
+  @override
+  String get dictionaryEmptySubtitle => 'Çevirici aracılığıyla kelime ekleyin';
+
+  @override
+  String get categoryAll => 'Tümü';
+
+  @override
+  String get clearDictionary => 'Sözlüğü temizle?';
+
+  @override
+  String get clearDictionaryContent => 'Tüm kelimeler kalıcı olarak silinecek.';
+
+  @override
+  String get clearDictionaryConfirm => 'Tümünü sil';
+
+  @override
+  String get clearDictionaryTooltip => 'Sözlüğü temizle';
 }
