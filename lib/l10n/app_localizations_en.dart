@@ -179,6 +179,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get language => 'Язык';
 
   @override
+  String get change_password => 'Change password';
+
+  @override
   String get logout => 'Выйти';
 
   @override

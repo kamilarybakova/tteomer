@@ -117,5 +117,6 @@
   "clearDictionary": "Sözlüğü temizle?",
   "clearDictionaryContent": "Tüm kelimeler kalıcı olarak silinecek.",
   "clearDictionaryConfirm": "Tümünü sil",
-  "clearDictionaryTooltip": "Sözlüğü temizle"
+  "clearDictionaryTooltip": "Sözlüğü temizle",
+  "change_password": "Şifreyi değiştir"
 }

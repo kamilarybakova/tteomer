@@ -20,6 +20,7 @@ import '../../data/repository/auth_repository_impl.dart';
 import '../../domain/repositories/auth_repository.dart';
 import '../../domain/usecases/login_usecase.dart';
 import '../../domain/usecases/register_usecase.dart';
+import '../../domain/usecases/change_password_usecase.dart';
 import '../../domain/usecases/reset_password_confirm_usecase.dart';
 import '../../domain/usecases/reset_password_usecase.dart';
 import 'auth_notifier.dart';
@@ -52,6 +53,10 @@ final resetPasswordConfirmUseCaseProvider = Provider(
       (ref) => ResetPasswordConfirmUseCase(ref.read(authRepositoryProvider)),
 );
 
+final changePasswordUseCaseProvider = Provider(
+      (ref) => ChangePasswordUseCase(ref.read(authRepositoryProvider)),
+);
+
 // Notifier
 final authNotifierProvider =
 StateNotifierProvider<AuthNotifier, AuthState>((ref) {
@@ -60,6 +65,7 @@ StateNotifierProvider<AuthNotifier, AuthState>((ref) {
     registerUseCase: ref.read(registerUseCaseProvider),
     resetPasswordUseCase: ref.read(resetPasswordUseCaseProvider),
     resetPasswordConfirmUseCase: ref.read(resetPasswordConfirmUseCaseProvider),
+    changePasswordUseCase: ref.read(changePasswordUseCaseProvider),
     storage: ref.read(secureStorageProvider),
   );
 });

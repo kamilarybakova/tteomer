@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:tteomer/features/auth/domain/usecases/reset_password_usecase.dart';
+import '../../domain/usecases/change_password_usecase.dart';
 import '../../domain/usecases/login_usecase.dart';
 import '../../domain/usecases/register_usecase.dart';
 import '../../domain/usecases/reset_password_confirm_usecase.dart';
@@ -12,6 +13,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
   final RegisterUseCase registerUseCase;
   final ResetPasswordUseCase resetPasswordUseCase;
   final ResetPasswordConfirmUseCase resetPasswordConfirmUseCase;
+  final ChangePasswordUseCase changePasswordUseCase;
   final FlutterSecureStorage storage;
 
   AuthNotifier({
@@ -19,13 +21,36 @@ class AuthNotifier extends StateNotifier<AuthState> {
     required this.registerUseCase,
     required this.resetPasswordUseCase,
     required this.resetPasswordConfirmUseCase,
+    required this.changePasswordUseCase,
     required this.storage,
   }) : super(AuthInitial());
 
   String _extractError(Object e) {
     if (e is DioException) {
       final data = e.response?.data;
-      return data?['errors']?['detail'] ?? data?['detail'] ?? 'Unknown error';
+      final errors = data?['errors'];
+      if (errors is Map) {
+        if (errors['detail'] != null) {
+          return errors['detail'].toString();
+        }
+
+        final messages = <String>[];
+        errors.forEach((key, value) {
+          if (value is List) {
+            for (final item in value) {
+              messages.add(item.toString());
+            }
+          } else if (value != null) {
+            messages.add(value.toString());
+          }
+        });
+        if (messages.isNotEmpty) {
+          return messages.join('\n');
+        }
+      }
+
+      final detail = data?['detail'];
+      if (detail != null) return detail.toString();
     }
     return e.toString();
   }
@@ -87,6 +112,16 @@ class AuthNotifier extends StateNotifier<AuthState> {
       state = AuthLoading();
       await resetPasswordConfirmUseCase(email: email, code: code, password: password);
       state = ResetPasswordSuccess();
+    } catch (e) {
+      state = AuthError(_extractError(e));
+    }
+  }
+
+  Future<void> changePassword({required String newPassword}) async {
+    try {
+      state = AuthLoading();
+      await changePasswordUseCase(newPassword: newPassword);
+      state = PasswordChangeSuccess();
     } catch (e) {
       state = AuthError(_extractError(e));
     }

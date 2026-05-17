@@ -119,6 +119,27 @@ class _ScanCameraScreenState extends ConsumerState<ScanCameraScreen> {
           ),
 
           Positioned(
+            top: 50,
+            left: 16,
+            child: SafeArea(
+              child: GestureDetector(
+                onTap: () => Navigator.pop(context),
+                child: Container(
+                  padding: const EdgeInsets.all(8),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.4),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ),
+          ),
+
+          Positioned(
             top: 60,
             left: 0,
             right: 0,

@@ -117,5 +117,6 @@
   "clearDictionary": "Сөздүктү тазалоо?",
   "clearDictionaryContent": "Бардык сөздөр биротола өчүрүлөт.",
   "clearDictionaryConfirm": "Баарын өчүрүү",
-  "clearDictionaryTooltip": "Сөздүктү тазалоо"
+  "clearDictionaryTooltip": "Сөздүктү тазалоо",
+  "change_password": "Сырсөздү өзгөртүү"
 }

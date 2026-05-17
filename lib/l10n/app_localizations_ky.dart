@@ -179,6 +179,9 @@ class AppLocalizationsKy extends AppLocalizations {
   String get language => 'Тил';
 
   @override
+  String get change_password => 'Сырсөздү өзгөртүү';
+
+  @override
   String get logout => 'Чыгуу';
 
   @override

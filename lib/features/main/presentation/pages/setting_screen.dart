@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:tteomer/features/auth/presentation/pages/auth_screen.dart';
+import 'package:tteomer/features/auth/presentation/pages/change_password_screen.dart';
 
 import '../../../../core/widgets/language_picker_sheet.dart';
 import '../../../../l10n/app_localizations.dart';
@@ -52,6 +53,20 @@ class SettingsScreen extends ConsumerWidget {
                       (route) => false,
                 );
               }
+            },
+          ),
+          const SizedBox(height: 12),
+          ListTile(
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            tileColor: Colors.white,
+            leading: const Icon(Icons.password),
+            title: Text(l10n.change_password),
+            trailing: const Icon(Icons.chevron_right),
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (_) => const ChangePasswordScreen()),
+              );
             },
           ),
         ],

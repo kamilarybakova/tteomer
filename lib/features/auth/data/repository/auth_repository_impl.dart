@@ -51,4 +51,9 @@ class AuthRepositoryImpl implements AuthRepository {
       password: password
     );
   }
+
+  @override
+  Future<void> changePassword({required String newPassword}) {
+    return remote.changePassword(newPassword: newPassword);
+  }
 }

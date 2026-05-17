@@ -179,6 +179,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get language => 'Dil';
 
   @override
+  String get change_password => 'Şifreyi değiştir';
+
+  @override
   String get logout => 'Çıkış yap';
 
   @override

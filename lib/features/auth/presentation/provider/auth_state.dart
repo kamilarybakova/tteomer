@@ -17,6 +17,7 @@ class AuthRegistered extends AuthState {}
 class ResetPasswordEmailSent extends AuthState {}
 
 class ResetPasswordSuccess extends AuthState {}
+class PasswordChangeSuccess extends AuthState {}
 
 class AuthError extends AuthState {
   final String message;

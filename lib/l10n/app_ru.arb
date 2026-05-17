@@ -121,5 +121,6 @@
   "clearDictionary": "Очистить словарь?",
   "clearDictionaryContent": "Все слова будут удалены безвозвратно.",
   "clearDictionaryConfirm": "Удалить всё",
-  "clearDictionaryTooltip": "Очистить словарь"
+  "clearDictionaryTooltip": "Очистить словарь",
+  "change_password": "Изменить пароль"
 }

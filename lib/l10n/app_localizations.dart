@@ -423,6 +423,12 @@ abstract class AppLocalizations {
   /// **'Язык'**
   String get language;
 
+  /// No description provided for @change_password.
+  ///
+  /// In en, this message translates to:
+  /// **'Change password'**
+  String get change_password;
+
   /// No description provided for @logout.
   ///
   /// In en, this message translates to:

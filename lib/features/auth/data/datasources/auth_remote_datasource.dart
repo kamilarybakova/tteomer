@@ -24,6 +24,10 @@ abstract class AuthRemoteDataSource {
     required String code,
     required String password,
   });
+
+  Future<void> changePassword({
+    required String newPassword,
+  });
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -85,13 +89,23 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     required String code,
     required String password
   }) async {
-    dio.post(
+    await dio.post(
       '/api/v1/auth/password-reset/confirm/',
       data: {
         'email': email,
         'code': code,
         'new_password': password,
       }
+    );
+  }
+
+  @override
+  Future<void> changePassword({required String newPassword}) async {
+    await dio.post(
+      '/api/v1/auth/password-change/',
+      data: {
+        'new_password': newPassword,
+      },
     );
   }
 }
