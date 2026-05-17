@@ -5,19 +5,23 @@ import '../model/material_model.dart';
 
 class MaterialsRepositoryImpl implements MaterialsRepository {
   final MaterialsRemoteDataSource remote;
-
   MaterialsRepositoryImpl(this.remote);
 
   @override
-  Future<List<MaterialModel>> getMaterials({
+  Future<({List<MaterialModel> materials, bool hasMore})> getMaterials({
     String? level,
     int? categoryId,
+    int page = 1,
+    int pageSize = 10,
   }) {
-    return remote.getMaterials(level: level, categoryId: categoryId);
+    return remote.getMaterials(
+      level: level,
+      categoryId: categoryId,
+      page: page,
+      pageSize: pageSize,
+    );
   }
 
   @override
-  Future<List<CategoryModel>> getCategories() {
-    return remote.getCategories();
-  }
+  Future<List<CategoryModel>> getCategories() => remote.getCategories();
 }

@@ -10,14 +10,18 @@ class DictionaryRepositoryImpl implements DictionaryRepository {
   });
 
   @override
-  Future<List<Word>> getWords({
+  Future<({List<Word> words, bool hasMore})> getWords({
     String? status,
     String? topic,
     String? search,
+    int page = 1,
+    int pageSize = 5,
   }) {
     return remoteDatasource.getWords(
       topic: topic,
       search: search,
+      page: page,
+      pageSize: pageSize,
     );
   }
 

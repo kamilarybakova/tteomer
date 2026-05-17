@@ -81,18 +81,56 @@ class DictionaryContent extends ConsumerWidget {
   }
 }
 
-class _WordsList extends ConsumerWidget {
+class _WordsList extends ConsumerStatefulWidget {
   const _WordsList({required this.words});
   final List<Word> words;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<_WordsList> createState() => _WordsListState();
+}
+
+class _WordsListState extends ConsumerState<_WordsList> {
+  final _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_onScroll);
+  }
+
+  void _onScroll() {
+    final pos = _scrollController.position;
+    if (pos.pixels >= pos.maxScrollExtent - 200) {
+      ref.read(wordsVmProvider.notifier).loadWords(reset: false);
+    }
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final state = ref.watch(wordsVmProvider);
+    final hasMore = state is DictionaryData ? state.hasMore : false;
+
     return ListView.separated(
+      controller: _scrollController,
       padding: const EdgeInsets.all(16),
-      itemCount: words.length,
+      itemCount: widget.words.length + (hasMore ? 1 : 0),
       separatorBuilder: (_, __) => const SizedBox(height: 12),
       itemBuilder: (_, i) {
-        final word = words[i];
+        if (i == widget.words.length) {
+          return const Center(
+            child: Padding(
+              padding: EdgeInsets.all(16),
+              child: CircularProgressIndicator(),
+            ),
+          );
+        }
+        final word = widget.words[i];
         return WordTile(
           word: word,
           onDelete: () =>
@@ -315,8 +353,8 @@ class _CategoriesChipsState extends ConsumerState<_CategoriesChips> {
             onTap: () {
               setState(() => selectedIndex = index);
               final notifier = ref.read(wordsVmProvider.notifier);
-              if (category == 'All') {
-                notifier.loadWords();
+              if (index == 0) {
+                notifier.loadWords(reset: true);
               } else {
                 notifier.loadByTopic(category);
               }

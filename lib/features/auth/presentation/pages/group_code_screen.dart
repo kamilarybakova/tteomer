@@ -80,11 +80,12 @@ class _GroupCodeScreenState extends ConsumerState<GroupCodeScreen> {
     final t = AppLocalizations.of(context)!;
     ref.listen<AuthState>(authNotifierProvider, (prev, next) {
       if (next is AuthRegistered) {
-        Navigator.push(
+        Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(
             builder: (context) => const MainNavigationScreen(),
           ),
+              (route) => false,
         );
       }
 

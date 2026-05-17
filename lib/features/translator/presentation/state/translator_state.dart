@@ -28,10 +28,10 @@ class TranslatorState {
       flag: '🇷🇺',
     ),
     targetLanguage: LanguageEntity(
-      code: 'ky',
-      name: 'Kyrgyz',
-      nativeName: 'Кыргызча',
-      flag: '🇰🇬',
+      code: 'tr',
+      name: 'Turkish',
+      nativeName: 'Türkçe',
+      flag: '🇹🇷',
     ),
   );
 

@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tteomer/core/storage/shared_prefs_service.dart';
 import '../../data/datasources/gemini_translation_datasource.dart';
 import '../../data/repositories/translation_repository_impl.dart';
 import '../../domain/entities/language_entity.dart';
@@ -35,7 +36,39 @@ class TranslatorNotifier extends StateNotifier<TranslatorState> {
   Timer? _debounceTimer;
 
   TranslatorNotifier(this._translateUseCase)
-      : super(TranslatorState.initial());
+      : super(TranslatorState.initial()) {
+    _loadSavedLanguages();
+  }
+
+  Future<void> _loadSavedLanguages() async {
+    final prefs = await SharedPrefsService.getInstance();
+    final savedSourceCode = prefs.getTranslatorSourceLanguage();
+    final savedTargetCode = prefs.getTranslatorTargetLanguage();
+
+    final sourceLanguage = LanguageEntity.findByCode(savedSourceCode ?? '');
+    final targetLanguage = LanguageEntity.findByCode(savedTargetCode ?? '');
+
+    if (sourceLanguage == null || targetLanguage == null) {
+      return;
+    }
+
+    if (sourceLanguage.code == targetLanguage.code) {
+      return;
+    }
+
+    state = state.copyWith(
+      sourceLanguage: sourceLanguage,
+      targetLanguage: targetLanguage,
+    );
+  }
+
+  Future<void> _persistLanguages() async {
+    final prefs = await SharedPrefsService.getInstance();
+    await prefs.saveTranslatorLanguages(
+      sourceLanguageCode: state.sourceLanguage.code,
+      targetLanguageCode: state.targetLanguage.code,
+    );
+  }
 
   void onTextChanged(String text) {
     state = state.copyWith(
@@ -93,6 +126,7 @@ class TranslatorNotifier extends StateNotifier<TranslatorState> {
       clearTranslation: true,
       status: TranslatorStatus.idle,
     );
+    unawaited(_persistLanguages());
 
     if (state.inputText.trim().isNotEmpty) {
       translate();
@@ -109,6 +143,7 @@ class TranslatorNotifier extends StateNotifier<TranslatorState> {
       clearTranslation: true,
       status: TranslatorStatus.idle,
     );
+    unawaited(_persistLanguages());
     if (state.inputText.trim().isNotEmpty) translate();
   }
 
@@ -122,6 +157,7 @@ class TranslatorNotifier extends StateNotifier<TranslatorState> {
       clearTranslation: true,
       status: TranslatorStatus.idle,
     );
+    unawaited(_persistLanguages());
     if (state.inputText.trim().isNotEmpty) translate();
   }
 

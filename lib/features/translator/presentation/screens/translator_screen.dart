@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../../../core/tts/tts_service.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../add_words/presentation/state/add_words_notifier.dart';
 import '../../domain/entities/language_entity.dart';
@@ -18,11 +19,16 @@ class TranslatorScreen extends ConsumerStatefulWidget {
 class _TranslatorScreenState extends ConsumerState<TranslatorScreen> {
   final _controller = TextEditingController();
   final _focusNode = FocusNode();
+  final _tts = TtsService();
+
+  bool _isSpeakingSource = false;
+  bool _isSpeakingTarget = false;
 
   @override
   void dispose() {
     _controller.dispose();
     _focusNode.dispose();
+    _tts.dispose();
     super.dispose();
   }
 
@@ -56,6 +62,44 @@ class _TranslatorScreenState extends ConsumerState<TranslatorScreen> {
     );
   }
 
+  Future<void> _speakSource(TranslatorState state) async {
+    if (_isSpeakingSource) {
+      await _tts.stop();
+      setState(() => _isSpeakingSource = false);
+      return;
+    }
+    final text = state.inputText.trim();
+    if (text.isEmpty) return;
+    setState(() {
+      _isSpeakingSource = true;
+      _isSpeakingTarget = false;
+    });
+    await _tts.speak(
+      text: text,
+      languageCode: state.sourceLanguage.code,
+    );
+    if (mounted) setState(() => _isSpeakingSource = false);
+  }
+
+  Future<void> _speakTarget(TranslatorState state) async {
+    if (_isSpeakingTarget) {
+      await _tts.stop();
+      setState(() => _isSpeakingTarget = false);
+      return;
+    }
+    final text = state.translation?.translatedText.trim() ?? '';
+    if (text.isEmpty) return;
+    setState(() {
+      _isSpeakingTarget = true;
+      _isSpeakingSource = false;
+    });
+    await _tts.speak(
+      text: text,
+      languageCode: state.targetLanguage.code,
+    );
+    if (mounted) setState(() => _isSpeakingTarget = false);
+  }
+
   @override
   Widget build(BuildContext context) {
     final state = ref.watch(translatorNotifierProvider);
@@ -75,127 +119,187 @@ class _TranslatorScreenState extends ConsumerState<TranslatorScreen> {
             style: const TextStyle(fontWeight: FontWeight.w700),
           ),
         ),
-        body: ListView(
-          padding: const EdgeInsets.all(16),
-          children: [
-            Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(24),
-                gradient: const LinearGradient(
-                  colors: [Color(0xFF6C63FF), Color(0xFF8E7BFF)],
+        body: GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: ListView(
+            padding: const EdgeInsets.all(16),
+            children: [
+              // ── Hero banner ──────────────────────────────────────────
+              Container(
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(24),
+                  gradient: const LinearGradient(
+                    colors: [Color(0xFF6C63FF), Color(0xFF8E7BFF)],
+                  ),
+                ),
+                child: Row(
+                  children: [
+                    Container(
+                      width: 56,
+                      height: 56,
+                      decoration: const BoxDecoration(
+                        color: Colors.white,
+                        shape: BoxShape.circle,
+                      ),
+                      child: const Icon(
+                        Icons.translate_rounded,
+                        color: Color(0xFF6C63FF),
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            l10n.instant_translation,
+                            style: const TextStyle(color: Colors.white),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            l10n.ai_translator,
+                            style: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 20,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              child: Row(
-                children: [
-                  Container(
-                    width: 56,
-                    height: 56,
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      shape: BoxShape.circle,
-                    ),
-                    child: const Icon(
-                      Icons.translate_rounded,
-                      color: Color(0xFF6C63FF),
-                    ),
-                  ),
-                  const SizedBox(width: 16),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          l10n.instant_translation,
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                        const SizedBox(height: 4),
-                        Text(
-                          l10n.ai_translator,
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
 
-            const SizedBox(height: 20),
+              const SizedBox(height: 20),
 
-            _LanguageBar(state: state, notifier: notifier),
+              _LanguageBar(state: state, notifier: notifier),
 
-            const SizedBox(height: 16),
+              const SizedBox(height: 16),
 
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                color: Colors.white,
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(state.sourceLanguage.nativeName, style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: Color(0xFF8E7BFF))),
-
-                    const SizedBox(height: 10),
-
-                    TextField(
-                      controller: _controller,
-                      focusNode: _focusNode,
-                      maxLines: 5,
-                      decoration: InputDecoration(
-                        hintText: l10n.enter_text_hint,
-                        border: InputBorder.none,
-                      ),
-                      onChanged: notifier.onTextChanged,
-                    ),
-
-                    if (state.inputText.isNotEmpty) ...[
-                      const Divider(),
+              // ── Input card ───────────────────────────────────────────
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.white,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
-                            l10n.symbols_count(state.inputText.length),
+                            state.sourceLanguage.nativeName,
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                              color: Color(0xFF8E7BFF),
+                            ),
                           ),
-                          GestureDetector(
-                            onTap: () {
-                              _controller.clear();
-                              notifier.clearInput();
-                            },
-                            child: Text(l10n.clear),
-                          ),
+                          // 🔊 Кнопка озвучки исходного текста
+                          if (state.inputText.trim().isNotEmpty)
+                            _SpeakButton(
+                              isSpeaking: _isSpeakingSource,
+                              onTap: () => _speakSource(state),
+                            ),
                         ],
                       ),
+
+                      const SizedBox(height: 10),
+
+                      TextField(
+                        controller: _controller,
+                        focusNode: _focusNode,
+                        maxLines: 5,
+                        decoration: InputDecoration(
+                          hintText: l10n.enter_text_hint,
+                          border: InputBorder.none,
+                        ),
+                        onChanged: notifier.onTextChanged,
+                      ),
+
+                      if (state.inputText.isNotEmpty) ...[
+                        const Divider(),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(l10n.symbols_count(state.inputText.length)),
+                            GestureDetector(
+                              onTap: () {
+                                _controller.clear();
+                                notifier.clearInput();
+                              },
+                              child: Text(l10n.clear),
+                            ),
+                          ],
+                        ),
+                      ],
                     ],
-                  ],
+                  ),
                 ),
               ),
-            ),
 
-            const SizedBox(height: 12),
-
-            _ResultCard(state: state),
-
-            if (turkishWord != null && turkishWord.isNotEmpty) ...[
               const SizedBox(height: 12),
-              _AddToDictionaryButton(
-                turkishWord: turkishWord,
-                onTap: () => _addToWordList(turkishWord),
+
+              // ── Result card ──────────────────────────────────────────
+              _ResultCard(
+                state: state,
+                isSpeaking: _isSpeakingTarget,
+                onSpeak: () => _speakTarget(state),
               ),
+
+              if (turkishWord != null && turkishWord.isNotEmpty) ...[
+                const SizedBox(height: 12),
+                _AddToDictionaryButton(
+                  turkishWord: turkishWord,
+                  onTap: () => _addToWordList(turkishWord),
+                ),
+              ],
             ],
-          ],
+          ),
         ),
       ),
     );
   }
 }
+
+// ── Speak icon button ────────────────────────────────────────────────────────
+
+class _SpeakButton extends StatelessWidget {
+  final bool isSpeaking;
+  final VoidCallback onTap;
+
+  const _SpeakButton({required this.isSpeaking, required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        width: 34,
+        height: 34,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: isSpeaking
+              ? const Color(0xFF6C63FF)
+              : const Color(0xFF6C63FF).withOpacity(0.1),
+        ),
+        child: Icon(
+          isSpeaking ? Icons.stop_rounded : Icons.volume_up_rounded,
+          size: 18,
+          color: isSpeaking ? Colors.white : const Color(0xFF6C63FF),
+        ),
+      ),
+    );
+  }
+}
+
+// ── Language bar ─────────────────────────────────────────────────────────────
 
 class _LanguageBar extends StatelessWidget {
   final TranslatorState state;
@@ -258,10 +362,18 @@ class _LanguageBar extends StatelessWidget {
   }
 }
 
+// ── Result card ──────────────────────────────────────────────────────────────
+
 class _ResultCard extends StatelessWidget {
   final TranslatorState state;
+  final bool isSpeaking;
+  final VoidCallback onSpeak;
 
-  const _ResultCard({required this.state});
+  const _ResultCard({
+    required this.state,
+    required this.isSpeaking,
+    required this.onSpeak,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -279,9 +391,7 @@ class _ResultCard extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(20),
           ),
-          child: const Center(
-            child: CircularProgressIndicator(),
-          ),
+          child: const Center(child: CircularProgressIndicator()),
         ),
 
         TranslatorStatus.error => Container(
@@ -327,40 +437,55 @@ class _ResultCard extends StatelessWidget {
                         fontSize: 14,
                       ),
                     ),
-
-                    GestureDetector(
-                      onTap: () {
-                        Clipboard.setData(
-                          ClipboardData(
-                            text: state.translation!.translatedText,
+                    Row(
+                      children: [
+                        // 🔊 Кнопка озвучки перевода
+                        _SpeakButton(
+                          isSpeaking: isSpeaking,
+                          onTap: onSpeak,
+                        ),
+                        const SizedBox(width: 8),
+                        // 📋 Кнопка копирования
+                        GestureDetector(
+                          onTap: () {
+                            Clipboard.setData(
+                              ClipboardData(
+                                text: state.translation!.translatedText,
+                              ),
+                            );
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(content: Text(l10n.copied)),
+                            );
+                          },
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              const Icon(
+                                Icons.copy_rounded,
+                                size: 16,
+                                color: Color(0xFF6C63FF),
+                              ),
+                              const SizedBox(width: 4),
+                              Text(
+                                l10n.copy,
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                  color: Color(0xFF6C63FF),
+                                  fontWeight: FontWeight.w500,
+                                ),
+                              ),
+                            ],
                           ),
-                        );
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                            content: Text(l10n.copied),
-                          ),
-                        );
-                      },
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(Icons.copy_rounded, size: 16, color: Color(0xFF6C63FF)),
-                          SizedBox(width: 4),
-                          Text(
-                            l10n.copy,
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Color(0xFF6C63FF),
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ],
                 ),
                 const SizedBox(height: 12),
-                SelectableText(state.translation!.translatedText, style: TextStyle(fontSize: 16)),
+                SelectableText(
+                  state.translation!.translatedText,
+                  style: const TextStyle(fontSize: 16),
+                ),
               ],
             ),
           ),
@@ -369,6 +494,8 @@ class _ResultCard extends StatelessWidget {
     );
   }
 }
+
+// ── Add to dictionary button ─────────────────────────────────────────────────
 
 class _AddToDictionaryButton extends StatefulWidget {
   final String turkishWord;
@@ -380,8 +507,7 @@ class _AddToDictionaryButton extends StatefulWidget {
   });
 
   @override
-  State<_AddToDictionaryButton> createState() =>
-      _AddToDictionaryButtonState();
+  State<_AddToDictionaryButton> createState() => _AddToDictionaryButtonState();
 }
 
 class _AddToDictionaryButtonState extends State<_AddToDictionaryButton> {
@@ -420,9 +546,7 @@ class _AddToDictionaryButtonState extends State<_AddToDictionaryButton> {
           borderRadius: BorderRadius.circular(20),
           color: _added ? const Color(0xFFE8F5E9) : Colors.white,
           border: Border.all(
-            color: _added
-                ? const Color(0xFF4CAF50)
-                : const Color(0xFF6C63FF),
+            color: _added ? const Color(0xFF4CAF50) : const Color(0xFF6C63FF),
           ),
         ),
         child: Row(
@@ -444,7 +568,6 @@ class _AddToDictionaryButtonState extends State<_AddToDictionaryButton> {
                     ? const Color(0xFF4CAF50)
                     : const Color(0xFF6C63FF),
               ),
-
             const SizedBox(width: 8),
             Text(
               _added

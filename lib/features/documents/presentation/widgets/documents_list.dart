@@ -1,46 +1,94 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tteomer/core/widgets/icon_data.dart';
 
 import '../../../auth/presentation/provider/providers.dart';
 import '../pages/document_webview_page.dart';
 import '../provider/materials_state.dart';
 
-class DocumentsList extends ConsumerWidget {
+class DocumentsList extends ConsumerStatefulWidget {
   final int? selectedCategory;
-
-  const DocumentsList({super.key, required this.selectedCategory});
+  final String? selectedLevel;
+  const DocumentsList({
+    super.key,
+    required this.selectedCategory,
+    this.selectedLevel,
+  });
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<DocumentsList> createState() => _DocumentsListState();
+}
+
+class _DocumentsListState extends ConsumerState<DocumentsList> {
+  final _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_onScroll);
+  }
+
+  void _onScroll() {
+    if (widget.selectedLevel != null) return;
+    final pos = _scrollController.position;
+    if (pos.pixels >= pos.maxScrollExtent - 200) {
+      ref.read(materialsNotifierProvider.notifier).load(
+        level: widget.selectedLevel,
+        categoryId: widget.selectedCategory,
+        reset: false,
+      );
+    }
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     final state = ref.watch(materialsNotifierProvider);
 
     return switch (state) {
-      MaterialsLoading() =>
-      const Center(child: CircularProgressIndicator()),
-
-      MaterialsError(message: final message) =>
-          _Error(message),
-
-      MaterialsLoaded(materials: final materials) =>
-          _buildList(materials, ref),
-
+      MaterialsLoading() => const Center(child: CircularProgressIndicator()),
+      MaterialsError(:final message) => _Error(message),
+      MaterialsLoaded(:final materials, :final hasMore, :final isLoading) =>
+          Stack(
+            children: [
+              _buildList(materials, hasMore, ref),
+              if (isLoading)
+                const Positioned(
+                  top: 0, left: 0, right: 0,
+                  child: LinearProgressIndicator(),
+                ),
+            ],
+          ),
       _ => const SizedBox(),
     };
   }
 
-  Widget _buildList(List materials, WidgetRef ref) {
-    final filtered = selectedCategory == null
+  Widget _buildList(List materials, bool hasMore, WidgetRef ref) {
+    final filteredByLevel = widget.selectedLevel == null
         ? materials
-        : materials.where((m) => m.category?.id == selectedCategory);
+        : materials
+            .where((m) => (m.level as String).toUpperCase() == widget.selectedLevel)
+            .toList();
+    final filtered = widget.selectedCategory == null
+        ? filteredByLevel
+        : filteredByLevel.where((m) => m.category?.id == widget.selectedCategory).toList();
 
     final pinned = filtered.where((e) => e.isPinned).toList();
     final normal = filtered.where((e) => !e.isPinned).toList();
 
     return RefreshIndicator(
       onRefresh: () async {
-        ref.read(materialsNotifierProvider.notifier).load();
+        ref.read(materialsNotifierProvider.notifier).load(
+          reset: true,
+        );
       },
       child: ListView(
+        controller: _scrollController,
         physics: const BouncingScrollPhysics(),
         padding: const EdgeInsets.all(16),
         children: [
@@ -51,6 +99,11 @@ class DocumentsList extends ConsumerWidget {
             const SizedBox(height: 16),
           ],
           ...normal.map((m) => _MaterialCard(m)),
+          if (hasMore && widget.selectedLevel == null)
+            const Padding(
+              padding: EdgeInsets.all(16),
+              child: Center(child: CircularProgressIndicator()),
+            ),
           const SizedBox(height: 100),
         ],
       ),
@@ -114,7 +167,7 @@ class _MaterialCard extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
               child: Icon(
-                _getFileIcon(material.file),
+                getIcon(material.file),
                 color: color,
               ),
             ),
@@ -124,20 +177,13 @@ class _MaterialCard extends StatelessWidget {
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
                     material.title,
                     style: const TextStyle(
                       fontWeight: FontWeight.w700,
                       fontSize: 16,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    '${material.category?.name ?? "Все"} • ${material.fileSizeMb}',
-                    style: TextStyle(
-                      color: Colors.grey.shade600,
-                      fontSize: 13,
                     ),
                   ),
                 ],
@@ -153,15 +199,6 @@ class _MaterialCard extends StatelessWidget {
         ),
       ),
     );
-  }
-
-  IconData _getFileIcon(String file) {
-    final ext = file.split('.').last.toLowerCase();
-
-    if (ext == 'pdf') return Icons.picture_as_pdf;
-    if (ext == 'doc' || ext == 'docx') return Icons.description;
-
-    return Icons.insert_drive_file;
   }
 }
 

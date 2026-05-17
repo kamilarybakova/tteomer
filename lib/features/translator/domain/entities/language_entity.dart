@@ -37,4 +37,13 @@ class LanguageEntity {
       flag: '🇬🇧',
     ),
   ];
+
+  static LanguageEntity? findByCode(String code) {
+    for (final language in supportedLanguages) {
+      if (language.code == code) {
+        return language;
+      }
+    }
+    return null;
+  }
 }

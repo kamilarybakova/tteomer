@@ -6,6 +6,8 @@ class SharedPrefsService {
 
   static const String _keyEmail = 'email';
   static const String _keyPassword = 'password';
+  static const String _keyTranslatorSourceLanguage = 'translator_source_language';
+  static const String _keyTranslatorTargetLanguage = 'translator_target_language';
 
   SharedPrefsService._();
 
@@ -37,6 +39,30 @@ class SharedPrefsService {
 
   Future<bool> removePassword() async {
     return await _prefs!.remove(_keyPassword);
+  }
+
+  Future<bool> saveTranslatorSourceLanguage(String languageCode) async {
+    return await _prefs!.setString(_keyTranslatorSourceLanguage, languageCode);
+  }
+
+  String? getTranslatorSourceLanguage() {
+    return _prefs!.getString(_keyTranslatorSourceLanguage);
+  }
+
+  Future<bool> saveTranslatorTargetLanguage(String languageCode) async {
+    return await _prefs!.setString(_keyTranslatorTargetLanguage, languageCode);
+  }
+
+  String? getTranslatorTargetLanguage() {
+    return _prefs!.getString(_keyTranslatorTargetLanguage);
+  }
+
+  Future<void> saveTranslatorLanguages({
+    required String sourceLanguageCode,
+    required String targetLanguageCode,
+  }) async {
+    await saveTranslatorSourceLanguage(sourceLanguageCode);
+    await saveTranslatorTargetLanguage(targetLanguageCode);
   }
 
   Future<void> saveCredentials({

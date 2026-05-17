@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tteomer/core/widgets/language_picker_sheet.dart';
 
 import 'auth_gate.dart';
 import 'core/storage/shared_prefs_service.dart';
 import 'core/utils/locale_state.dart';
+import 'core/widgets/language_picker_sheet.dart';
 import 'l10n/app_localizations.dart';
 
 void main() async {
@@ -28,17 +28,32 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   Locale _locale = const Locale('ru');
 
+  @override
+  void initState() {
+    super.initState();
+    _loadLocale();
+  }
+
+  Future<void> _loadLocale() async {
+    final saved = await LocaleService.getSavedLocale();
+    if (saved != null) {
+      setState(() {
+        _locale = saved;
+        LocaleState.current = saved;
+      });
+    }
+  }
+
   void _setLocale(Locale locale) {
     LocaleState.current = locale;
+    LocaleService.saveLocale(locale);
     setState(() => _locale = locale);
   }
 
   @override
   Widget build(BuildContext context) {
     return LocaleController(
-      setLocale: (Locale locale) {
-        _setLocale(locale);
-      },
+      setLocale: _setLocale,
       child: MaterialApp(
         title: 'TTOM',
         theme: ThemeData(

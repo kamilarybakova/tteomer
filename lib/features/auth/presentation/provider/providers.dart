@@ -64,6 +64,11 @@ StateNotifierProvider<AuthNotifier, AuthState>((ref) {
   );
 });
 
+final userRoleProvider = FutureProvider<String?>((ref) async {
+  final storage = ref.read(secureStorageProvider);
+  return storage.read(key: 'user_role');
+});
+
 final materialsRemoteDataSourceProvider = Provider(
       (ref) => MaterialsRemoteDataSourceImpl(ref.read(dioProvider)),
 );

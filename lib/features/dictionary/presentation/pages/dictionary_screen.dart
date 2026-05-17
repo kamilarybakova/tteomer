@@ -22,7 +22,16 @@ class _DictionaryScreenState extends ConsumerState<DictionaryScreen> {
   void initState() {
     super.initState();
     Future.microtask(() {
-      ref.read(wordsVmProvider.notifier).loadWords();
+      ref.read(wordsVmProvider.notifier).loadWords(reset: true);
+    });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+
+    Future.microtask(() {
+      ref.read(wordsVmProvider.notifier).loadWords(reset: true);
     });
   }
 
@@ -61,8 +70,13 @@ class _DictionaryScreenState extends ConsumerState<DictionaryScreen> {
     return Scaffold(
       backgroundColor: const Color(0xFFF3F3F3),
       appBar: AppBar(
-        backgroundColor: const Color(0xFFF3F3F3),
-        title: Text(l10n.tabDictionary),
+        backgroundColor: Colors.transparent,
+        elevation: 0, 
+        centerTitle: true,
+        title: Text(
+          l10n.tabDictionary,
+          style: const TextStyle(fontWeight: FontWeight.w700),
+        ),
         actions: [
           if (hasWords)
             IconButton(
