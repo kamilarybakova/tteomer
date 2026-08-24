@@ -209,6 +209,35 @@ class AppLocalizationsRu extends AppLocalizations {
   String get sectionContacts => 'Контакты';
 
   @override
+  String get dailyPracticeTitle => 'Практика на сегодня';
+
+  @override
+  String get wordOfTheDay => 'Слово дня';
+
+  @override
+  String get sentenceOfTheDay => 'Предложение дня';
+
+  @override
+  String get sentencePracticeHint => 'Повтори фразу вслух и попробуй использовать её в своём диалоге.';
+
+  @override
+  String get dailyPracticePreparing => 'Подбираем материал дня';
+
+  @override
+  String get dailyPracticePreparingSubtitle => 'Сейчас подготовим слово и предложение под ваш уровень.';
+
+  @override
+  String get dailyPracticeUnavailable => 'Сегодняшняя практика временно недоступна';
+
+  @override
+  String get dailyPracticeUnavailableSubtitle => 'Попробуйте открыть экран ещё раз чуть позже.';
+
+  @override
+  String levelBadge(Object level) {
+    return 'Уровень $level';
+  }
+
+  @override
   String get registerButton => 'Зарегистрироваться';
 
   @override

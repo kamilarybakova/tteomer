@@ -12,6 +12,7 @@ import '../../../documents/domain/usecase/get_materials_usecase.dart';
 import '../../../documents/presentation/provider/materials_notifier.dart';
 import '../../../documents/presentation/provider/materials_state.dart';
 import '../../../main/data/datasource/main_remote_datasource.dart';
+import '../../../main/data/datasource/daily_learning_datasource.dart';
 import '../../../main/data/repository/main_repository_impl.dart';
 import '../../../main/domain/repository/main_repository.dart';
 import '../../../main/domain/usecase/fetch_news_usecase.dart';
@@ -46,20 +47,21 @@ final registerUseCaseProvider = Provider((ref) {
 });
 
 final resetPasswordUseCaseProvider = Provider(
-      (ref) => ResetPasswordUseCase(ref.read(authRepositoryProvider)),
+  (ref) => ResetPasswordUseCase(ref.read(authRepositoryProvider)),
 );
 
 final resetPasswordConfirmUseCaseProvider = Provider(
-      (ref) => ResetPasswordConfirmUseCase(ref.read(authRepositoryProvider)),
+  (ref) => ResetPasswordConfirmUseCase(ref.read(authRepositoryProvider)),
 );
 
 final changePasswordUseCaseProvider = Provider(
-      (ref) => ChangePasswordUseCase(ref.read(authRepositoryProvider)),
+  (ref) => ChangePasswordUseCase(ref.read(authRepositoryProvider)),
 );
 
 // Notifier
-final authNotifierProvider =
-StateNotifierProvider<AuthNotifier, AuthState>((ref) {
+final authNotifierProvider = StateNotifierProvider<AuthNotifier, AuthState>((
+  ref,
+) {
   return AuthNotifier(
     loginUseCase: ref.read(loginUseCaseProvider),
     registerUseCase: ref.read(registerUseCaseProvider),
@@ -76,61 +78,58 @@ final userRoleProvider = FutureProvider<String?>((ref) async {
 });
 
 final materialsRemoteDataSourceProvider = Provider(
-      (ref) => MaterialsRemoteDataSourceImpl(ref.read(dioProvider)),
+  (ref) => MaterialsRemoteDataSourceImpl(ref.read(dioProvider)),
 );
 
 final materialsRepositoryProvider = Provider(
-      (ref) => MaterialsRepositoryImpl(
-    ref.read(materialsRemoteDataSourceProvider),
-  ),
+  (ref) => MaterialsRepositoryImpl(ref.read(materialsRemoteDataSourceProvider)),
 );
 
 final getMaterialsUseCaseProvider = Provider(
-      (ref) => GetMaterialsUseCase(
-    ref.read(materialsRepositoryProvider),
-  ),
+  (ref) => GetMaterialsUseCase(ref.read(materialsRepositoryProvider)),
 );
 
 final getCategoriesUseCaseProvider = Provider(
-      (ref) => GetCategoriesUseCase(
-    ref.read(materialsRepositoryProvider),
-  ),
+  (ref) => GetCategoriesUseCase(ref.read(materialsRepositoryProvider)),
 );
 
 final materialsNotifierProvider =
-StateNotifierProvider<MaterialsNotifier, MaterialsState>((ref) {
-  return MaterialsNotifier(
-    getMaterials: ref.read(getMaterialsUseCaseProvider),
-    getCategories: ref.read(getCategoriesUseCaseProvider),
-  );
-});
+    StateNotifierProvider<MaterialsNotifier, MaterialsState>((ref) {
+      return MaterialsNotifier(
+        getMaterials: ref.read(getMaterialsUseCaseProvider),
+        getCategories: ref.read(getCategoriesUseCaseProvider),
+      );
+    });
 
 final newsRemoteDataSourceProvider = Provider<MainRemoteDatasource>((ref) {
   return MainRemoteDatasourceImpl(ref.read(dioProvider));
 });
 
+final dailyLearningDatasourceProvider = Provider<DailyLearningDatasource>((
+  ref,
+) {
+  return DailyLearningDatasource();
+});
+
 final newsRepositoryProvider = Provider<MainRepository>((ref) {
-  return MainRepositoryImpl(
-    ref.read(newsRemoteDataSourceProvider),
-  );
+  return MainRepositoryImpl(ref.read(newsRemoteDataSourceProvider));
 });
 
 final fetchNewsUseCaseProvider = Provider((ref) {
-  return FetchNewsUseCase(
-    ref.read(newsRepositoryProvider),
-  );
+  return FetchNewsUseCase(ref.read(newsRepositoryProvider));
 });
 
 final fetchRegistrationStatusProvider = Provider((ref) {
-  return FetchRegistrationStatus(
-    ref.read(newsRepositoryProvider),
-  );
+  return FetchRegistrationStatus(ref.read(newsRepositoryProvider));
 });
 
-final mainNotifierProvider =
-StateNotifierProvider<MainNotifier, NewsState>((ref) {
+final mainNotifierProvider = StateNotifierProvider<MainNotifier, NewsState>((
+  ref,
+) {
   return MainNotifier(
     ref.read(fetchNewsUseCaseProvider),
     ref.read(fetchRegistrationStatusProvider),
+    ref.read(dailyLearningDatasourceProvider),
+    ref.read(secureStorageProvider),
   );
 });

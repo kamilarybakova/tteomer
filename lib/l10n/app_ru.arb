@@ -86,6 +86,20 @@
   "welcomeSubtitle": "в Tteomer",
   "sectionNews": "Новости и объявления",
   "sectionContacts": "Контакты",
+  "dailyPracticeTitle": "Практика на сегодня",
+  "wordOfTheDay": "Слово дня",
+  "sentenceOfTheDay": "Предложение дня",
+  "sentencePracticeHint": "Повтори фразу вслух и попробуй использовать её в своём диалоге.",
+  "dailyPracticePreparing": "Подбираем материал дня",
+  "dailyPracticePreparingSubtitle": "Сейчас подготовим слово и предложение под ваш уровень.",
+  "dailyPracticeUnavailable": "Сегодняшняя практика временно недоступна",
+  "dailyPracticeUnavailableSubtitle": "Попробуйте открыть экран ещё раз чуть позже.",
+  "levelBadge": "Уровень {level}",
+  "@levelBadge": {
+    "placeholders": {
+      "level": {}
+    }
+  },
   "registerButton": "Зарегистрироваться",
   "contactSite": "Сайт",
   "contactInstagram": "Instagram",

@@ -83,6 +83,20 @@
   "welcomeSubtitle": "Tteomer'ге",
   "sectionNews": "Жаңылыктар жана Жарыялар",
   "sectionContacts": "Байланыштар",
+  "dailyPracticeTitle": "Бүгүнкү машыгуу",
+  "wordOfTheDay": "Күндүн сөзү",
+  "sentenceOfTheDay": "Күндүн сүйлөмү",
+  "sentencePracticeHint": "Сүйлөмдү үн чыгарып кайталап, өзүңүздүн диалогуңузда колдонуп көрүңүз.",
+  "dailyPracticePreparing": "Бүгүнкү материал даярдалып жатат",
+  "dailyPracticePreparingSubtitle": "Деңгээлиңизге жараша сөз жана сүйлөм тандап жатабыз.",
+  "dailyPracticeUnavailable": "Бүгүнкү машыгуу убактылуу жеткиликсиз",
+  "dailyPracticeUnavailableSubtitle": "Бир аздан кийин бул экранды кайра ачып көрүңүз.",
+  "levelBadge": "{level} деңгээли",
+  "@levelBadge": {
+    "placeholders": {
+      "level": {}
+    }
+  },
   "registerButton": "Катталуу",
   "contactSite": "Сайт",
   "contactInstagram": "Instagram",

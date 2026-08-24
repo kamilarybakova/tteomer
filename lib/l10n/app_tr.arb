@@ -82,6 +82,20 @@
   "welcomeSubtitle": "Tteomer'e",
   "sectionNews": "Haberler ve Duyurular",
   "sectionContacts": "İletişim",
+  "dailyPracticeTitle": "Bugunun calismasi",
+  "wordOfTheDay": "Gunun kelimesi",
+  "sentenceOfTheDay": "Gunun cumlesi",
+  "sentencePracticeHint": "Cumleyi sesli tekrar edin ve kendi diyalogunuzda kullanmayi deneyin.",
+  "dailyPracticePreparing": "Bugunun calismasi hazirlaniyor",
+  "dailyPracticePreparingSubtitle": "Seviyenize uygun kelime ve cumle seciyoruz.",
+  "dailyPracticeUnavailable": "Bugunun calismasi gecici olarak kullanilamiyor",
+  "dailyPracticeUnavailableSubtitle": "Lutfen bu ekrani biraz sonra tekrar acin.",
+  "levelBadge": "Seviye {level}",
+  "@levelBadge": {
+    "placeholders": {
+      "level": {}
+    }
+  },
   "registerButton": "Kayıt ol",
   "contactSite": "Site",
   "contactInstagram": "Instagram",

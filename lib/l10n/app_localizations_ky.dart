@@ -209,6 +209,35 @@ class AppLocalizationsKy extends AppLocalizations {
   String get sectionContacts => 'Байланыштар';
 
   @override
+  String get dailyPracticeTitle => 'Бүгүнкү машыгуу';
+
+  @override
+  String get wordOfTheDay => 'Күндүн сөзү';
+
+  @override
+  String get sentenceOfTheDay => 'Күндүн сүйлөмү';
+
+  @override
+  String get sentencePracticeHint => 'Сүйлөмдү үн чыгарып кайталап, өзүңүздүн диалогуңузда колдонуп көрүңүз.';
+
+  @override
+  String get dailyPracticePreparing => 'Бүгүнкү материал даярдалып жатат';
+
+  @override
+  String get dailyPracticePreparingSubtitle => 'Деңгээлиңизге жараша сөз жана сүйлөм тандап жатабыз.';
+
+  @override
+  String get dailyPracticeUnavailable => 'Бүгүнкү машыгуу убактылуу жеткиликсиз';
+
+  @override
+  String get dailyPracticeUnavailableSubtitle => 'Бир аздан кийин бул экранды кайра ачып көрүңүз.';
+
+  @override
+  String levelBadge(Object level) {
+    return '$level деңгээли';
+  }
+
+  @override
   String get registerButton => 'Катталуу';
 
   @override

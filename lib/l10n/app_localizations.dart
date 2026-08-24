@@ -483,6 +483,60 @@ abstract class AppLocalizations {
   /// **'Контакты'**
   String get sectionContacts;
 
+  /// No description provided for @dailyPracticeTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily practice'**
+  String get dailyPracticeTitle;
+
+  /// No description provided for @wordOfTheDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Word of the day'**
+  String get wordOfTheDay;
+
+  /// No description provided for @sentenceOfTheDay.
+  ///
+  /// In en, this message translates to:
+  /// **'Sentence of the day'**
+  String get sentenceOfTheDay;
+
+  /// No description provided for @sentencePracticeHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Say the phrase aloud and try using it in your own dialogue.'**
+  String get sentencePracticeHint;
+
+  /// No description provided for @dailyPracticePreparing.
+  ///
+  /// In en, this message translates to:
+  /// **'Preparing today’s practice'**
+  String get dailyPracticePreparing;
+
+  /// No description provided for @dailyPracticePreparingSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'We’re selecting a word and sentence for your level.'**
+  String get dailyPracticePreparingSubtitle;
+
+  /// No description provided for @dailyPracticeUnavailable.
+  ///
+  /// In en, this message translates to:
+  /// **'Today’s practice is temporarily unavailable'**
+  String get dailyPracticeUnavailable;
+
+  /// No description provided for @dailyPracticeUnavailableSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Please try opening this screen again a bit later.'**
+  String get dailyPracticeUnavailableSubtitle;
+
+  /// No description provided for @levelBadge.
+  ///
+  /// In en, this message translates to:
+  /// **'Level {level}'**
+  String levelBadge(Object level);
+
   /// No description provided for @registerButton.
   ///
   /// In en, this message translates to:

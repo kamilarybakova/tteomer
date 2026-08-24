@@ -47,14 +47,13 @@ class AuthResponseModel extends AuthTokens {
   final bool success;
   final AuthDataModel data;
 
-  AuthResponseModel({
-    required this.success,
-    required this.data,
-  }) : super(
-          accessToken: data.access,
-          refreshToken: data.refresh,
-          role: data.user.role,
-        );
+  AuthResponseModel({required this.success, required this.data})
+    : super(
+        accessToken: data.access,
+        refreshToken: data.refresh,
+        role: data.user.role,
+        level: data.user.level,
+      );
 
   factory AuthResponseModel.fromJson(Map<String, dynamic> json) {
     return AuthResponseModel(

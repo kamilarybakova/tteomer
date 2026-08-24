@@ -209,6 +209,35 @@ class AppLocalizationsEn extends AppLocalizations {
   String get sectionContacts => 'Контакты';
 
   @override
+  String get dailyPracticeTitle => 'Daily practice';
+
+  @override
+  String get wordOfTheDay => 'Word of the day';
+
+  @override
+  String get sentenceOfTheDay => 'Sentence of the day';
+
+  @override
+  String get sentencePracticeHint => 'Say the phrase aloud and try using it in your own dialogue.';
+
+  @override
+  String get dailyPracticePreparing => 'Preparing today’s practice';
+
+  @override
+  String get dailyPracticePreparingSubtitle => 'We’re selecting a word and sentence for your level.';
+
+  @override
+  String get dailyPracticeUnavailable => 'Today’s practice is temporarily unavailable';
+
+  @override
+  String get dailyPracticeUnavailableSubtitle => 'Please try opening this screen again a bit later.';
+
+  @override
+  String levelBadge(Object level) {
+    return 'Level $level';
+  }
+
+  @override
   String get registerButton => 'Зарегистрироваться';
 
   @override

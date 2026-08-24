@@ -209,6 +209,35 @@ class AppLocalizationsTr extends AppLocalizations {
   String get sectionContacts => 'İletişim';
 
   @override
+  String get dailyPracticeTitle => 'Bugunun calismasi';
+
+  @override
+  String get wordOfTheDay => 'Gunun kelimesi';
+
+  @override
+  String get sentenceOfTheDay => 'Gunun cumlesi';
+
+  @override
+  String get sentencePracticeHint => 'Cumleyi sesli tekrar edin ve kendi diyalogunuzda kullanmayi deneyin.';
+
+  @override
+  String get dailyPracticePreparing => 'Bugunun calismasi hazirlaniyor';
+
+  @override
+  String get dailyPracticePreparingSubtitle => 'Seviyenize uygun kelime ve cumle seciyoruz.';
+
+  @override
+  String get dailyPracticeUnavailable => 'Bugunun calismasi gecici olarak kullanilamiyor';
+
+  @override
+  String get dailyPracticeUnavailableSubtitle => 'Lutfen bu ekrani biraz sonra tekrar acin.';
+
+  @override
+  String levelBadge(Object level) {
+    return 'Seviye $level';
+  }
+
+  @override
   String get registerButton => 'Kayıt ol';
 
   @override

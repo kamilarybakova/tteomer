@@ -62,6 +62,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
       await storage.write(key: 'access_token', value: tokens.accessToken);
       await storage.write(key: 'refresh_token', value: tokens.refreshToken);
       await storage.write(key: 'user_role', value: tokens.role);
+      await storage.write(key: 'user_level', value: tokens.level);
       state = AuthSuccess(tokens);
     } catch (e) {
       state = AuthError(_extractError(e));
@@ -87,6 +88,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
       await storage.write(key: 'access_token', value: tokens.accessToken);
       await storage.write(key: 'refresh_token', value: tokens.refreshToken);
       await storage.write(key: 'user_role', value: tokens.role);
+      await storage.write(key: 'user_level', value: tokens.level);
       state = AuthRegistered();
     } catch (e) {
       state = AuthError(_extractError(e));
@@ -110,7 +112,11 @@ class AuthNotifier extends StateNotifier<AuthState> {
   }) async {
     try {
       state = AuthLoading();
-      await resetPasswordConfirmUseCase(email: email, code: code, password: password);
+      await resetPasswordConfirmUseCase(
+        email: email,
+        code: code,
+        password: password,
+      );
       state = ResetPasswordSuccess();
     } catch (e) {
       state = AuthError(_extractError(e));

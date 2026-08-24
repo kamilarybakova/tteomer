@@ -18,6 +18,7 @@ class HomeScreen extends ConsumerStatefulWidget {
 class _HomeScreenState extends ConsumerState<HomeScreen> {
   late final PageController _newsPageController;
   int _currentNewsPage = 0;
+  String? _lastLocaleCode;
 
   @override
   void initState() {
@@ -27,6 +28,19 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(mainNotifierProvider.notifier).fetchNews();
       ref.read(mainNotifierProvider.notifier).checkRegistrationStatus();
+    });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final localeCode = Localizations.localeOf(context).languageCode;
+    if (_lastLocaleCode == localeCode) return;
+    _lastLocaleCode = localeCode;
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      ref
+          .read(mainNotifierProvider.notifier)
+          .fetchDailyLearning(localeCode: localeCode);
     });
   }
 
@@ -130,6 +144,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
             const SizedBox(height: 20),
 
+            _DailyLearningSection(state: newsState),
+
+            const SizedBox(height: 20),
+
             // Шиммер пока грузятся новости
             if (newsState.status == NewsStatus.loading) ...[
               _SectionTitle(l10n.sectionNews),
@@ -187,7 +205,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                                 end: Alignment.bottomCenter,
                                 colors: [
                                   Colors.transparent,
-                                  Colors.black.withOpacity(0.7),
+                                  Colors.black.withValues(alpha: 0.7),
                                 ],
                               ),
                             ),
@@ -240,7 +258,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: List.generate(
                   newsState.news.length,
-                      (index) => AnimatedContainer(
+                  (index) => AnimatedContainer(
                     duration: const Duration(milliseconds: 300),
                     margin: const EdgeInsets.symmetric(horizontal: 4),
                     width: _currentNewsPage == index ? 20 : 8,
@@ -268,7 +286,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                     color: AppColors.accent,
                     boxShadow: [
                       BoxShadow(
-                        color: AppColors.accent.withOpacity(0.3),
+                        color: AppColors.accent.withValues(alpha: 0.3),
                         blurRadius: 12,
                         offset: const Offset(0, 6),
                       ),
@@ -336,6 +354,274 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 }
 
+class _DailyLearningSection extends StatelessWidget {
+  final NewsState state;
+
+  const _DailyLearningSection({required this.state});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          children: [
+            Text(
+              l10n.dailyPracticeTitle,
+              style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w800),
+            ),
+            const SizedBox(width: 10),
+            if (state.userLevel != null)
+              Container(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 5,
+                ),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF6C63FF).withValues(alpha: 0.12),
+                  borderRadius: BorderRadius.circular(999),
+                ),
+                child: Text(
+                  l10n.levelBadge(state.userLevel!),
+                  style: const TextStyle(
+                    color: Color(0xFF6C63FF),
+                    fontWeight: FontWeight.w700,
+                    fontSize: 12,
+                  ),
+                ),
+              ),
+          ],
+        ),
+        const SizedBox(height: 12),
+        AnimatedSwitcher(
+          duration: const Duration(milliseconds: 250),
+          child: switch (state.dailyLearningStatus) {
+            DailyLearningStatus.loading => const _DailyLearningSkeleton(),
+            DailyLearningStatus.success
+                when state.dailyLearningContent != null =>
+              _DailyLearningCard(state: state),
+            DailyLearningStatus.error => _DailyLearningFallbackMessage(
+              title: l10n.dailyPracticeUnavailable,
+              subtitle: l10n.dailyPracticeUnavailableSubtitle,
+            ),
+            _ => _DailyLearningFallbackMessage(
+              title: l10n.dailyPracticePreparing,
+              subtitle: l10n.dailyPracticePreparingSubtitle,
+            ),
+          },
+        ),
+      ],
+    );
+  }
+}
+
+class _DailyLearningCard extends StatelessWidget {
+  final NewsState state;
+
+  const _DailyLearningCard({required this.state});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final content = state.dailyLearningContent!;
+
+    return Container(
+      key: ValueKey(
+        '${state.contentLocaleCode}-${content.level}-${content.word}-${content.sentence}',
+      ),
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(28),
+        gradient: const LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [Color(0xFF0F172A), Color(0xFF1E3A8A), Color(0xFF7C3AED)],
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: const Color(0xFF6C63FF).withValues(alpha: 0.18),
+            blurRadius: 22,
+            offset: const Offset(0, 10),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          _DailyLearningTile(
+            icon: Icons.auto_awesome_rounded,
+            eyebrow: l10n.wordOfTheDay,
+            title: content.word,
+            subtitle: content.wordTranslation,
+            accent: const Color(0xFFFFD166),
+          ),
+          const SizedBox(height: 12),
+          _DailyLearningTile(
+            icon: Icons.chat_bubble_outline_rounded,
+            eyebrow: l10n.sentenceOfTheDay,
+            title: content.sentence,
+            subtitle: content.sentenceTranslation,
+            accent: const Color(0xFF7DD3FC),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _DailyLearningTile extends StatelessWidget {
+  final IconData icon;
+  final String eyebrow;
+  final String title;
+  final String subtitle;
+  final Color accent;
+
+  const _DailyLearningTile({
+    required this.icon,
+    required this.eyebrow,
+    required this.title,
+    required this.subtitle,
+    required this.accent,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.10),
+        borderRadius: BorderRadius.circular(22),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.12)),
+      ),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            width: 46,
+            height: 46,
+            decoration: BoxDecoration(
+              color: accent.withValues(alpha: 0.18),
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: Icon(icon, color: accent),
+          ),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  eyebrow,
+                  style: TextStyle(
+                    color: Colors.white.withValues(alpha: 0.72),
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w800,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  subtitle,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _DailyLearningSkeleton extends StatelessWidget {
+  const _DailyLearningSkeleton();
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      key: const ValueKey('daily-learning-skeleton'),
+      height: 232,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(28),
+      ),
+      child: const Center(child: CircularProgressIndicator()),
+    );
+  }
+}
+
+class _DailyLearningFallbackMessage extends StatelessWidget {
+  final String title;
+  final String subtitle;
+
+  const _DailyLearningFallbackMessage({
+    required this.title,
+    required this.subtitle,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      key: ValueKey(title),
+      padding: const EdgeInsets.all(18),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(24),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 44,
+            height: 44,
+            decoration: BoxDecoration(
+              color: const Color(0xFF6C63FF).withValues(alpha: 0.12),
+              borderRadius: BorderRadius.circular(14),
+            ),
+            child: const Icon(Icons.bolt_rounded, color: Color(0xFF6C63FF)),
+          ),
+          const SizedBox(width: 14),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(height: 4),
+                Text(
+                  subtitle,
+                  style: const TextStyle(
+                    color: Color(0xFF6B7280),
+                    height: 1.35,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 // ─────────────────────────── SHIMMER ───────────────────────────
 
 class _NewsShimmer extends StatefulWidget {
@@ -358,9 +644,10 @@ class _NewsShimmerState extends State<_NewsShimmer>
       duration: const Duration(milliseconds: 1200),
     )..repeat();
 
-    _animation = Tween<double>(begin: -1.5, end: 1.5).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut),
-    );
+    _animation = Tween<double>(
+      begin: -1.5,
+      end: 1.5,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
   }
 
   @override
@@ -388,7 +675,7 @@ class _NewsShimmerState extends State<_NewsShimmer>
               mainAxisAlignment: MainAxisAlignment.center,
               children: List.generate(
                 3,
-                    (i) => _ShimmerBox(
+                (i) => _ShimmerBox(
                   width: i == 0 ? 20 : 8,
                   height: 8,
                   borderRadius: 4,
@@ -464,10 +751,7 @@ class _SectionTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       title,
-      style: const TextStyle(
-        fontSize: 18,
-        fontWeight: FontWeight.w700,
-      ),
+      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
     );
   }
 }
@@ -497,7 +781,7 @@ class _ContactTile extends StatelessWidget {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: color.withOpacity(0.12),
+              color: color.withValues(alpha: 0.12),
               blurRadius: 10,
               offset: const Offset(0, 4),
             ),
@@ -509,7 +793,7 @@ class _ContactTile extends StatelessWidget {
               width: 42,
               height: 42,
               decoration: BoxDecoration(
-                color: color.withOpacity(0.1),
+                color: color.withValues(alpha: 0.1),
                 borderRadius: BorderRadius.circular(12),
               ),
               child: Icon(icon, color: color, size: 22),
