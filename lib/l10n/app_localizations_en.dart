@@ -307,4 +307,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get clearDictionaryTooltip => 'Очистить словарь';
+
+  @override
+  String get passwordResetSuccess => 'Password has been reset';
+
+  @override
+  String get passwordChangeSuccess => 'Password changed successfully';
+
+  @override
+  String get rememberMe => 'Remember me';
+
+  @override
+  String codeSentToEmail(Object email) {
+    return 'Code was sent to $email';
+  }
 }

@@ -307,4 +307,18 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get clearDictionaryTooltip => 'Sözlüğü temizle';
+
+  @override
+  String get passwordResetSuccess => 'Şifre sıfırlandı';
+
+  @override
+  String get passwordChangeSuccess => 'Şifre başarıyla değiştirildi';
+
+  @override
+  String get rememberMe => 'Beni hatırla';
+
+  @override
+  String codeSentToEmail(Object email) {
+    return 'Kod $email adresine gönderildi';
+  }
 }

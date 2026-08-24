@@ -118,5 +118,14 @@
   "clearDictionaryContent": "Tüm kelimeler kalıcı olarak silinecek.",
   "clearDictionaryConfirm": "Tümünü sil",
   "clearDictionaryTooltip": "Sözlüğü temizle",
-  "change_password": "Şifreyi değiştir"
+  "change_password": "Şifreyi değiştir",
+  "passwordResetSuccess": "Şifre sıfırlandı",
+  "passwordChangeSuccess": "Şifre başarıyla değiştirildi",
+  "rememberMe": "Beni hatırla",
+  "codeSentToEmail": "Kod {email} adresine gönderildi",
+  "@codeSentToEmail": {
+    "placeholders": {
+      "email": {}
+    }
+  }
 }

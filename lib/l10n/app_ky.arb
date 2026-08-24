@@ -118,5 +118,14 @@
   "clearDictionaryContent": "Бардык сөздөр биротола өчүрүлөт.",
   "clearDictionaryConfirm": "Баарын өчүрүү",
   "clearDictionaryTooltip": "Сөздүктү тазалоо",
-  "change_password": "Сырсөздү өзгөртүү"
+  "change_password": "Сырсөздү өзгөртүү",
+  "passwordResetSuccess": "Сырсөз калыбына келтирилди",
+  "passwordChangeSuccess": "Сырсөз ийгиликтүү өзгөртүлдү",
+  "rememberMe": "Мени эстеп кал",
+  "codeSentToEmail": "Код {email} дарегине жөнөтүлдү",
+  "@codeSentToEmail": {
+    "placeholders": {
+      "email": {}
+    }
+  }
 }

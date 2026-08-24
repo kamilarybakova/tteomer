@@ -122,5 +122,14 @@
   "clearDictionary": "Очистить словарь?",
   "clearDictionaryContent": "Все слова будут удалены безвозвратно.",
   "clearDictionaryConfirm": "Удалить всё",
-  "clearDictionaryTooltip": "Очистить словарь"
+  "clearDictionaryTooltip": "Очистить словарь",
+  "passwordResetSuccess": "Password has been reset",
+  "passwordChangeSuccess": "Password changed successfully",
+  "rememberMe": "Remember me",
+  "codeSentToEmail": "Code was sent to {email}",
+  "@codeSentToEmail": {
+    "placeholders": {
+      "email": {}
+    }
+  }
 }

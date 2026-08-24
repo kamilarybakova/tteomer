@@ -8,7 +8,7 @@ class GeminiTranslationDatasource {
   final String apiKey;
   final http.Client _client;
 
-  static const String _model = 'models/gemini-2.5-flash-lite';
+  static const String _model = 'models/gemini-2.5-flash';
   static const String _baseUrl =
       'https://generativelanguage.googleapis.com/v1beta/$_model:generateContent';
 

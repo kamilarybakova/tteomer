@@ -123,4 +123,14 @@
   "clearDictionaryConfirm": "Удалить всё",
   "clearDictionaryTooltip": "Очистить словарь",
   "change_password": "Изменить пароль"
+  ,
+  "passwordResetSuccess": "Пароль был сброшен",
+  "passwordChangeSuccess": "Пароль успешно изменен",
+  "rememberMe": "Запомнить меня",
+  "codeSentToEmail": "Код был отправлен на почту {email}",
+  "@codeSentToEmail": {
+    "placeholders": {
+      "email": {}
+    }
+  }
 }

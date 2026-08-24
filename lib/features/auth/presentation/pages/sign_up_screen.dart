@@ -3,6 +3,7 @@ import 'package:tteomer/features/auth/presentation/pages/group_code_screen.dart'
 import 'package:tteomer/features/auth/presentation/pages/log_in_screen.dart';
 import 'package:tteomer/features/auth/presentation/utils/auth_text_field.dart';
 import 'package:tteomer/features/auth/presentation/utils/field_label.dart';
+import '../../../../core/widgets/language_picker_sheet.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/button_widget.dart';
 import '../../../../l10n/app_localizations.dart';
@@ -35,7 +36,19 @@ class _SignUpScreenState extends State<SignUpScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             children: [
-              const SizedBox(height: 40),
+              Align(
+                alignment: Alignment.centerRight,
+                child: IconButton(
+                  icon: const Icon(Icons.language),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const LanguageScreen()),
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(height: 12),
 
               /// TITLE
               Align(

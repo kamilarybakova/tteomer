@@ -14,7 +14,7 @@ class LanguageScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppColors.backgroundPrimary,
       appBar: AppBar(
-        title: Text("Язык"),
+        title: Text(l10n.language),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),

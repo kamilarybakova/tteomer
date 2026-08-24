@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tteomer/features/auth/presentation/pages/log_in_screen.dart';
 import 'package:tteomer/features/auth/presentation/pages/sign_up_screen.dart';
+import 'package:tteomer/core/widgets/language_picker_sheet.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/button_widget.dart';
 import '../../../../l10n/app_localizations.dart';
@@ -24,6 +25,18 @@ class _AuthScreenState extends State<AuthScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             children: [
+              Align(
+                alignment: Alignment.centerRight,
+                child: IconButton(
+                  icon: const Icon(Icons.language),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const LanguageScreen()),
+                    );
+                  },
+                ),
+              ),
               const Spacer(),
 
               Image.asset(

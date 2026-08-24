@@ -22,13 +22,19 @@ class _DocumentWebViewPageState extends State<DocumentWebViewPage> {
   String _buildViewerUrl(String url) {
     final lower = url.toLowerCase();
 
+    final isPresentationFile =
+        lower.endsWith('.pptx') || lower.endsWith('.ppt');
+
     final isOfficeFile =
-        lower.endsWith('.pptx') ||
-            lower.endsWith('.ppt') ||
-            lower.endsWith('.doc') ||
-            lower.endsWith('.docx') ||
-            lower.endsWith('.xls') ||
-            lower.endsWith('.xlsx');
+        isPresentationFile ||
+        lower.endsWith('.doc') ||
+        lower.endsWith('.docx') ||
+        lower.endsWith('.xls') ||
+        lower.endsWith('.xlsx');
+
+    if (isPresentationFile) {
+      return 'https://view.officeapps.live.com/op/embed.aspx?src=${Uri.encodeComponent(url)}';
+    }
 
     if (isOfficeFile) {
       return 'https://docs.google.com/gview?embedded=true&url=${Uri.encodeComponent(url)}';

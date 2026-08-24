@@ -43,7 +43,7 @@ class _ForgotPasswordScreenState extends ConsumerState<ForgotPasswordScreen> {
     ref.listen<AuthState>(authNotifierProvider, (prev, next) {
       if (next is ResetPasswordEmailSent) {
         final email = controller.text.trim();
-        AppToast.show(context, 'Код был отправлен на почту $email');
+        AppToast.show(context, l10n.codeSentToEmail(email));
 
         Navigator.push(
           context,

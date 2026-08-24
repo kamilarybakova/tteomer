@@ -307,4 +307,18 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get clearDictionaryTooltip => 'Очистить словарь';
+
+  @override
+  String get passwordResetSuccess => 'Пароль был сброшен';
+
+  @override
+  String get passwordChangeSuccess => 'Пароль успешно изменен';
+
+  @override
+  String get rememberMe => 'Запомнить меня';
+
+  @override
+  String codeSentToEmail(Object email) {
+    return 'Код был отправлен на почту $email';
+  }
 }

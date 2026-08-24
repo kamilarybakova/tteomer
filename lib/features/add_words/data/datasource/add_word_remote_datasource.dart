@@ -12,6 +12,15 @@ class AddWordRemoteDatasource {
     );
 
     final data = response.data['data'] as Map<String, dynamic>;
-    return List<String>.from(data['added_words'] as List);
+    final addedWords = data['added_words'];
+
+    // API can return either:
+    // - added_words: ["word1", "word2"]
+    // - added_words: 1
+    if (addedWords is List) {
+      return List<String>.from(addedWords);
+    }
+
+    return <String>[];
   }
 }

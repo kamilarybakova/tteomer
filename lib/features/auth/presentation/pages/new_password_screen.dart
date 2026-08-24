@@ -49,7 +49,7 @@ class _NewPasswordScreenState extends ConsumerState<NewPasswordScreen> {
 
     ref.listen<AuthState>(authNotifierProvider, (prev, next) {
       if (next is ResetPasswordSuccess) {
-        AppToast.show(context, 'Пароль был сброшен');
+        AppToast.show(context, l10n.passwordResetSuccess);
 
         Navigator.pushAndRemoveUntil(
           context,
@@ -147,8 +147,8 @@ class _NewPasswordScreenState extends ConsumerState<NewPasswordScreen> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    const Text('Уже есть аккаунт? ',
-                        style: TextStyle(color: Colors.grey)),
+                    Text('${l10n.alreadyHaveAccount} ',
+                        style: const TextStyle(color: Colors.grey)),
                     GestureDetector(
                       onTap: () => Navigator.push(
                           context,
@@ -156,8 +156,8 @@ class _NewPasswordScreenState extends ConsumerState<NewPasswordScreen> {
                             builder: (context) => const LogInScreen(),
                           ),
                       ),
-                      child: const Text(
-                        'Войти',
+                      child: Text(
+                        l10n.login,
                         style: TextStyle(
                           color: Color(0xFF4C63D2),
                           fontWeight: FontWeight.w600,

@@ -6,6 +6,7 @@ import 'package:tteomer/features/auth/presentation/pages/sign_up_screen.dart';
 import '../../../../core/storage/shared_prefs_service.dart';
 import '../../../../core/widgets/app_toast.dart';
 import '../../../../core/widgets/button_widget.dart';
+import '../../../../core/widgets/language_picker_sheet.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../../../main_navigation_screen.dart';
 import '../provider/auth_state.dart';
@@ -106,7 +107,19 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
           padding: const EdgeInsets.symmetric(horizontal: 24),
           child: Column(
             children: [
-              const SizedBox(height: 40),
+              Align(
+                alignment: Alignment.centerRight,
+                child: IconButton(
+                  icon: const Icon(Icons.language),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const LanguageScreen()),
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(height: 12),
               Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
@@ -164,9 +177,9 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
                           ),
                         ),
                         const SizedBox(width: 8),
-                        const Text(
-                          'Запомнить меня',
-                          style: TextStyle(color: Colors.grey, fontSize: 13),
+                        Text(
+                          t.rememberMe,
+                          style: const TextStyle(color: Colors.grey, fontSize: 13),
                         ),
                       ],
                     ),

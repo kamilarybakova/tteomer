@@ -40,7 +40,7 @@ class _ChangePasswordScreenState extends ConsumerState<ChangePasswordScreen> {
 
     ref.listen<AuthState>(authNotifierProvider, (prev, next) {
       if (next is PasswordChangeSuccess) {
-        AppToast.show(context, 'Пароль успешно изменен');
+        AppToast.show(context, l10n.passwordChangeSuccess);
         if (context.mounted) Navigator.pop(context);
       }
 

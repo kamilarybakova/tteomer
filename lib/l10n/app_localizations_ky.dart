@@ -307,4 +307,18 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get clearDictionaryTooltip => 'Сөздүктү тазалоо';
+
+  @override
+  String get passwordResetSuccess => 'Сырсөз калыбына келтирилди';
+
+  @override
+  String get passwordChangeSuccess => 'Сырсөз ийгиликтүү өзгөртүлдү';
+
+  @override
+  String get rememberMe => 'Мени эстеп кал';
+
+  @override
+  String codeSentToEmail(Object email) {
+    return 'Код $email дарегине жөнөтүлдү';
+  }
 }

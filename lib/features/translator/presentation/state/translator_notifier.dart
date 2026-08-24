@@ -11,7 +11,7 @@ import 'translator_state.dart';
 
 final geminiDatasourceProvider = Provider<GeminiTranslationDatasource>((ref) {
   return GeminiTranslationDatasource(
-    apiKey: 'AIzaSyBa1M7_FckP_1cBzAuRi1hYh59qsKksX4U',
+    apiKey: 'AIzaSyAzfLWGfdVra6euG_tXYuags5UtA5sqDi8',
   );
 });
 
