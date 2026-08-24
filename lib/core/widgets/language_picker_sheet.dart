@@ -21,17 +21,17 @@ class LanguageScreen extends StatelessWidget {
       body: Column(
         children: [
           _LanguageOption(
-            title: 'Русский',
+            title: l10n.langRussian,
             localeCode: 'ru',
             isSelected: currentLocale == 'ru',
           ),
           _LanguageOption(
-            title: 'Кыргызча',
+            title: l10n.langKyrgyz,
             localeCode: 'ky',
             isSelected: currentLocale == 'ky',
           ),
           _LanguageOption(
-            title: 'Türkçe',
+            title: l10n.langTurkish,
             localeCode: 'tr',
             isSelected: currentLocale == 'tr',
           ),

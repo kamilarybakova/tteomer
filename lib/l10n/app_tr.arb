@@ -96,7 +96,18 @@
       "level": {}
     }
   },
-  "registerButton": "Kayıt ol",
+  "forceUpdateTitle": "Uygulamanin guncellenmesi gerekiyor",
+  "optionalUpdateTitle": "Guncelleme mevcut",
+  "updateMessage": "Mevcut surum: {currentVersion}. {latestVersion} surumu kullanima hazir. Devam etmek icin uygulamayi guncelleyin.",
+  "@updateMessage": {
+    "placeholders": {
+      "currentVersion": {},
+      "latestVersion": {}
+    }
+  },
+  "updateNow": "Simdi guncelle",
+  "later": "Daha sonra",
+  "registerButton": "Kursa kayıt ol",
   "contactSite": "Site",
   "contactInstagram": "Instagram",
   "contactFacebook": "Facebook",

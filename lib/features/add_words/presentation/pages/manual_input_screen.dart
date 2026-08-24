@@ -55,7 +55,7 @@ class _AddManuallyBottomSheetState
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context)!;
     final bottomInset = MediaQuery.of(context).viewInsets.bottom;
 
     return GestureDetector(
@@ -81,7 +81,7 @@ class _AddManuallyBottomSheetState
                   const SizedBox(height: 16),
 
                   Text(
-                    l10n?.addManually ?? 'Add manually',
+                    l10n.addManually,
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -94,9 +94,7 @@ class _AddManuallyBottomSheetState
                     controller: _controller,
                     maxLines: 5,
                     decoration: InputDecoration(
-                      hintText:
-                      l10n?.manualInputHint ??
-                          'Enter one or multiple words\n(one per line)',
+                      hintText: l10n.manualInputHint,
                       filled: true,
                       fillColor: const Color(0xFFF3F3F3),
                       border: OutlineInputBorder(
@@ -113,7 +111,7 @@ class _AddManuallyBottomSheetState
                     child: ElevatedButton.icon(
                       onPressed: _parseWords,
                       icon: const Icon(Icons.check, color: Colors.white),
-                      label: Text(l10n?.check ?? 'Check'),
+                      label: Text(l10n.check),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: AppColors.accent,
                         foregroundColor: Colors.white,
@@ -131,7 +129,7 @@ class _AddManuallyBottomSheetState
                     Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        l10n?.detectedWords ?? 'Detected words',
+                        l10n.detectedWords,
                         style: const TextStyle(
                           fontWeight: FontWeight.w600,
                         ),
@@ -155,9 +153,9 @@ class _AddManuallyBottomSheetState
 
                     SizedBox(
                       width: double.infinity,
-                      child: ElevatedButton.icon(
-                        onPressed: _submit,
-                        label: Text(l10n?.save ?? 'Save'),
+                    child: ElevatedButton.icon(
+                      onPressed: _submit,
+                      label: Text(l10n.save),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.accent,
                           foregroundColor: Colors.white,

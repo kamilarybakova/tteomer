@@ -238,7 +238,24 @@ class AppLocalizationsKy extends AppLocalizations {
   }
 
   @override
-  String get registerButton => 'Катталуу';
+  String get forceUpdateTitle => 'Колдонмону жаңыртуу керек';
+
+  @override
+  String get optionalUpdateTitle => 'Жаңы жаңыртуу жеткиликтүү';
+
+  @override
+  String updateMessage(Object currentVersion, Object latestVersion) {
+    return 'Учурдагы версия: $currentVersion. $latestVersion версиясы жеткиликтүү. Улантуу үчүн колдонмону жаңыртыңыз.';
+  }
+
+  @override
+  String get updateNow => 'Азыр жаңыртуу';
+
+  @override
+  String get later => 'Кийинчерээк';
+
+  @override
+  String get registerButton => 'Курска катталуу';
 
   @override
   String get contactSite => 'Сайт';

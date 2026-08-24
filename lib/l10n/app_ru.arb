@@ -100,7 +100,18 @@
       "level": {}
     }
   },
-  "registerButton": "Зарегистрироваться",
+  "forceUpdateTitle": "Нужно обновить приложение",
+  "optionalUpdateTitle": "Доступно обновление",
+  "updateMessage": "Чтобы продолжить работу, установите обновление.",
+  "@updateMessage": {
+    "placeholders": {
+      "currentVersion": {},
+      "latestVersion": {}
+    }
+  },
+  "updateNow": "Обновить сейчас",
+  "later": "Позже",
+  "registerButton": "Зарегистрироваться на курс",
   "contactSite": "Сайт",
   "contactInstagram": "Instagram",
   "contactFacebook": "Facebook",

@@ -97,7 +97,18 @@
       "level": {}
     }
   },
-  "registerButton": "Катталуу",
+  "forceUpdateTitle": "Колдонмону жаңыртуу керек",
+  "optionalUpdateTitle": "Жаңы жаңыртуу жеткиликтүү",
+  "updateMessage": "Учурдагы версия: {currentVersion}. {latestVersion} версиясы жеткиликтүү. Улантуу үчүн колдонмону жаңыртыңыз.",
+  "@updateMessage": {
+    "placeholders": {
+      "currentVersion": {},
+      "latestVersion": {}
+    }
+  },
+  "updateNow": "Азыр жаңыртуу",
+  "later": "Кийинчерээк",
+  "registerButton": "Курска катталуу",
   "contactSite": "Сайт",
   "contactInstagram": "Instagram",
   "contactFacebook": "Facebook",

@@ -108,319 +108,319 @@ abstract class AppLocalizations {
   /// No description provided for @register.
   ///
   /// In en, this message translates to:
-  /// **'Создать аккаунт'**
+  /// **'Create account'**
   String get register;
 
   /// No description provided for @signUpTitle.
   ///
   /// In en, this message translates to:
-  /// **'Создать аккаунт'**
+  /// **'Create account'**
   String get signUpTitle;
 
   /// No description provided for @nickname.
   ///
   /// In en, this message translates to:
-  /// **'Ник'**
+  /// **'Nickname'**
   String get nickname;
 
   /// No description provided for @enterNickname.
   ///
   /// In en, this message translates to:
-  /// **'Введите ник'**
+  /// **'Enter nickname'**
   String get enterNickname;
 
   /// No description provided for @email.
   ///
   /// In en, this message translates to:
-  /// **'Почта'**
+  /// **'Email'**
   String get email;
 
   /// No description provided for @enterEmail.
   ///
   /// In en, this message translates to:
-  /// **'Введите почту'**
+  /// **'Enter email'**
   String get enterEmail;
 
   /// No description provided for @password.
   ///
   /// In en, this message translates to:
-  /// **'Пароль'**
+  /// **'Password'**
   String get password;
 
   /// No description provided for @acceptTerms.
   ///
   /// In en, this message translates to:
-  /// **'Я принимаю условия использования\nи политику конфиденциальности.'**
+  /// **'I accept the terms of use\nand the privacy policy.'**
   String get acceptTerms;
 
   /// No description provided for @alreadyHaveAccount.
   ///
   /// In en, this message translates to:
-  /// **'Уже есть аккаунт?'**
+  /// **'Already have an account?'**
   String get alreadyHaveAccount;
 
   /// No description provided for @login.
   ///
   /// In en, this message translates to:
-  /// **'Войти'**
+  /// **'Log in'**
   String get login;
 
   /// No description provided for @createAccount.
   ///
   /// In en, this message translates to:
-  /// **'Создать аккаунт'**
+  /// **'Create account'**
   String get createAccount;
 
   /// No description provided for @forgotPassword.
   ///
   /// In en, this message translates to:
-  /// **'Забыли пароль?'**
+  /// **'Forgot password?'**
   String get forgotPassword;
 
   /// No description provided for @noAccount.
   ///
   /// In en, this message translates to:
-  /// **'Нет аккаунта?'**
+  /// **'Don’t have an account?'**
   String get noAccount;
 
   /// No description provided for @enterGroupCode.
   ///
   /// In en, this message translates to:
-  /// **'Введите код группы'**
+  /// **'Enter group code'**
   String get enterGroupCode;
 
   /// No description provided for @send.
   ///
   /// In en, this message translates to:
-  /// **'Отправить'**
+  /// **'Send'**
   String get send;
 
   /// No description provided for @resendCode.
   ///
   /// In en, this message translates to:
-  /// **'Отправить код снова'**
+  /// **'Send code again'**
   String get resendCode;
 
   /// No description provided for @resendWithTimer.
   ///
   /// In en, this message translates to:
-  /// **'Отправить код снова {time}'**
+  /// **'Send code again {time}'**
   String resendWithTimer(Object time);
 
   /// No description provided for @forgotPasswordTitle.
   ///
   /// In en, this message translates to:
-  /// **'Забыли пароль?'**
+  /// **'Forgot password?'**
   String get forgotPasswordTitle;
 
   /// No description provided for @forgotPasswordDesc.
   ///
   /// In en, this message translates to:
-  /// **'Пожалуйста, введите адрес электронной почты, связанный с вашей учетной записью.'**
+  /// **'Please enter the email address associated with your account.'**
   String get forgotPasswordDesc;
 
   /// No description provided for @sendCode.
   ///
   /// In en, this message translates to:
-  /// **'Отправить код'**
+  /// **'Send code'**
   String get sendCode;
 
   /// No description provided for @rememberPassword.
   ///
   /// In en, this message translates to:
-  /// **'Вспомнили пароль?'**
+  /// **'Remembered your password?'**
   String get rememberPassword;
 
   /// No description provided for @verifyEmailTitle.
   ///
   /// In en, this message translates to:
-  /// **'Проверьте вашу почту'**
+  /// **'Check your email'**
   String get verifyEmailTitle;
 
   /// No description provided for @verifyEmailDesc.
   ///
   /// In en, this message translates to:
-  /// **'Мы отправили код на почту {email}'**
+  /// **'We sent a code to {email}'**
   String verifyEmailDesc(Object email);
 
   /// No description provided for @resetPasswordTitle.
   ///
   /// In en, this message translates to:
-  /// **'Сбросить пароль'**
+  /// **'Reset password'**
   String get resetPasswordTitle;
 
   /// No description provided for @enterNewPassword.
   ///
   /// In en, this message translates to:
-  /// **'Введите новый пароль'**
+  /// **'Enter a new password'**
   String get enterNewPassword;
 
   /// No description provided for @newPassword.
   ///
   /// In en, this message translates to:
-  /// **'Новый пароль'**
+  /// **'New password'**
   String get newPassword;
 
   /// No description provided for @repeatPassword.
   ///
   /// In en, this message translates to:
-  /// **'Повторите ввод нового пароля'**
+  /// **'Repeat new password'**
   String get repeatPassword;
 
   /// No description provided for @resetPassword.
   ///
   /// In en, this message translates to:
-  /// **'Сбросить пароль'**
+  /// **'Reset password'**
   String get resetPassword;
 
   /// No description provided for @emptyDictionaryTitle.
   ///
   /// In en, this message translates to:
-  /// **'Словарь пуст'**
+  /// **'Dictionary is empty'**
   String get emptyDictionaryTitle;
 
   /// No description provided for @emptyDictionarySubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Добавьте первые слова, чтобы начать обучение'**
+  /// **'Add your first words to start learning'**
   String get emptyDictionarySubtitle;
 
   /// No description provided for @searchHint.
   ///
   /// In en, this message translates to:
-  /// **'Поиск слов'**
+  /// **'Search words'**
   String get searchHint;
 
   /// No description provided for @tabHome.
   ///
   /// In en, this message translates to:
-  /// **'Главная'**
+  /// **'Home'**
   String get tabHome;
 
   /// No description provided for @tabDictionary.
   ///
   /// In en, this message translates to:
-  /// **'Словарь'**
+  /// **'Dictionary'**
   String get tabDictionary;
 
   /// No description provided for @tabDocs.
   ///
   /// In en, this message translates to:
-  /// **'Документы'**
+  /// **'Documents'**
   String get tabDocs;
 
   /// No description provided for @tabTranslator.
   ///
   /// In en, this message translates to:
-  /// **'Переводчик'**
+  /// **'Translator'**
   String get tabTranslator;
 
   /// No description provided for @firstName.
   ///
   /// In en, this message translates to:
-  /// **'Имя'**
+  /// **'First name'**
   String get firstName;
 
   /// No description provided for @lastName.
   ///
   /// In en, this message translates to:
-  /// **'Фамилия'**
+  /// **'Last name'**
   String get lastName;
 
   /// No description provided for @enterName.
   ///
   /// In en, this message translates to:
-  /// **'Введите ваше имя'**
+  /// **'Enter your first name'**
   String get enterName;
 
   /// No description provided for @enterLastName.
   ///
   /// In en, this message translates to:
-  /// **'Введите вашу фамилию'**
+  /// **'Enter your last name'**
   String get enterLastName;
 
   /// No description provided for @scanFromPhoto.
   ///
   /// In en, this message translates to:
-  /// **'Сканировать с фото'**
+  /// **'Scan from photo'**
   String get scanFromPhoto;
 
   /// No description provided for @addManually.
   ///
   /// In en, this message translates to:
-  /// **'Добавить вручную'**
+  /// **'Add manually'**
   String get addManually;
 
   /// No description provided for @pasteText.
   ///
   /// In en, this message translates to:
-  /// **'Вставить текст'**
+  /// **'Paste text'**
   String get pasteText;
 
   /// No description provided for @manualInputHint.
   ///
   /// In en, this message translates to:
-  /// **'Введите одно или несколько слов\n(каждое с новой строки)'**
+  /// **'Enter one or more words\n(each on a new line)'**
   String get manualInputHint;
 
   /// No description provided for @check.
   ///
   /// In en, this message translates to:
-  /// **'Проверить'**
+  /// **'Check'**
   String get check;
 
   /// No description provided for @detectedWords.
   ///
   /// In en, this message translates to:
-  /// **'Найденные слова'**
+  /// **'Detected words'**
   String get detectedWords;
 
   /// No description provided for @scanText.
   ///
   /// In en, this message translates to:
-  /// **'Сканировать'**
+  /// **'Scan'**
   String get scanText;
 
   /// No description provided for @scan.
   ///
   /// In en, this message translates to:
-  /// **'Отсканируйте текст'**
+  /// **'Scan the text'**
   String get scan;
 
   /// No description provided for @scanError.
   ///
   /// In en, this message translates to:
-  /// **'Ошибка сканирования'**
+  /// **'Scanning error'**
   String get scanError;
 
   /// No description provided for @reviewWordsTitle.
   ///
   /// In en, this message translates to:
-  /// **'Проверьте слова ({count})'**
+  /// **'Review words ({count})'**
   String reviewWordsTitle(int count);
 
   /// No description provided for @addWordsButton.
   ///
   /// In en, this message translates to:
-  /// **'Добавить {count} слов'**
+  /// **'Add {count} words'**
   String addWordsButton(int count);
 
   /// No description provided for @addWords.
   ///
   /// In en, this message translates to:
-  /// **'Добавить слова'**
+  /// **'Add words'**
   String get addWords;
 
   /// No description provided for @settings.
   ///
   /// In en, this message translates to:
-  /// **'Настройки'**
+  /// **'Settings'**
   String get settings;
 
   /// No description provided for @language.
   ///
   /// In en, this message translates to:
-  /// **'Язык'**
+  /// **'Language'**
   String get language;
 
   /// No description provided for @change_password.
@@ -432,19 +432,19 @@ abstract class AppLocalizations {
   /// No description provided for @logout.
   ///
   /// In en, this message translates to:
-  /// **'Выйти'**
+  /// **'Log out'**
   String get logout;
 
   /// No description provided for @selectLanguage.
   ///
   /// In en, this message translates to:
-  /// **'Выберите язык'**
+  /// **'Select language'**
   String get selectLanguage;
 
   /// No description provided for @langRussian.
   ///
   /// In en, this message translates to:
-  /// **'Русский'**
+  /// **'Russian'**
   String get langRussian;
 
   /// No description provided for @langTurkish.
@@ -456,31 +456,31 @@ abstract class AppLocalizations {
   /// No description provided for @langKyrgyz.
   ///
   /// In en, this message translates to:
-  /// **'Кыргызча'**
+  /// **'Kyrgyz'**
   String get langKyrgyz;
 
   /// No description provided for @welcomeTitle.
   ///
   /// In en, this message translates to:
-  /// **'Добро пожаловать 👋'**
+  /// **'Welcome 👋'**
   String get welcomeTitle;
 
   /// No description provided for @sectionNews.
   ///
   /// In en, this message translates to:
-  /// **'Новости и объявления'**
+  /// **'News and announcements'**
   String get sectionNews;
 
   /// No description provided for @welcomeSubtitle.
   ///
   /// In en, this message translates to:
-  /// **'в Tteomer'**
+  /// **'to Tteomer'**
   String get welcomeSubtitle;
 
   /// No description provided for @sectionContacts.
   ///
   /// In en, this message translates to:
-  /// **'Контакты'**
+  /// **'Contacts'**
   String get sectionContacts;
 
   /// No description provided for @dailyPracticeTitle.
@@ -537,16 +537,46 @@ abstract class AppLocalizations {
   /// **'Level {level}'**
   String levelBadge(Object level);
 
+  /// No description provided for @forceUpdateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'App update required'**
+  String get forceUpdateTitle;
+
+  /// No description provided for @optionalUpdateTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Update available'**
+  String get optionalUpdateTitle;
+
+  /// No description provided for @updateMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Current version: {currentVersion}. Version {latestVersion} is available. Install the update to continue with the latest build.'**
+  String updateMessage(Object currentVersion, Object latestVersion);
+
+  /// No description provided for @updateNow.
+  ///
+  /// In en, this message translates to:
+  /// **'Update now'**
+  String get updateNow;
+
+  /// No description provided for @later.
+  ///
+  /// In en, this message translates to:
+  /// **'Later'**
+  String get later;
+
   /// No description provided for @registerButton.
   ///
   /// In en, this message translates to:
-  /// **'Зарегистрироваться'**
+  /// **'Register for the course'**
   String get registerButton;
 
   /// No description provided for @contactSite.
   ///
   /// In en, this message translates to:
-  /// **'Сайт'**
+  /// **'Website'**
   String get contactSite;
 
   /// No description provided for @contactInstagram.
@@ -570,151 +600,151 @@ abstract class AppLocalizations {
   /// No description provided for @save.
   ///
   /// In en, this message translates to:
-  /// **'Сохранить'**
+  /// **'Save'**
   String get save;
 
   /// No description provided for @translator_title.
   ///
   /// In en, this message translates to:
-  /// **'Переводчик'**
+  /// **'Translator'**
   String get translator_title;
 
   /// No description provided for @instant_translation.
   ///
   /// In en, this message translates to:
-  /// **'Мгновенный перевод'**
+  /// **'Instant translation'**
   String get instant_translation;
 
   /// No description provided for @ai_translator.
   ///
   /// In en, this message translates to:
-  /// **'AI Переводчик'**
+  /// **'AI Translator'**
   String get ai_translator;
 
   /// No description provided for @enter_text_hint.
   ///
   /// In en, this message translates to:
-  /// **'Введите текст для перевода...'**
+  /// **'Enter text to translate...'**
   String get enter_text_hint;
 
   /// No description provided for @symbols_count.
   ///
   /// In en, this message translates to:
-  /// **'{count} символов'**
+  /// **'{count} characters'**
   String symbols_count(Object count);
 
   /// No description provided for @clear.
   ///
   /// In en, this message translates to:
-  /// **'Очистить'**
+  /// **'Clear'**
   String get clear;
 
   /// No description provided for @translation_error.
   ///
   /// In en, this message translates to:
-  /// **'Ошибка перевода. Проверьте API-ключ или подключение.'**
+  /// **'Translation error. Check the API key or connection.'**
   String get translation_error;
 
   /// No description provided for @copy.
   ///
   /// In en, this message translates to:
-  /// **'Копировать'**
+  /// **'Copy'**
   String get copy;
 
   /// No description provided for @copied.
   ///
   /// In en, this message translates to:
-  /// **'Скопировано в буфер обмена'**
+  /// **'Copied to clipboard'**
   String get copied;
 
   /// No description provided for @added_to_dictionary.
   ///
   /// In en, this message translates to:
-  /// **'«{word}» добавлено в словарь'**
+  /// **'\"{word}\" added to dictionary'**
   String added_to_dictionary(Object word);
 
   /// No description provided for @add_to_dictionary.
   ///
   /// In en, this message translates to:
-  /// **'Добавить «{word}» в словарь'**
+  /// **'Add \"{word}\" to dictionary'**
   String add_to_dictionary(Object word);
 
   /// No description provided for @added.
   ///
   /// In en, this message translates to:
-  /// **'«{word}» добавлено!'**
+  /// **'\"{word}\" added!'**
   String added(Object word);
 
   /// No description provided for @deleteWord.
   ///
   /// In en, this message translates to:
-  /// **'Удалить слово?'**
+  /// **'Delete word?'**
   String get deleteWord;
 
   /// No description provided for @deleteWordContent.
   ///
   /// In en, this message translates to:
-  /// **'«{word}» будет удалено из вашего словаря.'**
+  /// **'\"{word}\" will be removed from your dictionary.'**
   String deleteWordContent(String word);
 
   /// No description provided for @cancel.
   ///
   /// In en, this message translates to:
-  /// **'Отмена'**
+  /// **'Cancel'**
   String get cancel;
 
   /// No description provided for @delete.
   ///
   /// In en, this message translates to:
-  /// **'Удалить'**
+  /// **'Delete'**
   String get delete;
 
   /// No description provided for @deleteSwipeLabel.
   ///
   /// In en, this message translates to:
-  /// **'Удалить'**
+  /// **'Delete'**
   String get deleteSwipeLabel;
 
   /// No description provided for @dictionaryEmpty.
   ///
   /// In en, this message translates to:
-  /// **'Словарь пуст'**
+  /// **'Dictionary is empty'**
   String get dictionaryEmpty;
 
   /// No description provided for @dictionaryEmptySubtitle.
   ///
   /// In en, this message translates to:
-  /// **'Добавьте слова через переводчик'**
+  /// **'Add words through the translator'**
   String get dictionaryEmptySubtitle;
 
   /// No description provided for @categoryAll.
   ///
   /// In en, this message translates to:
-  /// **'Все'**
+  /// **'All'**
   String get categoryAll;
 
   /// No description provided for @clearDictionary.
   ///
   /// In en, this message translates to:
-  /// **'Очистить словарь?'**
+  /// **'Clear dictionary?'**
   String get clearDictionary;
 
   /// No description provided for @clearDictionaryContent.
   ///
   /// In en, this message translates to:
-  /// **'Все слова будут удалены безвозвратно.'**
+  /// **'All words will be permanently deleted.'**
   String get clearDictionaryContent;
 
   /// No description provided for @clearDictionaryConfirm.
   ///
   /// In en, this message translates to:
-  /// **'Удалить всё'**
+  /// **'Delete all'**
   String get clearDictionaryConfirm;
 
   /// No description provided for @clearDictionaryTooltip.
   ///
   /// In en, this message translates to:
-  /// **'Очистить словарь'**
+  /// **'Clear dictionary'**
   String get clearDictionaryTooltip;
 
   /// No description provided for @passwordResetSuccess.

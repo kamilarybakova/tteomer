@@ -12,201 +12,201 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'Bişkek Türkiye Türkçesi Öğretim Merkezi';
 
   @override
-  String get register => 'Создать аккаунт';
+  String get register => 'Create account';
 
   @override
-  String get signUpTitle => 'Создать аккаунт';
+  String get signUpTitle => 'Create account';
 
   @override
-  String get nickname => 'Ник';
+  String get nickname => 'Nickname';
 
   @override
-  String get enterNickname => 'Введите ник';
+  String get enterNickname => 'Enter nickname';
 
   @override
-  String get email => 'Почта';
+  String get email => 'Email';
 
   @override
-  String get enterEmail => 'Введите почту';
+  String get enterEmail => 'Enter email';
 
   @override
-  String get password => 'Пароль';
+  String get password => 'Password';
 
   @override
-  String get acceptTerms => 'Я принимаю условия использования\nи политику конфиденциальности.';
+  String get acceptTerms => 'I accept the terms of use\nand the privacy policy.';
 
   @override
-  String get alreadyHaveAccount => 'Уже есть аккаунт?';
+  String get alreadyHaveAccount => 'Already have an account?';
 
   @override
-  String get login => 'Войти';
+  String get login => 'Log in';
 
   @override
-  String get createAccount => 'Создать аккаунт';
+  String get createAccount => 'Create account';
 
   @override
-  String get forgotPassword => 'Забыли пароль?';
+  String get forgotPassword => 'Forgot password?';
 
   @override
-  String get noAccount => 'Нет аккаунта?';
+  String get noAccount => 'Don’t have an account?';
 
   @override
-  String get enterGroupCode => 'Введите код группы';
+  String get enterGroupCode => 'Enter group code';
 
   @override
-  String get send => 'Отправить';
+  String get send => 'Send';
 
   @override
-  String get resendCode => 'Отправить код снова';
+  String get resendCode => 'Send code again';
 
   @override
   String resendWithTimer(Object time) {
-    return 'Отправить код снова $time';
+    return 'Send code again $time';
   }
 
   @override
-  String get forgotPasswordTitle => 'Забыли пароль?';
+  String get forgotPasswordTitle => 'Forgot password?';
 
   @override
-  String get forgotPasswordDesc => 'Пожалуйста, введите адрес электронной почты, связанный с вашей учетной записью.';
+  String get forgotPasswordDesc => 'Please enter the email address associated with your account.';
 
   @override
-  String get sendCode => 'Отправить код';
+  String get sendCode => 'Send code';
 
   @override
-  String get rememberPassword => 'Вспомнили пароль?';
+  String get rememberPassword => 'Remembered your password?';
 
   @override
-  String get verifyEmailTitle => 'Проверьте вашу почту';
+  String get verifyEmailTitle => 'Check your email';
 
   @override
   String verifyEmailDesc(Object email) {
-    return 'Мы отправили код на почту $email';
+    return 'We sent a code to $email';
   }
 
   @override
-  String get resetPasswordTitle => 'Сбросить пароль';
+  String get resetPasswordTitle => 'Reset password';
 
   @override
-  String get enterNewPassword => 'Введите новый пароль';
+  String get enterNewPassword => 'Enter a new password';
 
   @override
-  String get newPassword => 'Новый пароль';
+  String get newPassword => 'New password';
 
   @override
-  String get repeatPassword => 'Повторите ввод нового пароля';
+  String get repeatPassword => 'Repeat new password';
 
   @override
-  String get resetPassword => 'Сбросить пароль';
+  String get resetPassword => 'Reset password';
 
   @override
-  String get emptyDictionaryTitle => 'Словарь пуст';
+  String get emptyDictionaryTitle => 'Dictionary is empty';
 
   @override
-  String get emptyDictionarySubtitle => 'Добавьте первые слова, чтобы начать обучение';
+  String get emptyDictionarySubtitle => 'Add your first words to start learning';
 
   @override
-  String get searchHint => 'Поиск слов';
+  String get searchHint => 'Search words';
 
   @override
-  String get tabHome => 'Главная';
+  String get tabHome => 'Home';
 
   @override
-  String get tabDictionary => 'Словарь';
+  String get tabDictionary => 'Dictionary';
 
   @override
-  String get tabDocs => 'Документы';
+  String get tabDocs => 'Documents';
 
   @override
-  String get tabTranslator => 'Переводчик';
+  String get tabTranslator => 'Translator';
 
   @override
-  String get firstName => 'Имя';
+  String get firstName => 'First name';
 
   @override
-  String get lastName => 'Фамилия';
+  String get lastName => 'Last name';
 
   @override
-  String get enterName => 'Введите ваше имя';
+  String get enterName => 'Enter your first name';
 
   @override
-  String get enterLastName => 'Введите вашу фамилию';
+  String get enterLastName => 'Enter your last name';
 
   @override
-  String get scanFromPhoto => 'Сканировать с фото';
+  String get scanFromPhoto => 'Scan from photo';
 
   @override
-  String get addManually => 'Добавить вручную';
+  String get addManually => 'Add manually';
 
   @override
-  String get pasteText => 'Вставить текст';
+  String get pasteText => 'Paste text';
 
   @override
-  String get manualInputHint => 'Введите одно или несколько слов\n(каждое с новой строки)';
+  String get manualInputHint => 'Enter one or more words\n(each on a new line)';
 
   @override
-  String get check => 'Проверить';
+  String get check => 'Check';
 
   @override
-  String get detectedWords => 'Найденные слова';
+  String get detectedWords => 'Detected words';
 
   @override
-  String get scanText => 'Сканировать';
+  String get scanText => 'Scan';
 
   @override
-  String get scan => 'Отсканируйте текст';
+  String get scan => 'Scan the text';
 
   @override
-  String get scanError => 'Ошибка сканирования';
+  String get scanError => 'Scanning error';
 
   @override
   String reviewWordsTitle(int count) {
-    return 'Проверьте слова ($count)';
+    return 'Review words ($count)';
   }
 
   @override
   String addWordsButton(int count) {
-    return 'Добавить $count слов';
+    return 'Add $count words';
   }
 
   @override
-  String get addWords => 'Добавить слова';
+  String get addWords => 'Add words';
 
   @override
-  String get settings => 'Настройки';
+  String get settings => 'Settings';
 
   @override
-  String get language => 'Язык';
+  String get language => 'Language';
 
   @override
   String get change_password => 'Change password';
 
   @override
-  String get logout => 'Выйти';
+  String get logout => 'Log out';
 
   @override
-  String get selectLanguage => 'Выберите язык';
+  String get selectLanguage => 'Select language';
 
   @override
-  String get langRussian => 'Русский';
+  String get langRussian => 'Russian';
 
   @override
   String get langTurkish => 'Türkçe';
 
   @override
-  String get langKyrgyz => 'Кыргызча';
+  String get langKyrgyz => 'Kyrgyz';
 
   @override
-  String get welcomeTitle => 'Добро пожаловать 👋';
+  String get welcomeTitle => 'Welcome 👋';
 
   @override
-  String get sectionNews => 'Новости и объявления';
+  String get sectionNews => 'News and announcements';
 
   @override
-  String get welcomeSubtitle => 'в Tteomer';
+  String get welcomeSubtitle => 'to Tteomer';
 
   @override
-  String get sectionContacts => 'Контакты';
+  String get sectionContacts => 'Contacts';
 
   @override
   String get dailyPracticeTitle => 'Daily practice';
@@ -238,10 +238,27 @@ class AppLocalizationsEn extends AppLocalizations {
   }
 
   @override
-  String get registerButton => 'Зарегистрироваться';
+  String get forceUpdateTitle => 'App update required';
 
   @override
-  String get contactSite => 'Сайт';
+  String get optionalUpdateTitle => 'Update available';
+
+  @override
+  String updateMessage(Object currentVersion, Object latestVersion) {
+    return 'Current version: $currentVersion. Version $latestVersion is available. Install the update to continue with the latest build.';
+  }
+
+  @override
+  String get updateNow => 'Update now';
+
+  @override
+  String get later => 'Later';
+
+  @override
+  String get registerButton => 'Register for the course';
+
+  @override
+  String get contactSite => 'Website';
 
   @override
   String get contactInstagram => 'Instagram';
@@ -253,89 +270,89 @@ class AppLocalizationsEn extends AppLocalizations {
   String get contactYoutube => 'YouTube';
 
   @override
-  String get save => 'Сохранить';
+  String get save => 'Save';
 
   @override
-  String get translator_title => 'Переводчик';
+  String get translator_title => 'Translator';
 
   @override
-  String get instant_translation => 'Мгновенный перевод';
+  String get instant_translation => 'Instant translation';
 
   @override
-  String get ai_translator => 'AI Переводчик';
+  String get ai_translator => 'AI Translator';
 
   @override
-  String get enter_text_hint => 'Введите текст для перевода...';
+  String get enter_text_hint => 'Enter text to translate...';
 
   @override
   String symbols_count(Object count) {
-    return '$count символов';
+    return '$count characters';
   }
 
   @override
-  String get clear => 'Очистить';
+  String get clear => 'Clear';
 
   @override
-  String get translation_error => 'Ошибка перевода. Проверьте API-ключ или подключение.';
+  String get translation_error => 'Translation error. Check the API key or connection.';
 
   @override
-  String get copy => 'Копировать';
+  String get copy => 'Copy';
 
   @override
-  String get copied => 'Скопировано в буфер обмена';
+  String get copied => 'Copied to clipboard';
 
   @override
   String added_to_dictionary(Object word) {
-    return '«$word» добавлено в словарь';
+    return '\"$word\" added to dictionary';
   }
 
   @override
   String add_to_dictionary(Object word) {
-    return 'Добавить «$word» в словарь';
+    return 'Add \"$word\" to dictionary';
   }
 
   @override
   String added(Object word) {
-    return '«$word» добавлено!';
+    return '\"$word\" added!';
   }
 
   @override
-  String get deleteWord => 'Удалить слово?';
+  String get deleteWord => 'Delete word?';
 
   @override
   String deleteWordContent(String word) {
-    return '«$word» будет удалено из вашего словаря.';
+    return '\"$word\" will be removed from your dictionary.';
   }
 
   @override
-  String get cancel => 'Отмена';
+  String get cancel => 'Cancel';
 
   @override
-  String get delete => 'Удалить';
+  String get delete => 'Delete';
 
   @override
-  String get deleteSwipeLabel => 'Удалить';
+  String get deleteSwipeLabel => 'Delete';
 
   @override
-  String get dictionaryEmpty => 'Словарь пуст';
+  String get dictionaryEmpty => 'Dictionary is empty';
 
   @override
-  String get dictionaryEmptySubtitle => 'Добавьте слова через переводчик';
+  String get dictionaryEmptySubtitle => 'Add words through the translator';
 
   @override
-  String get categoryAll => 'Все';
+  String get categoryAll => 'All';
 
   @override
-  String get clearDictionary => 'Очистить словарь?';
+  String get clearDictionary => 'Clear dictionary?';
 
   @override
-  String get clearDictionaryContent => 'Все слова будут удалены безвозвратно.';
+  String get clearDictionaryContent => 'All words will be permanently deleted.';
 
   @override
-  String get clearDictionaryConfirm => 'Удалить всё';
+  String get clearDictionaryConfirm => 'Delete all';
 
   @override
-  String get clearDictionaryTooltip => 'Очистить словарь';
+  String get clearDictionaryTooltip => 'Clear dictionary';
 
   @override
   String get passwordResetSuccess => 'Password has been reset';

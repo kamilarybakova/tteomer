@@ -238,7 +238,24 @@ class AppLocalizationsTr extends AppLocalizations {
   }
 
   @override
-  String get registerButton => 'Kayıt ol';
+  String get forceUpdateTitle => 'Uygulamanin guncellenmesi gerekiyor';
+
+  @override
+  String get optionalUpdateTitle => 'Guncelleme mevcut';
+
+  @override
+  String updateMessage(Object currentVersion, Object latestVersion) {
+    return 'Mevcut surum: $currentVersion. $latestVersion surumu kullanima hazir. Devam etmek icin uygulamayi guncelleyin.';
+  }
+
+  @override
+  String get updateNow => 'Simdi guncelle';
+
+  @override
+  String get later => 'Daha sonra';
+
+  @override
+  String get registerButton => 'Kursa kayıt ol';
 
   @override
   String get contactSite => 'Site';

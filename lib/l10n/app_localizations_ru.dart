@@ -238,7 +238,24 @@ class AppLocalizationsRu extends AppLocalizations {
   }
 
   @override
-  String get registerButton => 'Зарегистрироваться';
+  String get forceUpdateTitle => 'Нужно обновить приложение';
+
+  @override
+  String get optionalUpdateTitle => 'Доступно обновление';
+
+  @override
+  String updateMessage(Object currentVersion, Object latestVersion) {
+    return 'Чтобы продолжить работу, установите обновление.';
+  }
+
+  @override
+  String get updateNow => 'Обновить сейчас';
+
+  @override
+  String get later => 'Позже';
+
+  @override
+  String get registerButton => 'Зарегистрироваться на курс';
 
   @override
   String get contactSite => 'Сайт';

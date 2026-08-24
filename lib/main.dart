@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'auth_gate.dart';
+import 'core/update/update_gate.dart';
 import 'core/storage/shared_prefs_service.dart';
 import 'core/utils/locale_state.dart';
 import 'core/widgets/language_picker_sheet.dart';
@@ -11,11 +12,7 @@ void main() async {
   // await NoScreenshot.instance.screenshotOff();
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPrefsService.getInstance();
-  runApp(
-    const ProviderScope(
-      child: MyApp(),
-    ),
-  );
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -56,14 +53,12 @@ class _MyAppState extends State<MyApp> {
       setLocale: _setLocale,
       child: MaterialApp(
         title: 'TTOM',
-        theme: ThemeData(
-          fontFamily: 'SFProDisplay',
-        ),
+        theme: ThemeData(fontFamily: 'SFProDisplay'),
         debugShowCheckedModeBanner: false,
         locale: _locale,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
         supportedLocales: AppLocalizations.supportedLocales,
-        home: const AuthGate(),
+        home: const UpdateGate(child: AuthGate()),
       ),
     );
   }

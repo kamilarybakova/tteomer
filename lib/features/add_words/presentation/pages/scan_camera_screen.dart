@@ -71,16 +71,14 @@ class _ScanCameraScreenState extends ConsumerState<ScanCameraScreen> {
       if (mounted) {
         Navigator.push(
           context,
-          MaterialPageRoute(
-            builder: (_) => const ScanPreviewScreen(),
-          ),
+          MaterialPageRoute(builder: (_) => const ScanPreviewScreen()),
         );
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('$e')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('$e')));
       }
     } finally {
       setState(() => _isProcessing = false);
@@ -95,12 +93,10 @@ class _ScanCameraScreenState extends ConsumerState<ScanCameraScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final l10n = AppLocalizations.of(context);
+    final l10n = AppLocalizations.of(context)!;
 
     if (_controller == null || !_controller!.value.isInitialized) {
-      return const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
-      );
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
     return Scaffold(
@@ -127,13 +123,10 @@ class _ScanCameraScreenState extends ConsumerState<ScanCameraScreen> {
                 child: Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: Colors.black.withOpacity(0.4),
+                    color: Colors.black.withValues(alpha: 0.4),
                     shape: BoxShape.circle,
                   ),
-                  child: const Icon(
-                    Icons.arrow_back,
-                    color: Colors.white,
-                  ),
+                  child: const Icon(Icons.arrow_back, color: Colors.white),
                 ),
               ),
             ),
@@ -144,7 +137,7 @@ class _ScanCameraScreenState extends ConsumerState<ScanCameraScreen> {
             left: 0,
             right: 0,
             child: Text(
-              l10n?.scan ?? "Отсканируйте текст",
+              l10n.scan,
               textAlign: TextAlign.center,
               style: TextStyle(
                 color: Colors.white,
@@ -152,7 +145,7 @@ class _ScanCameraScreenState extends ConsumerState<ScanCameraScreen> {
                 fontWeight: FontWeight.w500,
                 shadows: [
                   Shadow(
-                    color: Colors.black.withOpacity(0.5),
+                    color: Colors.black.withValues(alpha: 0.5),
                     blurRadius: 4,
                   ),
                 ],
@@ -173,14 +166,14 @@ class _ScanCameraScreenState extends ConsumerState<ScanCameraScreen> {
                 ),
                 child: _isProcessing
                     ? const SizedBox(
-                  height: 24,
-                  width: 24,
-                  child: CircularProgressIndicator(
-                    color: Colors.white,
-                    strokeWidth: 2,
-                  ),
-                )
-                    : Text(l10n?.scanText ?? "Сканировать", style: TextStyle(fontSize: 18)),
+                        height: 24,
+                        width: 24,
+                        child: CircularProgressIndicator(
+                          color: Colors.white,
+                          strokeWidth: 2,
+                        ),
+                      )
+                    : Text(l10n.scanText, style: const TextStyle(fontSize: 18)),
               ),
             ),
           ),
