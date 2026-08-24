@@ -1,11 +1,13 @@
 import '../../domain/entities/translation_entity.dart';
 import '../../domain/repositories/translation_repository.dart';
-import '../datasources/gemini_translation_datasource.dart';
+import '../datasources/google_translate_datasource.dart';
+import '../datasources/libre_translate_datasource.dart';
 
 class TranslationRepositoryImpl implements TranslationRepository {
-  final GeminiTranslationDatasource _datasource;
+  final GoogleTranslateDatasource _googleDatasource;
+  final LibreTranslateDatasource _libreDatasource;
 
-  TranslationRepositoryImpl(this._datasource);
+  TranslationRepositoryImpl(this._googleDatasource, this._libreDatasource);
 
   @override
   Future<TranslationEntity> translate({
@@ -13,10 +15,30 @@ class TranslationRepositoryImpl implements TranslationRepository {
     required String sourceLanguage,
     required String targetLanguage,
   }) async {
-    return _datasource.translate(
-      text: text,
-      sourceLanguage: sourceLanguage,
-      targetLanguage: targetLanguage,
-    );
+    if (!_googleDatasource.isConfigured) {
+      return _libreDatasource.translate(
+        text: text,
+        sourceLanguage: sourceLanguage,
+        targetLanguage: targetLanguage,
+      );
+    }
+
+    try {
+      return await _googleDatasource.translate(
+        text: text,
+        sourceLanguage: sourceLanguage,
+        targetLanguage: targetLanguage,
+      );
+    } on GoogleTranslateApiException catch (error) {
+      if (!error.isQuotaExceeded) {
+        rethrow;
+      }
+
+      return _libreDatasource.translate(
+        text: text,
+        sourceLanguage: sourceLanguage,
+        targetLanguage: targetLanguage,
+      );
+    }
   }
 }

@@ -74,10 +74,7 @@ class _TranslatorScreenState extends ConsumerState<TranslatorScreen> {
       _isSpeakingSource = true;
       _isSpeakingTarget = false;
     });
-    await _tts.speak(
-      text: text,
-      languageCode: state.sourceLanguage.code,
-    );
+    await _tts.speak(text: text, languageCode: state.sourceLanguage.code);
     if (mounted) setState(() => _isSpeakingSource = false);
   }
 
@@ -93,10 +90,7 @@ class _TranslatorScreenState extends ConsumerState<TranslatorScreen> {
       _isSpeakingTarget = true;
       _isSpeakingSource = false;
     });
-    await _tts.speak(
-      text: text,
-      languageCode: state.targetLanguage.code,
-    );
+    await _tts.speak(text: text, languageCode: state.targetLanguage.code);
     if (mounted) setState(() => _isSpeakingTarget = false);
   }
 
@@ -148,25 +142,9 @@ class _TranslatorScreenState extends ConsumerState<TranslatorScreen> {
                       ),
                     ),
                     const SizedBox(width: 16),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            l10n.instant_translation,
-                            style: const TextStyle(color: Colors.white),
-                          ),
-                          const SizedBox(height: 4),
-                          Text(
-                            l10n.ai_translator,
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ],
-                      ),
+                    Text(
+                      l10n.instant_translation,
+                      style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.w700),
                     ),
                   ],
                 ),
@@ -287,7 +265,7 @@ class _SpeakButton extends StatelessWidget {
           shape: BoxShape.circle,
           color: isSpeaking
               ? const Color(0xFF6C63FF)
-              : const Color(0xFF6C63FF).withOpacity(0.1),
+              : const Color(0xFF6C63FF).withValues(alpha: 0.1),
         ),
         child: Icon(
           isSpeaking ? Icons.stop_rounded : Icons.volume_up_rounded,
@@ -316,7 +294,7 @@ class _LanguageBar extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         boxShadow: [
           BoxShadow(
-            color: const Color(0xFF6C63FF).withOpacity(0.08),
+            color: const Color(0xFF6C63FF).withValues(alpha: 0.08),
             blurRadius: 16,
             offset: const Offset(0, 4),
           ),
@@ -335,16 +313,16 @@ class _LanguageBar extends StatelessWidget {
           GestureDetector(
             onTap: notifier.swapLanguages,
             child: Container(
-              width: 40,
-              height: 40,
+              width: 36,
+              height: 36,
               decoration: BoxDecoration(
-                color: const Color(0xFF6C63FF).withOpacity(0.1),
+                color: const Color(0xFF6C63FF).withValues(alpha: 0.1),
                 shape: BoxShape.circle,
               ),
               child: const Icon(
                 Icons.swap_horiz_rounded,
                 color: Color(0xFF6C63FF),
-                size: 22,
+                size: 20,
               ),
             ),
           ),
@@ -440,10 +418,7 @@ class _ResultCard extends StatelessWidget {
                     Row(
                       children: [
                         // 🔊 Кнопка озвучки перевода
-                        _SpeakButton(
-                          isSpeaking: isSpeaking,
-                          onTap: onSpeak,
-                        ),
+                        _SpeakButton(isSpeaking: isSpeaking, onTap: onSpeak),
                         const SizedBox(width: 8),
                         // 📋 Кнопка копирования
                         GestureDetector(

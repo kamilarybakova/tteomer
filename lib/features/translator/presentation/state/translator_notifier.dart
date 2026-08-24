@@ -1,7 +1,9 @@
 import 'dart:async';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tteomer/core/storage/shared_prefs_service.dart';
-import '../../data/datasources/gemini_translation_datasource.dart';
+import '../../../../core/utils/app_config.dart';
+import '../../data/datasources/google_translate_datasource.dart';
+import '../../data/datasources/libre_translate_datasource.dart';
 import '../../data/repositories/translation_repository_impl.dart';
 import '../../domain/entities/language_entity.dart';
 import '../../domain/usecases/translate_usecase.dart';
@@ -9,15 +11,28 @@ import 'translator_state.dart';
 
 // ── Providers ──────────────────────────────────────────────────────────────
 
-final geminiDatasourceProvider = Provider<GeminiTranslationDatasource>((ref) {
-  return GeminiTranslationDatasource(
-    apiKey: 'AIzaSyAzfLWGfdVra6euG_tXYuags5UtA5sqDi8',
+final googleTranslateDatasourceProvider = Provider<GoogleTranslateDatasource>((
+  ref,
+) {
+  return GoogleTranslateDatasource(apiKey: AppConfig.googleTranslateApiKey);
+});
+
+final libreTranslateDatasourceProvider = Provider<LibreTranslateDatasource>((
+  ref,
+) {
+  return LibreTranslateDatasource(
+    baseUrl: AppConfig.libreTranslateBaseUrl,
+    apiKey: AppConfig.libreTranslateApiKey,
   );
 });
 
-final translationRepositoryProvider =
-Provider<TranslationRepositoryImpl>((ref) {
-  return TranslationRepositoryImpl(ref.watch(geminiDatasourceProvider));
+final translationRepositoryProvider = Provider<TranslationRepositoryImpl>((
+  ref,
+) {
+  return TranslationRepositoryImpl(
+    ref.watch(googleTranslateDatasourceProvider),
+    ref.watch(libreTranslateDatasourceProvider),
+  );
 });
 
 final translateUseCaseProvider = Provider<TranslateUseCase>((ref) {
@@ -25,9 +40,9 @@ final translateUseCaseProvider = Provider<TranslateUseCase>((ref) {
 });
 
 final translatorNotifierProvider =
-StateNotifierProvider<TranslatorNotifier, TranslatorState>(
+    StateNotifierProvider<TranslatorNotifier, TranslatorState>(
       (ref) => TranslatorNotifier(ref.watch(translateUseCaseProvider)),
-);
+    );
 
 // ── Notifier ───────────────────────────────────────────────────────────────
 
@@ -36,7 +51,7 @@ class TranslatorNotifier extends StateNotifier<TranslatorState> {
   Timer? _debounceTimer;
 
   TranslatorNotifier(this._translateUseCase)
-      : super(TranslatorState.initial()) {
+    : super(TranslatorState.initial()) {
     _loadSavedLanguages();
   }
 
@@ -90,16 +105,13 @@ class TranslatorNotifier extends StateNotifier<TranslatorState> {
   Future<void> translate() async {
     if (state.inputText.trim().isEmpty) return;
 
-    state = state.copyWith(
-      status: TranslatorStatus.loading,
-      clearError: true,
-    );
+    state = state.copyWith(status: TranslatorStatus.loading, clearError: true);
 
     try {
       final result = await _translateUseCase(
         text: state.inputText,
-        sourceLanguage: state.sourceLanguage.name,
-        targetLanguage: state.targetLanguage.name,
+        sourceLanguage: state.sourceLanguage.code,
+        targetLanguage: state.targetLanguage.code,
       );
 
       state = state.copyWith(

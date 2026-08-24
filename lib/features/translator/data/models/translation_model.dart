@@ -9,7 +9,7 @@ class TranslationModel extends TranslationEntity {
     required super.createdAt,
   });
 
-  factory TranslationModel.fromGeminiResponse({
+  factory TranslationModel.fromTranslationResponse({
     required String originalText,
     required String translatedText,
     required String sourceLanguage,

@@ -26,17 +26,17 @@ class LanguageSelectorWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(
-          mainAxisSize: MainAxisSize.min,
           children: [
-            Text(
-              selected.flag,
-              style: const TextStyle(fontSize: 20),
-            ),
+            _LanguageBadge(language: selected),
             const SizedBox(width: 8),
-            Text(
-              selected.nativeName,
-              style: theme.textTheme.titleSmall?.copyWith(
-                fontWeight: FontWeight.w600,
+            Expanded(
+              child: Text(
+                selected.nativeName,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+                style: theme.textTheme.titleSmall?.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
             const SizedBox(width: 4),
@@ -98,14 +98,13 @@ class _LanguagePickerSheet extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           ...languages.map(
-                (lang) => ListTile(
+            (lang) => ListTile(
               onTap: () => onSelected(lang),
-              leading: Text(lang.flag, style: const TextStyle(fontSize: 24)),
+              leading: _LanguageBadge(language: lang, compact: false),
               title: Text(lang.nativeName),
               subtitle: Text(lang.name),
               trailing: selected.code == lang.code
-                  ? Icon(Icons.check_rounded,
-                  color: theme.colorScheme.primary)
+                  ? Icon(Icons.check_rounded, color: theme.colorScheme.primary)
                   : null,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -113,6 +112,42 @@ class _LanguagePickerSheet extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _LanguageBadge extends StatelessWidget {
+  final LanguageEntity language;
+  final bool compact;
+
+  const _LanguageBadge({required this.language, this.compact = true});
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final label = language.code.toUpperCase();
+    final horizontalPadding = compact ? 8.0 : 10.0;
+    final verticalPadding = compact ? 6.0 : 8.0;
+
+    return Container(
+      constraints: const BoxConstraints(minWidth: 42),
+      padding: EdgeInsets.symmetric(
+        horizontal: horizontalPadding,
+        vertical: verticalPadding,
+      ),
+      decoration: BoxDecoration(
+        color: theme.colorScheme.primary.withValues(alpha: 0.10),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Text(
+        label,
+        textAlign: TextAlign.center,
+        style: theme.textTheme.labelMedium?.copyWith(
+          fontWeight: FontWeight.w700,
+          color: theme.colorScheme.primary,
+          letterSpacing: 0.4,
+        ),
       ),
     );
   }
