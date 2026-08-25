@@ -147,7 +147,6 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             _DailyLearningSection(state: newsState),
 
             const SizedBox(height: 20),
-
             // Шиммер пока грузятся новости
             if (newsState.status == NewsStatus.loading) ...[
               _SectionTitle(l10n.sectionNews),

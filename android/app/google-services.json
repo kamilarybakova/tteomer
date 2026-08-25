@@ -40,6 +40,42 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:654284750582:android:ada94e15a65f2c0570b6d7",
+        "android_client_info": {
+          "package_name": "com.kasoft.tteomer.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "654284750582-369jfogdpcnkm7jrtt3je9h7gigmhgkb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDN-3LziO2gXZozy7XqLJNFDFQdDeDnZ94"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "654284750582-369jfogdpcnkm7jrtt3je9h7gigmhgkb.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "654284750582-0lt7r7mebv63mg94fqegp1654blmm1qi.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.kasoft.tteomer"
+              }
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"
