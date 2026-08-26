@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'auth_gate.dart';
+import 'core/notifications/push_notification_provider.dart';
 import 'core/update/update_gate.dart';
 import 'core/storage/shared_prefs_service.dart';
 import 'core/utils/locale_state.dart';
@@ -12,6 +14,7 @@ void main() async {
   // await NoScreenshot.instance.screenshotOff();
   WidgetsFlutterBinding.ensureInitialized();
   await SharedPrefsService.getInstance();
+  await Firebase.initializeApp();
   runApp(const ProviderScope(child: MyApp()));
 }
 
@@ -51,14 +54,16 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return LocaleController(
       setLocale: _setLocale,
-      child: MaterialApp(
-        title: 'TTOM',
-        theme: ThemeData(fontFamily: 'SFProDisplay'),
-        debugShowCheckedModeBanner: false,
-        locale: _locale,
-        localizationsDelegates: AppLocalizations.localizationsDelegates,
-        supportedLocales: AppLocalizations.supportedLocales,
-        home: const UpdateGate(child: AuthGate()),
+      child: PushNotificationInitializer(
+        child: MaterialApp(
+          title: 'TTOM',
+          theme: ThemeData(fontFamily: 'SFProDisplay'),
+          debugShowCheckedModeBanner: false,
+          locale: _locale,
+          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          supportedLocales: AppLocalizations.supportedLocales,
+          home: const UpdateGate(child: AuthGate()),
+        ),
       ),
     );
   }

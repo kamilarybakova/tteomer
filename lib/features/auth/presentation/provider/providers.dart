@@ -4,6 +4,7 @@ import 'package:tteomer/features/main/presentation/state/main_notifier.dart';
 import 'package:tteomer/features/main/presentation/state/main_state.dart';
 
 import '../../../../core/network/dio_client.dart';
+import '../../../../core/notifications/push_notification_provider.dart';
 import '../../../../core/storage/secure_storage_provider.dart';
 import '../../../documents/data/datasource/materials_remote_datasource.dart';
 import '../../../documents/data/repository/materials_repository_impl.dart';
@@ -69,6 +70,7 @@ final authNotifierProvider = StateNotifierProvider<AuthNotifier, AuthState>((
     resetPasswordConfirmUseCase: ref.read(resetPasswordConfirmUseCaseProvider),
     changePasswordUseCase: ref.read(changePasswordUseCaseProvider),
     storage: ref.read(secureStorageProvider),
+    pushNotifications: ref.read(pushNotificationServiceProvider),
   );
 });
 

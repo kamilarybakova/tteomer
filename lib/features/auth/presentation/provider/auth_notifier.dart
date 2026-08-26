@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:tteomer/core/notifications/push_notification_service.dart';
 import 'package:tteomer/features/auth/domain/usecases/reset_password_usecase.dart';
 import '../../domain/usecases/change_password_usecase.dart';
 import '../../domain/usecases/login_usecase.dart';
@@ -15,6 +16,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
   final ResetPasswordConfirmUseCase resetPasswordConfirmUseCase;
   final ChangePasswordUseCase changePasswordUseCase;
   final FlutterSecureStorage storage;
+  final PushNotificationService pushNotifications;
 
   AuthNotifier({
     required this.loginUseCase,
@@ -23,6 +25,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     required this.resetPasswordConfirmUseCase,
     required this.changePasswordUseCase,
     required this.storage,
+    required this.pushNotifications,
   }) : super(AuthInitial());
 
   String _extractError(Object e) {
@@ -63,6 +66,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
       await storage.write(key: 'refresh_token', value: tokens.refreshToken);
       await storage.write(key: 'user_role', value: tokens.role);
       await storage.write(key: 'user_level', value: tokens.level);
+      await pushNotifications.syncCurrentTokenIfAuthenticated();
       state = AuthSuccess(tokens);
     } catch (e) {
       state = AuthError(_extractError(e));
@@ -89,6 +93,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
       await storage.write(key: 'refresh_token', value: tokens.refreshToken);
       await storage.write(key: 'user_role', value: tokens.role);
       await storage.write(key: 'user_level', value: tokens.level);
+      await pushNotifications.syncCurrentTokenIfAuthenticated();
       state = AuthRegistered();
     } catch (e) {
       state = AuthError(_extractError(e));
@@ -134,6 +139,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
   }
 
   Future<void> logout() async {
+    await pushNotifications.deactivateCurrentToken();
     await storage.delete(key: 'access_token');
     await storage.delete(key: 'refresh_token');
     await storage.delete(key: 'user_role');
