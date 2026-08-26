@@ -44,6 +44,7 @@
   "searchHint": "Сөз издөө",
   "tabHome": "Башкы бет",
   "tabDictionary": "Сөздүк",
+  "tabGroups": "Топтор",
   "tabDocs": "Документтер",
   "tabTranslator": "Которуу",
   "firstName": "Аты",
@@ -147,6 +148,53 @@
   "passwordResetSuccess": "Сырсөз калыбына келтирилди",
   "passwordChangeSuccess": "Сырсөз ийгиликтүү өзгөртүлдү",
   "rememberMe": "Мени эстеп кал",
+  "loadingLabel": "Жүктөлүүдө...",
+  "checkAgain": "Кайра текшерүү",
+  "pendingApprovalTitle": "Ырастоону күтүңүз",
+  "pendingApprovalSubtitle": "Өтүнмөңүз ийгиликтүү жөнөтүлдү. Мугалим топко кирүүнү ырастагандан кийин окуу материалдары ушул жерде пайда болот.",
+  "rejectedAccessTitle": "Кирүү азырынча жактырылган жок",
+  "rejectedAccessSubtitle": "Мугалим бул өтүнмөнү четке какты. Мектеп менен байланышыңыз же кийинчерээк башка активдүү топ менен кайра аракет кылыңыз.",
+  "noGroupTitle": "Топ азырынча туташкан эмес",
+  "noGroupSubtitle": "Аккаунтуңузга азырынча активдүү топ байланыша элек. Жаңы кошулуу коду үчүн мектептин администраторуна кайрылыңыз.",
+  "cohortEndedTitle": "Бул курс аяктады",
+  "cohortEndedSubtitle": "Мурунку тобуңуз мындан ары активдүү эмес. Жаңы курска кошулуу үчүн мектеп менен байланышыңыз.",
+  "noActiveCohortTitle": "Топ азыр жеткиликсиз",
+  "noActiveCohortSubtitle": "Топ табылды, бирок учурда активдүү агым жок. Кийинчерээк кайра текшерип көрүңүз.",
+  "accessStatusErrorTitle": "Кирүү макамын текшерүү мүмкүн болгон жок",
+  "accessStatusErrorSubtitle": "Учурда окуу макамыңызды текшерүү мүмкүн болбой калды. Бир аздан кийин кайра аракет кылыңыз.",
+  "groupInfoTitle": "Топ жөнүндө маалымат",
+  "groupNameLabel": "Топ",
+  "groupLevelLabel": "Деңгээл",
+  "groupTeacherLabel": "Мугалим",
+  "groupLessonTimeLabel": "Убакыт",
+  "groupNoteLabel": "Эскертүү",
+  "groupTimeUnknown": "Убакыт көрсөтүлгөн эмес",
+  "groupStudentsCount": "{current}/{max} студент",
+  "@groupStudentsCount": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "openPendingStudents": "Ачуу",
+  "noTeacherGroupsTitle": "Азырынча дайындалган топтор жок",
+  "noTeacherGroupsSubtitle": "Мугалимге тиешелүү топтор система тарабынан дайындалганда ушул жерде көрүнөт.",
+  "teacherGroupsErrorTitle": "Топторду жүктөө мүмкүн болгон жок",
+  "pendingStudentsTitle": "Ырастоону күтүп жаткан студенттер",
+  "groupStudentsSectionTitle": "Топтогу студенттер",
+  "noPendingStudentsTitle": "Күтүп жаткан өтүнмөлөр жок",
+  "noPendingStudentsSubtitle": "Бул топ үчүн жаңы студенттик өтүнмөлөр ушул жерде көрүнөт.",
+  "noGroupStudentsTitle": "Топто азырынча студенттер жок",
+  "noGroupStudentsSubtitle": "Бул топтун ырасталган студенттери ушул жерде көрүнөт.",
+  "requestedAtLabel": "Жөнөтүлгөн убакыт",
+  "approveStudent": "Ырастоо",
+  "rejectStudent": "Четке кагуу",
+  "studentApproved": "Студент ырасталды",
+  "studentRejected": "Өтүнмө четке кагылды",
   "codeSentToEmail": "Код {email} дарегине жөнөтүлдү",
   "@codeSentToEmail": {
     "placeholders": {

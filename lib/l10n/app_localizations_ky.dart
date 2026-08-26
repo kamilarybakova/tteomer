@@ -115,6 +115,9 @@ class AppLocalizationsKy extends AppLocalizations {
   String get tabDictionary => 'Сөздүк';
 
   @override
+  String get tabGroups => 'Топтор';
+
+  @override
   String get tabDocs => 'Документтер';
 
   @override
@@ -362,6 +365,119 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get rememberMe => 'Мени эстеп кал';
+
+  @override
+  String get loadingLabel => 'Жүктөлүүдө...';
+
+  @override
+  String get checkAgain => 'Кайра текшерүү';
+
+  @override
+  String get pendingApprovalTitle => 'Ырастоону күтүңүз';
+
+  @override
+  String get pendingApprovalSubtitle => 'Өтүнмөңүз ийгиликтүү жөнөтүлдү. Мугалим топко кирүүнү ырастагандан кийин окуу материалдары ушул жерде пайда болот.';
+
+  @override
+  String get rejectedAccessTitle => 'Кирүү азырынча жактырылган жок';
+
+  @override
+  String get rejectedAccessSubtitle => 'Мугалим бул өтүнмөнү четке какты. Мектеп менен байланышыңыз же кийинчерээк башка активдүү топ менен кайра аракет кылыңыз.';
+
+  @override
+  String get noGroupTitle => 'Топ азырынча туташкан эмес';
+
+  @override
+  String get noGroupSubtitle => 'Аккаунтуңузга азырынча активдүү топ байланыша элек. Жаңы кошулуу коду үчүн мектептин администраторуна кайрылыңыз.';
+
+  @override
+  String get cohortEndedTitle => 'Бул курс аяктады';
+
+  @override
+  String get cohortEndedSubtitle => 'Мурунку тобуңуз мындан ары активдүү эмес. Жаңы курска кошулуу үчүн мектеп менен байланышыңыз.';
+
+  @override
+  String get noActiveCohortTitle => 'Топ азыр жеткиликсиз';
+
+  @override
+  String get noActiveCohortSubtitle => 'Топ табылды, бирок учурда активдүү агым жок. Кийинчерээк кайра текшерип көрүңүз.';
+
+  @override
+  String get accessStatusErrorTitle => 'Кирүү макамын текшерүү мүмкүн болгон жок';
+
+  @override
+  String get accessStatusErrorSubtitle => 'Учурда окуу макамыңызды текшерүү мүмкүн болбой калды. Бир аздан кийин кайра аракет кылыңыз.';
+
+  @override
+  String get groupInfoTitle => 'Топ жөнүндө маалымат';
+
+  @override
+  String get groupNameLabel => 'Топ';
+
+  @override
+  String get groupLevelLabel => 'Деңгээл';
+
+  @override
+  String get groupTeacherLabel => 'Мугалим';
+
+  @override
+  String get groupLessonTimeLabel => 'Убакыт';
+
+  @override
+  String get groupNoteLabel => 'Эскертүү';
+
+  @override
+  String get groupTimeUnknown => 'Убакыт көрсөтүлгөн эмес';
+
+  @override
+  String groupStudentsCount(int current, int max) {
+    return '$current/$max студент';
+  }
+
+  @override
+  String get openPendingStudents => 'Ачуу';
+
+  @override
+  String get noTeacherGroupsTitle => 'Азырынча дайындалган топтор жок';
+
+  @override
+  String get noTeacherGroupsSubtitle => 'Мугалимге тиешелүү топтор система тарабынан дайындалганда ушул жерде көрүнөт.';
+
+  @override
+  String get teacherGroupsErrorTitle => 'Топторду жүктөө мүмкүн болгон жок';
+
+  @override
+  String get pendingStudentsTitle => 'Ырастоону күтүп жаткан студенттер';
+
+  @override
+  String get groupStudentsSectionTitle => 'Топтогу студенттер';
+
+  @override
+  String get noPendingStudentsTitle => 'Күтүп жаткан өтүнмөлөр жок';
+
+  @override
+  String get noPendingStudentsSubtitle => 'Бул топ үчүн жаңы студенттик өтүнмөлөр ушул жерде көрүнөт.';
+
+  @override
+  String get noGroupStudentsTitle => 'Топто азырынча студенттер жок';
+
+  @override
+  String get noGroupStudentsSubtitle => 'Бул топтун ырасталган студенттери ушул жерде көрүнөт.';
+
+  @override
+  String get requestedAtLabel => 'Жөнөтүлгөн убакыт';
+
+  @override
+  String get approveStudent => 'Ырастоо';
+
+  @override
+  String get rejectStudent => 'Четке кагуу';
+
+  @override
+  String get studentApproved => 'Студент ырасталды';
+
+  @override
+  String get studentRejected => 'Өтүнмө четке кагылды';
 
   @override
   String codeSentToEmail(Object email) {

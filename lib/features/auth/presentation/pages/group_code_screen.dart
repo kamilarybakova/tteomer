@@ -2,12 +2,11 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:tteomer/auth_gate.dart';
 
 import '../../../../core/widgets/app_toast.dart';
 import '../../../../core/widgets/button_widget.dart';
 import '../../../../l10n/app_localizations.dart';
-import '../../../../main_navigation_screen.dart';
 import '../provider/auth_state.dart';
 import '../provider/providers.dart';
 
@@ -82,10 +81,8 @@ class _GroupCodeScreenState extends ConsumerState<GroupCodeScreen> {
       if (next is AuthRegistered) {
         Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(
-            builder: (context) => const MainNavigationScreen(),
-          ),
-              (route) => false,
+          MaterialPageRoute(builder: (context) => const AuthGate()),
+          (route) => false,
         );
       }
 
@@ -137,7 +134,6 @@ class _GroupCodeScreenState extends ConsumerState<GroupCodeScreen> {
                     focusNode: focusNode,
                     autofocus: true,
                     textAlign: TextAlign.center,
-                    maxLength: 20,
                     keyboardType: TextInputType.text,
                     style: const TextStyle(
                       fontSize: 24,
@@ -164,7 +160,7 @@ class _GroupCodeScreenState extends ConsumerState<GroupCodeScreen> {
                     ),
                     onChanged: (_) => setState(() {}),
                     onSubmitted: (_) => _onSend(),
-                  )
+                  ),
                 ),
               ),
 
@@ -184,8 +180,8 @@ class _GroupCodeScreenState extends ConsumerState<GroupCodeScreen> {
               Text(
                 secondsLeft > 0
                     ? t.resendWithTimer(
-                  '00:${secondsLeft.toString().padLeft(2, '0')}',
-                )
+                        '00:${secondsLeft.toString().padLeft(2, '0')}',
+                      )
                     : t.resendCode,
                 style: const TextStyle(color: Colors.grey),
               ),
@@ -199,12 +195,14 @@ class _GroupCodeScreenState extends ConsumerState<GroupCodeScreen> {
   void _onSend() {
     final groupCode = controller.text.trim();
 
-    ref.read(authNotifierProvider.notifier).register(
-      email: widget.email,
-      password: widget.password,
-      firstName: widget.firstName,
-      lastName: widget.lastName,
-      groupCode: groupCode,
-    );
+    ref
+        .read(authNotifierProvider.notifier)
+        .register(
+          email: widget.email,
+          password: widget.password,
+          firstName: widget.firstName,
+          lastName: widget.lastName,
+          groupCode: groupCode,
+        );
   }
 }

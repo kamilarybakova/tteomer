@@ -44,6 +44,7 @@
   "searchHint": "Kelime ara",
   "tabHome": "Ana sayfa",
   "tabDictionary": "Sözlük",
+  "tabGroups": "Gruplar",
   "tabDocs": "Belgeler",
   "firstName": "Ad",
   "enterName": "Adınızı girin",
@@ -147,6 +148,53 @@
   "passwordResetSuccess": "Şifre sıfırlandı",
   "passwordChangeSuccess": "Şifre başarıyla değiştirildi",
   "rememberMe": "Beni hatırla",
+  "loadingLabel": "Yükleniyor...",
+  "checkAgain": "Tekrar kontrol et",
+  "pendingApprovalTitle": "Lütfen onayı bekleyin",
+  "pendingApprovalSubtitle": "Başvurunuz başarıyla gönderildi. Öğretmen grup erişiminizi onayladığında öğrenme materyalleri burada görünecek.",
+  "rejectedAccessTitle": "Erişim henüz onaylanmadı",
+  "rejectedAccessSubtitle": "Öğretmen bu başvuruyu reddetti. Lütfen okul ile iletişime geçin veya daha sonra başka bir aktif grupla tekrar deneyin.",
+  "noGroupTitle": "Henüz bir grup bağlı değil",
+  "noGroupSubtitle": "Hesabınızda henüz aktif bir grup yok. Yeni bir katılım kodu almak için okul yöneticisiyle iletişime geçin.",
+  "cohortEndedTitle": "Bu kurs sona erdi",
+  "cohortEndedSubtitle": "Önceki grubunuz artık aktif değil. Yeni bir kursa katılmak için okul ile iletişime geçin.",
+  "noActiveCohortTitle": "Grup şu anda kullanılamıyor",
+  "noActiveCohortSubtitle": "Bir grup bulundu ancak şu anda aktif bir dönem yok. Lütfen daha sonra tekrar kontrol edin.",
+  "accessStatusErrorTitle": "Erişim kontrol edilemedi",
+  "accessStatusErrorSubtitle": "Mevcut öğrenim durumunuz doğrulanamadı. Lütfen biraz sonra tekrar deneyin.",
+  "groupInfoTitle": "Grup bilgileri",
+  "groupNameLabel": "Grup",
+  "groupLevelLabel": "Seviye",
+  "groupTeacherLabel": "Öğretmen",
+  "groupLessonTimeLabel": "Ders saati",
+  "groupNoteLabel": "Not",
+  "groupTimeUnknown": "Saat belirtilmedi",
+  "groupStudentsCount": "{current}/{max} öğrenci",
+  "@groupStudentsCount": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "openPendingStudents": "Aç",
+  "noTeacherGroupsTitle": "Henüz atanmış grup yok",
+  "noTeacherGroupsSubtitle": "Öğretmene ait gruplar sistemde atandığında burada görünecek.",
+  "teacherGroupsErrorTitle": "Gruplar yüklenemedi",
+  "pendingStudentsTitle": "Onay bekleyen öğrenciler",
+  "groupStudentsSectionTitle": "Gruptaki öğrenciler",
+  "noPendingStudentsTitle": "Bekleyen istek yok",
+  "noPendingStudentsSubtitle": "Bu grup için yeni öğrenci istekleri burada görünecek.",
+  "noGroupStudentsTitle": "Grupta henüz öğrenci yok",
+  "noGroupStudentsSubtitle": "Bu grubun onaylanan öğrencileri burada görünecek.",
+  "requestedAtLabel": "Talep zamanı",
+  "approveStudent": "Onayla",
+  "rejectStudent": "Reddet",
+  "studentApproved": "Öğrenci onaylandı",
+  "studentRejected": "Öğrenci reddedildi",
   "codeSentToEmail": "Kod {email} adresine gönderildi",
   "@codeSentToEmail": {
     "placeholders": {

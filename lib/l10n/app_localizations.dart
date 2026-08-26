@@ -303,6 +303,12 @@ abstract class AppLocalizations {
   /// **'Dictionary'**
   String get tabDictionary;
 
+  /// No description provided for @tabGroups.
+  ///
+  /// In en, this message translates to:
+  /// **'Groups'**
+  String get tabGroups;
+
   /// No description provided for @tabDocs.
   ///
   /// In en, this message translates to:
@@ -764,6 +770,228 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Remember me'**
   String get rememberMe;
+
+  /// No description provided for @loadingLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Loading...'**
+  String get loadingLabel;
+
+  /// No description provided for @checkAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Check again'**
+  String get checkAgain;
+
+  /// No description provided for @pendingApprovalTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Please wait for approval'**
+  String get pendingApprovalTitle;
+
+  /// No description provided for @pendingApprovalSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your request has been sent successfully. As soon as the teacher confirms your group access, learning materials will appear here.'**
+  String get pendingApprovalSubtitle;
+
+  /// No description provided for @rejectedAccessTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Access was not approved'**
+  String get rejectedAccessTitle;
+
+  /// No description provided for @rejectedAccessSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'The teacher rejected this request. Please contact the school or try again later with another active group.'**
+  String get rejectedAccessSubtitle;
+
+  /// No description provided for @noGroupTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No group linked yet'**
+  String get noGroupTitle;
+
+  /// No description provided for @noGroupSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your account does not have an active group yet. Please contact the school administrator for a new join code.'**
+  String get noGroupSubtitle;
+
+  /// No description provided for @cohortEndedTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'This course has ended'**
+  String get cohortEndedTitle;
+
+  /// No description provided for @cohortEndedSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Your previous group is no longer active. Contact the school to join a new course.'**
+  String get cohortEndedSubtitle;
+
+  /// No description provided for @noActiveCohortTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Group is unavailable right now'**
+  String get noActiveCohortTitle;
+
+  /// No description provided for @noActiveCohortSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'A group was found, but there is no active cohort available at the moment. Please check again later.'**
+  String get noActiveCohortSubtitle;
+
+  /// No description provided for @accessStatusErrorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not check access'**
+  String get accessStatusErrorTitle;
+
+  /// No description provided for @accessStatusErrorSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'We couldn\'t verify your current learning status. Please try again in a moment.'**
+  String get accessStatusErrorSubtitle;
+
+  /// No description provided for @groupInfoTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Group details'**
+  String get groupInfoTitle;
+
+  /// No description provided for @groupNameLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Group'**
+  String get groupNameLabel;
+
+  /// No description provided for @groupLevelLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Level'**
+  String get groupLevelLabel;
+
+  /// No description provided for @groupTeacherLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Teacher'**
+  String get groupTeacherLabel;
+
+  /// No description provided for @groupLessonTimeLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Lesson time'**
+  String get groupLessonTimeLabel;
+
+  /// No description provided for @groupNoteLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Note'**
+  String get groupNoteLabel;
+
+  /// No description provided for @groupTimeUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Time not set'**
+  String get groupTimeUnknown;
+
+  /// No description provided for @groupStudentsCount.
+  ///
+  /// In en, this message translates to:
+  /// **'{current}/{max} students'**
+  String groupStudentsCount(int current, int max);
+
+  /// No description provided for @openPendingStudents.
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get openPendingStudents;
+
+  /// No description provided for @noTeacherGroupsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No groups assigned yet'**
+  String get noTeacherGroupsTitle;
+
+  /// No description provided for @noTeacherGroupsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Teacher groups will appear here as soon as they are assigned in the system.'**
+  String get noTeacherGroupsSubtitle;
+
+  /// No description provided for @teacherGroupsErrorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load groups'**
+  String get teacherGroupsErrorTitle;
+
+  /// No description provided for @pendingStudentsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pending students'**
+  String get pendingStudentsTitle;
+
+  /// No description provided for @groupStudentsSectionTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Students in the group'**
+  String get groupStudentsSectionTitle;
+
+  /// No description provided for @noPendingStudentsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No pending requests'**
+  String get noPendingStudentsTitle;
+
+  /// No description provided for @noPendingStudentsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'New student requests for this group will appear here.'**
+  String get noPendingStudentsSubtitle;
+
+  /// No description provided for @noGroupStudentsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No students in the group yet'**
+  String get noGroupStudentsTitle;
+
+  /// No description provided for @noGroupStudentsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Approved students for this group will appear here.'**
+  String get noGroupStudentsSubtitle;
+
+  /// No description provided for @requestedAtLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Requested'**
+  String get requestedAtLabel;
+
+  /// No description provided for @approveStudent.
+  ///
+  /// In en, this message translates to:
+  /// **'Approve'**
+  String get approveStudent;
+
+  /// No description provided for @rejectStudent.
+  ///
+  /// In en, this message translates to:
+  /// **'Reject'**
+  String get rejectStudent;
+
+  /// No description provided for @studentApproved.
+  ///
+  /// In en, this message translates to:
+  /// **'Student approved'**
+  String get studentApproved;
+
+  /// No description provided for @studentRejected.
+  ///
+  /// In en, this message translates to:
+  /// **'Student rejected'**
+  String get studentRejected;
 
   /// No description provided for @codeSentToEmail.
   ///

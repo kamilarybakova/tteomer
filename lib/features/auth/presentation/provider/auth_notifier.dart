@@ -132,4 +132,12 @@ class AuthNotifier extends StateNotifier<AuthState> {
       state = AuthError(_extractError(e));
     }
   }
+
+  Future<void> logout() async {
+    await storage.delete(key: 'access_token');
+    await storage.delete(key: 'refresh_token');
+    await storage.delete(key: 'user_role');
+    await storage.delete(key: 'user_level');
+    state = AuthInitial();
+  }
 }

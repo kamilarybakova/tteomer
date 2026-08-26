@@ -115,6 +115,9 @@ class AppLocalizationsTr extends AppLocalizations {
   String get tabDictionary => 'Sözlük';
 
   @override
+  String get tabGroups => 'Gruplar';
+
+  @override
   String get tabDocs => 'Belgeler';
 
   @override
@@ -362,6 +365,119 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get rememberMe => 'Beni hatırla';
+
+  @override
+  String get loadingLabel => 'Yükleniyor...';
+
+  @override
+  String get checkAgain => 'Tekrar kontrol et';
+
+  @override
+  String get pendingApprovalTitle => 'Lütfen onayı bekleyin';
+
+  @override
+  String get pendingApprovalSubtitle => 'Başvurunuz başarıyla gönderildi. Öğretmen grup erişiminizi onayladığında öğrenme materyalleri burada görünecek.';
+
+  @override
+  String get rejectedAccessTitle => 'Erişim henüz onaylanmadı';
+
+  @override
+  String get rejectedAccessSubtitle => 'Öğretmen bu başvuruyu reddetti. Lütfen okul ile iletişime geçin veya daha sonra başka bir aktif grupla tekrar deneyin.';
+
+  @override
+  String get noGroupTitle => 'Henüz bir grup bağlı değil';
+
+  @override
+  String get noGroupSubtitle => 'Hesabınızda henüz aktif bir grup yok. Yeni bir katılım kodu almak için okul yöneticisiyle iletişime geçin.';
+
+  @override
+  String get cohortEndedTitle => 'Bu kurs sona erdi';
+
+  @override
+  String get cohortEndedSubtitle => 'Önceki grubunuz artık aktif değil. Yeni bir kursa katılmak için okul ile iletişime geçin.';
+
+  @override
+  String get noActiveCohortTitle => 'Grup şu anda kullanılamıyor';
+
+  @override
+  String get noActiveCohortSubtitle => 'Bir grup bulundu ancak şu anda aktif bir dönem yok. Lütfen daha sonra tekrar kontrol edin.';
+
+  @override
+  String get accessStatusErrorTitle => 'Erişim kontrol edilemedi';
+
+  @override
+  String get accessStatusErrorSubtitle => 'Mevcut öğrenim durumunuz doğrulanamadı. Lütfen biraz sonra tekrar deneyin.';
+
+  @override
+  String get groupInfoTitle => 'Grup bilgileri';
+
+  @override
+  String get groupNameLabel => 'Grup';
+
+  @override
+  String get groupLevelLabel => 'Seviye';
+
+  @override
+  String get groupTeacherLabel => 'Öğretmen';
+
+  @override
+  String get groupLessonTimeLabel => 'Ders saati';
+
+  @override
+  String get groupNoteLabel => 'Not';
+
+  @override
+  String get groupTimeUnknown => 'Saat belirtilmedi';
+
+  @override
+  String groupStudentsCount(int current, int max) {
+    return '$current/$max öğrenci';
+  }
+
+  @override
+  String get openPendingStudents => 'Aç';
+
+  @override
+  String get noTeacherGroupsTitle => 'Henüz atanmış grup yok';
+
+  @override
+  String get noTeacherGroupsSubtitle => 'Öğretmene ait gruplar sistemde atandığında burada görünecek.';
+
+  @override
+  String get teacherGroupsErrorTitle => 'Gruplar yüklenemedi';
+
+  @override
+  String get pendingStudentsTitle => 'Onay bekleyen öğrenciler';
+
+  @override
+  String get groupStudentsSectionTitle => 'Gruptaki öğrenciler';
+
+  @override
+  String get noPendingStudentsTitle => 'Bekleyen istek yok';
+
+  @override
+  String get noPendingStudentsSubtitle => 'Bu grup için yeni öğrenci istekleri burada görünecek.';
+
+  @override
+  String get noGroupStudentsTitle => 'Grupta henüz öğrenci yok';
+
+  @override
+  String get noGroupStudentsSubtitle => 'Bu grubun onaylanan öğrencileri burada görünecek.';
+
+  @override
+  String get requestedAtLabel => 'Talep zamanı';
+
+  @override
+  String get approveStudent => 'Onayla';
+
+  @override
+  String get rejectStudent => 'Reddet';
+
+  @override
+  String get studentApproved => 'Öğrenci onaylandı';
+
+  @override
+  String get studentRejected => 'Öğrenci reddedildi';
 
   @override
   String codeSentToEmail(Object email) {

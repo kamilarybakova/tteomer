@@ -44,6 +44,7 @@
   "searchHint": "Search words",
   "tabHome": "Home",
   "tabDictionary": "Dictionary",
+  "tabGroups": "Groups",
   "tabDocs": "Documents",
   "tabTranslator": "Translator",
   "firstName": "First name",
@@ -151,6 +152,53 @@
   "passwordResetSuccess": "Password has been reset",
   "passwordChangeSuccess": "Password changed successfully",
   "rememberMe": "Remember me",
+  "loadingLabel": "Loading...",
+  "checkAgain": "Check again",
+  "pendingApprovalTitle": "Please wait for approval",
+  "pendingApprovalSubtitle": "Your request has been sent successfully. As soon as the teacher confirms your group access, learning materials will appear here.",
+  "rejectedAccessTitle": "Access was not approved",
+  "rejectedAccessSubtitle": "The teacher rejected this request. Please contact the school or try again later with another active group.",
+  "noGroupTitle": "No group linked yet",
+  "noGroupSubtitle": "Your account does not have an active group yet. Please contact the school administrator for a new join code.",
+  "cohortEndedTitle": "This course has ended",
+  "cohortEndedSubtitle": "Your previous group is no longer active. Contact the school to join a new course.",
+  "noActiveCohortTitle": "Group is unavailable right now",
+  "noActiveCohortSubtitle": "A group was found, but there is no active cohort available at the moment. Please check again later.",
+  "accessStatusErrorTitle": "Could not check access",
+  "accessStatusErrorSubtitle": "We couldn't verify your current learning status. Please try again in a moment.",
+  "groupInfoTitle": "Group details",
+  "groupNameLabel": "Group",
+  "groupLevelLabel": "Level",
+  "groupTeacherLabel": "Teacher",
+  "groupLessonTimeLabel": "Lesson time",
+  "groupNoteLabel": "Note",
+  "groupTimeUnknown": "Time not set",
+  "groupStudentsCount": "{current}/{max} students",
+  "@groupStudentsCount": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "openPendingStudents": "Open",
+  "noTeacherGroupsTitle": "No groups assigned yet",
+  "noTeacherGroupsSubtitle": "Teacher groups will appear here as soon as they are assigned in the system.",
+  "teacherGroupsErrorTitle": "Could not load groups",
+  "pendingStudentsTitle": "Pending students",
+  "groupStudentsSectionTitle": "Students in the group",
+  "noPendingStudentsTitle": "No pending requests",
+  "noPendingStudentsSubtitle": "New student requests for this group will appear here.",
+  "noGroupStudentsTitle": "No students in the group yet",
+  "noGroupStudentsSubtitle": "Approved students for this group will appear here.",
+  "requestedAtLabel": "Requested",
+  "approveStudent": "Approve",
+  "rejectStudent": "Reject",
+  "studentApproved": "Student approved",
+  "studentRejected": "Student rejected",
   "codeSentToEmail": "Code was sent to {email}",
   "@codeSentToEmail": {
     "placeholders": {

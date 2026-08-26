@@ -61,6 +61,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final newsState = ref.watch(mainNotifierProvider);
+    final roleAsync = ref.watch(userRoleProvider);
+    final role = roleAsync.valueOrNull?.trim().toUpperCase();
+    final isTeacher = role == 'TEACHER';
 
     return SafeArea(
       child: Scaffold(
@@ -144,9 +147,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
             const SizedBox(height: 20),
 
-            _DailyLearningSection(state: newsState),
-
-            const SizedBox(height: 20),
+            if (!isTeacher) ...[
+              _DailyLearningSection(state: newsState),
+              const SizedBox(height: 20),
+            ],
             // Шиммер пока грузятся новости
             if (newsState.status == NewsStatus.loading) ...[
               _SectionTitle(l10n.sectionNews),
@@ -275,7 +279,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
               const SizedBox(height: 20),
             ],
 
-            if (newsState.isRegistrationOpen == true) ...[
+            if (!isTeacher && newsState.isRegistrationOpen == true) ...[
               GestureDetector(
                 onTap: () => _openUrl('https://biskektomer.com/#'),
                 child: Container(

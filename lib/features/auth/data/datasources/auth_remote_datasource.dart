@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import '../model/auth_response_model.dart';
+import '../model/learning_status_model.dart';
 
 abstract class AuthRemoteDataSource {
   Future<AuthResponseModel> login({
@@ -15,9 +16,9 @@ abstract class AuthRemoteDataSource {
     required String groupCode,
   });
 
-  Future<void> resetPassword({
-    required String email
-  });
+  Future<LearningStatusModel> getLearningStatus();
+
+  Future<void> resetPassword({required String email});
 
   Future<void> resetPasswordConfirm({
     required String email,
@@ -25,9 +26,7 @@ abstract class AuthRemoteDataSource {
     required String password,
   });
 
-  Future<void> changePassword({
-    required String newPassword,
-  });
+  Future<void> changePassword({required String newPassword});
 }
 
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
@@ -42,10 +41,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }) async {
     final response = await dio.post(
       '/api/v1/auth/login/',
-      data: {
-        'email': email,
-        'password': password,
-      },
+      data: {'email': email, 'password': password},
     );
 
     return AuthResponseModel.fromJson(response.data);
@@ -74,28 +70,25 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
+  Future<LearningStatusModel> getLearningStatus() async {
+    final response = await dio.get('/api/v1/auth/me/learning-status/');
+    return LearningStatusModel.fromJson(response.data as Map<String, dynamic>);
+  }
+
+  @override
   Future<void> resetPassword({required String email}) async {
-    await dio.post(
-      '/api/v1/auth/password-reset/',
-      data: {
-        'email': email,
-      },
-    );
+    await dio.post('/api/v1/auth/password-reset/', data: {'email': email});
   }
 
   @override
   Future<void> resetPasswordConfirm({
     required String email,
     required String code,
-    required String password
+    required String password,
   }) async {
     await dio.post(
       '/api/v1/auth/password-reset/confirm/',
-      data: {
-        'email': email,
-        'code': code,
-        'new_password': password,
-      }
+      data: {'email': email, 'code': code, 'new_password': password},
     );
   }
 
@@ -103,9 +96,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<void> changePassword({required String newPassword}) async {
     await dio.post(
       '/api/v1/auth/password-change/',
-      data: {
-        'new_password': newPassword,
-      },
+      data: {'new_password': newPassword},
     );
   }
 }

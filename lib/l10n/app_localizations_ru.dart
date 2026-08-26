@@ -115,6 +115,9 @@ class AppLocalizationsRu extends AppLocalizations {
   String get tabDictionary => 'Словарь';
 
   @override
+  String get tabGroups => 'Группы';
+
+  @override
   String get tabDocs => 'Документы';
 
   @override
@@ -362,6 +365,119 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get rememberMe => 'Запомнить меня';
+
+  @override
+  String get loadingLabel => 'Загрузка...';
+
+  @override
+  String get checkAgain => 'Проверить снова';
+
+  @override
+  String get pendingApprovalTitle => 'Ожидайте подтверждения';
+
+  @override
+  String get pendingApprovalSubtitle => 'Ваша заявка успешно отправлена. Как только преподаватель подтвердит доступ к группе, материалы для обучения появятся здесь.';
+
+  @override
+  String get rejectedAccessTitle => 'Доступ пока не одобрен';
+
+  @override
+  String get rejectedAccessSubtitle => 'Преподаватель отклонил эту заявку. Свяжитесь со школой или попробуйте позже с другой активной группой.';
+
+  @override
+  String get noGroupTitle => 'Группа пока не подключена';
+
+  @override
+  String get noGroupSubtitle => 'У вашего аккаунта пока нет активной группы. Обратитесь к администратору школы, чтобы получить новый код подключения.';
+
+  @override
+  String get cohortEndedTitle => 'Этот курс завершен';
+
+  @override
+  String get cohortEndedSubtitle => 'Ваша предыдущая группа больше не активна. Свяжитесь со школой, чтобы записаться на новый курс.';
+
+  @override
+  String get noActiveCohortTitle => 'Группа сейчас недоступна';
+
+  @override
+  String get noActiveCohortSubtitle => 'Группа найдена, но активный поток сейчас недоступен. Попробуйте проверить статус позже.';
+
+  @override
+  String get accessStatusErrorTitle => 'Не удалось проверить доступ';
+
+  @override
+  String get accessStatusErrorSubtitle => 'Сейчас не получилось проверить ваш статус обучения. Попробуйте еще раз через минуту.';
+
+  @override
+  String get groupInfoTitle => 'Информация о группе';
+
+  @override
+  String get groupNameLabel => 'Группа';
+
+  @override
+  String get groupLevelLabel => 'Уровень';
+
+  @override
+  String get groupTeacherLabel => 'Преподаватель';
+
+  @override
+  String get groupLessonTimeLabel => 'Время';
+
+  @override
+  String get groupNoteLabel => 'Примечание';
+
+  @override
+  String get groupTimeUnknown => 'Время не указано';
+
+  @override
+  String groupStudentsCount(int current, int max) {
+    return '$current/$max студентов';
+  }
+
+  @override
+  String get openPendingStudents => 'Открыть';
+
+  @override
+  String get noTeacherGroupsTitle => 'Пока нет назначенных групп';
+
+  @override
+  String get noTeacherGroupsSubtitle => 'Группы преподавателя появятся здесь, как только их назначат в системе.';
+
+  @override
+  String get teacherGroupsErrorTitle => 'Не удалось загрузить группы';
+
+  @override
+  String get pendingStudentsTitle => 'Студенты на подтверждение';
+
+  @override
+  String get groupStudentsSectionTitle => 'Студенты в группе';
+
+  @override
+  String get noPendingStudentsTitle => 'Нет ожидающих заявок';
+
+  @override
+  String get noPendingStudentsSubtitle => 'Новые заявки студентов для этой группы появятся здесь.';
+
+  @override
+  String get noGroupStudentsTitle => 'В группе пока нет студентов';
+
+  @override
+  String get noGroupStudentsSubtitle => 'Подтвержденные студенты этой группы будут отображаться здесь.';
+
+  @override
+  String get requestedAtLabel => 'Отправлено';
+
+  @override
+  String get approveStudent => 'Подтвердить';
+
+  @override
+  String get rejectStudent => 'Отклонить';
+
+  @override
+  String get studentApproved => 'Студент подтвержден';
+
+  @override
+  String get studentRejected => 'Заявка отклонена';
 
   @override
   String codeSentToEmail(Object email) {

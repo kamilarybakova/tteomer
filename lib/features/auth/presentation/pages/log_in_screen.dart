@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tteomer/auth_gate.dart';
 import 'package:tteomer/features/auth/presentation/utils/auth_text_field.dart';
 import 'package:tteomer/features/auth/presentation/utils/field_label.dart';
 import 'package:tteomer/features/auth/presentation/pages/sign_up_screen.dart';
@@ -8,7 +9,6 @@ import '../../../../core/widgets/app_toast.dart';
 import '../../../../core/widgets/button_widget.dart';
 import '../../../../core/widgets/language_picker_sheet.dart';
 import '../../../../l10n/app_localizations.dart';
-import '../../../../main_navigation_screen.dart';
 import '../provider/auth_state.dart';
 import '../provider/providers.dart';
 import 'forgot_password_screen.dart';
@@ -61,10 +61,9 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
       await prefs.clearAll();
     }
 
-    ref.read(authNotifierProvider.notifier).login(
-      emailController.text.trim(),
-      passwordController.text.trim(),
-    );
+    ref
+        .read(authNotifierProvider.notifier)
+        .login(emailController.text.trim(), passwordController.text.trim());
   }
 
   @override
@@ -76,7 +75,7 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
 
   bool get _canSubmit =>
       emailController.text.trim().isNotEmpty &&
-          passwordController.text.trim().isNotEmpty;
+      passwordController.text.trim().isNotEmpty;
 
   @override
   Widget build(BuildContext context) {
@@ -89,9 +88,7 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
       if (next is AuthSuccess) {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(
-            builder: (_) => const MainNavigationScreen(),
-          ),
+          MaterialPageRoute(builder: (_) => const AuthGate()),
         );
       }
 
@@ -179,7 +176,10 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
                         const SizedBox(width: 8),
                         Text(
                           t.rememberMe,
-                          style: const TextStyle(color: Colors.grey, fontSize: 13),
+                          style: const TextStyle(
+                            color: Colors.grey,
+                            fontSize: 13,
+                          ),
                         ),
                       ],
                     ),
@@ -220,9 +220,7 @@ class _LogInScreenState extends ConsumerState<LogInScreen> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(
-                          builder: (_) => const SignUpScreen(),
-                        ),
+                        MaterialPageRoute(builder: (_) => const SignUpScreen()),
                       );
                     },
                     child: Text(

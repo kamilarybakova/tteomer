@@ -115,6 +115,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get tabDictionary => 'Dictionary';
 
   @override
+  String get tabGroups => 'Groups';
+
+  @override
   String get tabDocs => 'Documents';
 
   @override
@@ -362,6 +365,119 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get rememberMe => 'Remember me';
+
+  @override
+  String get loadingLabel => 'Loading...';
+
+  @override
+  String get checkAgain => 'Check again';
+
+  @override
+  String get pendingApprovalTitle => 'Please wait for approval';
+
+  @override
+  String get pendingApprovalSubtitle => 'Your request has been sent successfully. As soon as the teacher confirms your group access, learning materials will appear here.';
+
+  @override
+  String get rejectedAccessTitle => 'Access was not approved';
+
+  @override
+  String get rejectedAccessSubtitle => 'The teacher rejected this request. Please contact the school or try again later with another active group.';
+
+  @override
+  String get noGroupTitle => 'No group linked yet';
+
+  @override
+  String get noGroupSubtitle => 'Your account does not have an active group yet. Please contact the school administrator for a new join code.';
+
+  @override
+  String get cohortEndedTitle => 'This course has ended';
+
+  @override
+  String get cohortEndedSubtitle => 'Your previous group is no longer active. Contact the school to join a new course.';
+
+  @override
+  String get noActiveCohortTitle => 'Group is unavailable right now';
+
+  @override
+  String get noActiveCohortSubtitle => 'A group was found, but there is no active cohort available at the moment. Please check again later.';
+
+  @override
+  String get accessStatusErrorTitle => 'Could not check access';
+
+  @override
+  String get accessStatusErrorSubtitle => 'We couldn\'t verify your current learning status. Please try again in a moment.';
+
+  @override
+  String get groupInfoTitle => 'Group details';
+
+  @override
+  String get groupNameLabel => 'Group';
+
+  @override
+  String get groupLevelLabel => 'Level';
+
+  @override
+  String get groupTeacherLabel => 'Teacher';
+
+  @override
+  String get groupLessonTimeLabel => 'Lesson time';
+
+  @override
+  String get groupNoteLabel => 'Note';
+
+  @override
+  String get groupTimeUnknown => 'Time not set';
+
+  @override
+  String groupStudentsCount(int current, int max) {
+    return '$current/$max students';
+  }
+
+  @override
+  String get openPendingStudents => 'Open';
+
+  @override
+  String get noTeacherGroupsTitle => 'No groups assigned yet';
+
+  @override
+  String get noTeacherGroupsSubtitle => 'Teacher groups will appear here as soon as they are assigned in the system.';
+
+  @override
+  String get teacherGroupsErrorTitle => 'Could not load groups';
+
+  @override
+  String get pendingStudentsTitle => 'Pending students';
+
+  @override
+  String get groupStudentsSectionTitle => 'Students in the group';
+
+  @override
+  String get noPendingStudentsTitle => 'No pending requests';
+
+  @override
+  String get noPendingStudentsSubtitle => 'New student requests for this group will appear here.';
+
+  @override
+  String get noGroupStudentsTitle => 'No students in the group yet';
+
+  @override
+  String get noGroupStudentsSubtitle => 'Approved students for this group will appear here.';
+
+  @override
+  String get requestedAtLabel => 'Requested';
+
+  @override
+  String get approveStudent => 'Approve';
+
+  @override
+  String get rejectStudent => 'Reject';
+
+  @override
+  String get studentApproved => 'Student approved';
+
+  @override
+  String get studentRejected => 'Student rejected';
 
   @override
   String codeSentToEmail(Object email) {

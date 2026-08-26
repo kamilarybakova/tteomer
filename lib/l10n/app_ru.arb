@@ -44,6 +44,7 @@
   "searchHint": "Поиск слов",
   "tabHome": "Главная",
   "tabDictionary": "Словарь",
+  "tabGroups": "Группы",
   "tabDocs": "Документы",
   "firstName": "Имя",
   "enterName": "Введите ваше имя",
@@ -152,6 +153,53 @@
   "passwordResetSuccess": "Пароль был сброшен",
   "passwordChangeSuccess": "Пароль успешно изменен",
   "rememberMe": "Запомнить меня",
+  "loadingLabel": "Загрузка...",
+  "checkAgain": "Проверить снова",
+  "pendingApprovalTitle": "Ожидайте подтверждения",
+  "pendingApprovalSubtitle": "Ваша заявка успешно отправлена. Как только преподаватель подтвердит доступ к группе, материалы для обучения появятся здесь.",
+  "rejectedAccessTitle": "Доступ пока не одобрен",
+  "rejectedAccessSubtitle": "Преподаватель отклонил эту заявку. Свяжитесь со школой или попробуйте позже с другой активной группой.",
+  "noGroupTitle": "Группа пока не подключена",
+  "noGroupSubtitle": "У вашего аккаунта пока нет активной группы. Обратитесь к администратору школы, чтобы получить новый код подключения.",
+  "cohortEndedTitle": "Этот курс завершен",
+  "cohortEndedSubtitle": "Ваша предыдущая группа больше не активна. Свяжитесь со школой, чтобы записаться на новый курс.",
+  "noActiveCohortTitle": "Группа сейчас недоступна",
+  "noActiveCohortSubtitle": "Группа найдена, но активный поток сейчас недоступен. Попробуйте проверить статус позже.",
+  "accessStatusErrorTitle": "Не удалось проверить доступ",
+  "accessStatusErrorSubtitle": "Сейчас не получилось проверить ваш статус обучения. Попробуйте еще раз через минуту.",
+  "groupInfoTitle": "Информация о группе",
+  "groupNameLabel": "Группа",
+  "groupLevelLabel": "Уровень",
+  "groupTeacherLabel": "Преподаватель",
+  "groupLessonTimeLabel": "Время",
+  "groupNoteLabel": "Примечание",
+  "groupTimeUnknown": "Время не указано",
+  "groupStudentsCount": "{current}/{max} студентов",
+  "@groupStudentsCount": {
+    "placeholders": {
+      "current": {
+        "type": "int"
+      },
+      "max": {
+        "type": "int"
+      }
+    }
+  },
+  "openPendingStudents": "Открыть",
+  "noTeacherGroupsTitle": "Пока нет назначенных групп",
+  "noTeacherGroupsSubtitle": "Группы преподавателя появятся здесь, как только их назначат в системе.",
+  "teacherGroupsErrorTitle": "Не удалось загрузить группы",
+  "pendingStudentsTitle": "Студенты на подтверждение",
+  "groupStudentsSectionTitle": "Студенты в группе",
+  "noPendingStudentsTitle": "Нет ожидающих заявок",
+  "noPendingStudentsSubtitle": "Новые заявки студентов для этой группы появятся здесь.",
+  "noGroupStudentsTitle": "В группе пока нет студентов",
+  "noGroupStudentsSubtitle": "Подтвержденные студенты этой группы будут отображаться здесь.",
+  "requestedAtLabel": "Отправлено",
+  "approveStudent": "Подтвердить",
+  "rejectStudent": "Отклонить",
+  "studentApproved": "Студент подтвержден",
+  "studentRejected": "Заявка отклонена",
   "codeSentToEmail": "Код был отправлен на почту {email}",
   "@codeSentToEmail": {
     "placeholders": {
