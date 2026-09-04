@@ -3,11 +3,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tteomer/core/widgets/icon_data.dart';
 
 import '../../../auth/presentation/provider/providers.dart';
+import '../../../../l10n/app_localizations.dart';
 import '../pages/document_webview_page.dart';
 import '../provider/materials_state.dart';
 
 class DocumentsList extends ConsumerStatefulWidget {
-  final int? selectedCategory;
+  final String? selectedCategory;
   final String? selectedLevel;
   const DocumentsList({
     super.key,
@@ -32,11 +33,13 @@ class _DocumentsListState extends ConsumerState<DocumentsList> {
     if (widget.selectedLevel != null) return;
     final pos = _scrollController.position;
     if (pos.pixels >= pos.maxScrollExtent - 200) {
-      ref.read(materialsNotifierProvider.notifier).load(
-        level: widget.selectedLevel,
-        categoryId: widget.selectedCategory,
-        reset: false,
-      );
+      ref
+          .read(materialsNotifierProvider.notifier)
+          .load(
+            level: widget.selectedLevel,
+            categoryId: widget.selectedCategory,
+            reset: false,
+          );
     }
   }
 
@@ -54,44 +57,67 @@ class _DocumentsListState extends ConsumerState<DocumentsList> {
       MaterialsLoading() => const Center(child: CircularProgressIndicator()),
       MaterialsError(:final message) => _Error(message),
       MaterialsLoaded(:final materials, :final hasMore, :final isLoading) =>
-          Stack(
-            children: [
-              _buildList(materials, hasMore, ref),
-              if (isLoading)
-                const Positioned(
-                  top: 0, left: 0, right: 0,
-                  child: LinearProgressIndicator(),
-                ),
-            ],
-          ),
+        Stack(
+          children: [
+            _buildList(materials, hasMore, ref),
+            if (isLoading)
+              const Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                child: LinearProgressIndicator(),
+              ),
+          ],
+        ),
       _ => const SizedBox(),
     };
   }
 
   Widget _buildList(List materials, bool hasMore, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
     final filteredByLevel = widget.selectedLevel == null
         ? materials
         : materials
-            .where((m) => (m.level as String).toUpperCase() == widget.selectedLevel)
-            .toList();
+              .where(
+                (m) =>
+                    (m.level as String).toUpperCase() == widget.selectedLevel,
+              )
+              .toList();
     final filtered = widget.selectedCategory == null
         ? filteredByLevel
-        : filteredByLevel.where((m) => m.category?.id == widget.selectedCategory).toList();
+        : filteredByLevel
+              .where((m) => m.category?.id == widget.selectedCategory)
+              .toList();
 
     final pinned = filtered.where((e) => e.isPinned).toList();
     final normal = filtered.where((e) => !e.isPinned).toList();
+    final isEmpty = pinned.isEmpty && normal.isEmpty;
 
     return RefreshIndicator(
       onRefresh: () async {
-        ref.read(materialsNotifierProvider.notifier).load(
-          reset: true,
-        );
+        await ref
+            .read(materialsNotifierProvider.notifier)
+            .load(
+              level: widget.selectedLevel,
+              categoryId: widget.selectedCategory,
+              reset: true,
+            );
       },
       child: ListView(
         controller: _scrollController,
-        physics: const BouncingScrollPhysics(),
+        physics: const AlwaysScrollableScrollPhysics(
+          parent: BouncingScrollPhysics(),
+        ),
         padding: const EdgeInsets.all(16),
         children: [
+          if (isEmpty)
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.6,
+              child: _EmptyMaterialsState(
+                title: l10n.noGroupMaterialsTitle,
+                subtitle: l10n.noGroupMaterialsSubtitle,
+              ),
+            ),
           if (pinned.isNotEmpty) ...[
             const _SectionTitle('📌 Pinned'),
             const SizedBox(height: 8),
@@ -136,10 +162,8 @@ class _MaterialCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (_) => DocumentWebViewPage(
-              url: material.file,
-              title: material.title,
-            ),
+            builder: (_) =>
+                DocumentWebViewPage(url: material.file, title: material.title),
           ),
         );
       },
@@ -151,7 +175,7 @@ class _MaterialCard extends StatelessWidget {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.05),
+              color: Colors.black.withValues(alpha: 0.05),
               blurRadius: 16,
               offset: const Offset(0, 6),
             ),
@@ -163,13 +187,10 @@ class _MaterialCard extends StatelessWidget {
               width: 48,
               height: 48,
               decoration: BoxDecoration(
-                color: color.withOpacity(0.12),
+                color: color.withValues(alpha: 0.12),
                 shape: BoxShape.circle,
               ),
-              child: Icon(
-                getIcon(material.file),
-                color: color,
-              ),
+              child: Icon(getIcon(material.file), color: color),
             ),
 
             const SizedBox(width: 12),
@@ -211,10 +232,7 @@ class _SectionTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: const TextStyle(
-        fontSize: 18,
-        fontWeight: FontWeight.w700,
-      ),
+      style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
     );
   }
 }
@@ -227,9 +245,48 @@ class _Error extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(
-        message,
-        style: const TextStyle(color: Colors.red),
+      child: Text(message, style: const TextStyle(color: Colors.red)),
+    );
+  }
+}
+
+class _EmptyMaterialsState extends StatelessWidget {
+  final String title;
+  final String subtitle;
+
+  const _EmptyMaterialsState({required this.title, required this.subtitle});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Icon(
+              Icons.folder_open_rounded,
+              size: 56,
+              color: Color(0xFF4C63D2),
+            ),
+            const SizedBox(height: 16),
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w800),
+            ),
+            const SizedBox(height: 10),
+            Text(
+              subtitle,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 15,
+                height: 1.45,
+                color: Color(0xFF6B7280),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

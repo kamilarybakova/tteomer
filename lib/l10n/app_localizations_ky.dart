@@ -447,10 +447,85 @@ class AppLocalizationsKy extends AppLocalizations {
   String get teacherGroupsErrorTitle => 'Топторду жүктөө мүмкүн болгон жок';
 
   @override
+  String get teacherDocumentsErrorTitle => 'Материалдарды жүктөө мүмкүн болгон жок';
+
+  @override
+  String get noTeacherDocumentsTitle => 'Азырынча материалдар жок';
+
+  @override
+  String get noTeacherDocumentsSubtitle => 'Тобуңуз үчүн биринчи документти жүктөңүз, ал ушул жерде көрүнөт.';
+
+  @override
+  String get teacherFoldersTitle => 'Папкалар';
+
+  @override
+  String get addedMaterialsTitle => 'Кошулган материалдар';
+
+  @override
+  String get addMaterialButton => 'Материал кошуу';
+
+  @override
+  String get editMaterialButton => 'Материалды өзгөртүү';
+
+  @override
+  String get uploadMaterialButton => 'Материалды жүктөө';
+
+  @override
+  String get materialUploadedSuccess => 'Материал жүктөлдү';
+
+  @override
+  String get materialUpdatedSuccess => 'Материал ийгиликтүү жаңыртылды';
+
+  @override
+  String get materialDeletedSuccess => 'Материал ийгиликтүү өчүрүлдү';
+
+  @override
+  String get materialTitleLabel => 'Аталышы';
+
+  @override
+  String get materialTitleValidation => 'Аталышын киргизиңиз';
+
+  @override
+  String get materialDescriptionLabel => 'Сүрөттөмө';
+
+  @override
+  String get materialFileLabel => 'Файл';
+
+  @override
+  String get currentFileLabel => 'Учурдагы файл';
+
+  @override
+  String get selectFileButton => 'Файл тандоо';
+
+  @override
+  String get replaceFileButton => 'Файлды алмаштыруу';
+
+  @override
+  String get selectFileValidation => 'Файл тандаңыз';
+
+  @override
+  String get selectGroupLabel => 'Топ';
+
+  @override
+  String get selectGroupValidation => 'Топ тандаңыз';
+
+  @override
+  String get visibleToStudentsLabel => 'Студенттерге көрүнөт';
+
+  @override
+  String get hiddenFromStudentsLabel => 'Жашыруун';
+
+  @override
+  String get visibleToStudentsHint => 'Тандалган топтун студенттери бул документти көрө алышат.';
+
+  @override
   String get pendingStudentsTitle => 'Ырастоону күтүп жаткан студенттер';
 
   @override
   String get groupStudentsSectionTitle => 'Топтогу студенттер';
+
+  @override
+  String get groupMaterialsTitle => 'Материалдар';
 
   @override
   String get noPendingStudentsTitle => 'Күтүп жаткан өтүнмөлөр жок';
@@ -463,6 +538,18 @@ class AppLocalizationsKy extends AppLocalizations {
 
   @override
   String get noGroupStudentsSubtitle => 'Бул топтун ырасталган студенттери ушул жерде көрүнөт.';
+
+  @override
+  String get noGroupMaterialsTitle => 'Бул топто азырынча материалдар жок';
+
+  @override
+  String get noGroupMaterialsSubtitle => 'Бул топ үчүн биринчи материалды жүктөңүз, ал ушул жерде көрүнөт.';
+
+  @override
+  String get deleteMaterialTitle => 'Материалды өчүрөсүзбү?';
+
+  @override
+  String get deleteMaterialMessage => 'Бул материал толугу менен өчүрүлөт.';
 
   @override
   String get requestedAtLabel => 'Жөнөтүлгөн убакыт';

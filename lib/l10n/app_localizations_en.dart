@@ -447,10 +447,85 @@ class AppLocalizationsEn extends AppLocalizations {
   String get teacherGroupsErrorTitle => 'Could not load groups';
 
   @override
+  String get teacherDocumentsErrorTitle => 'Could not load materials';
+
+  @override
+  String get noTeacherDocumentsTitle => 'No materials yet';
+
+  @override
+  String get noTeacherDocumentsSubtitle => 'Upload the first document for your group and it will appear here.';
+
+  @override
+  String get teacherFoldersTitle => 'Folders';
+
+  @override
+  String get addedMaterialsTitle => 'Added materials';
+
+  @override
+  String get addMaterialButton => 'Add material';
+
+  @override
+  String get editMaterialButton => 'Edit material';
+
+  @override
+  String get uploadMaterialButton => 'Upload material';
+
+  @override
+  String get materialUploadedSuccess => 'Material uploaded';
+
+  @override
+  String get materialUpdatedSuccess => 'Material updated successfully';
+
+  @override
+  String get materialDeletedSuccess => 'Material deleted successfully';
+
+  @override
+  String get materialTitleLabel => 'Title';
+
+  @override
+  String get materialTitleValidation => 'Enter a title';
+
+  @override
+  String get materialDescriptionLabel => 'Description';
+
+  @override
+  String get materialFileLabel => 'File';
+
+  @override
+  String get currentFileLabel => 'Current file';
+
+  @override
+  String get selectFileButton => 'Select file';
+
+  @override
+  String get replaceFileButton => 'Replace file';
+
+  @override
+  String get selectFileValidation => 'Select a file';
+
+  @override
+  String get selectGroupLabel => 'Group';
+
+  @override
+  String get selectGroupValidation => 'Select a group';
+
+  @override
+  String get visibleToStudentsLabel => 'Visible to students';
+
+  @override
+  String get hiddenFromStudentsLabel => 'Hidden';
+
+  @override
+  String get visibleToStudentsHint => 'Students in the selected group will be able to see this document.';
+
+  @override
   String get pendingStudentsTitle => 'Pending students';
 
   @override
   String get groupStudentsSectionTitle => 'Students in the group';
+
+  @override
+  String get groupMaterialsTitle => 'Materials';
 
   @override
   String get noPendingStudentsTitle => 'No pending requests';
@@ -463,6 +538,18 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get noGroupStudentsSubtitle => 'Approved students for this group will appear here.';
+
+  @override
+  String get noGroupMaterialsTitle => 'No materials in this group yet';
+
+  @override
+  String get noGroupMaterialsSubtitle => 'Upload the first material for this group and it will appear here.';
+
+  @override
+  String get deleteMaterialTitle => 'Delete material?';
+
+  @override
+  String get deleteMaterialMessage => 'This material will be permanently removed.';
 
   @override
   String get requestedAtLabel => 'Requested';

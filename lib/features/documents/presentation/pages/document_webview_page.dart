@@ -110,19 +110,14 @@ class _DocumentWebViewPageState extends State<DocumentWebViewPage> {
         appBar: AppBar(
           title: Text(
             widget.title,
-            style: const TextStyle(
-              fontWeight: FontWeight.w600,
-            ),
+            style: const TextStyle(fontWeight: FontWeight.w600),
           ),
         ),
         body: Stack(
           children: [
             WebViewWidget(controller: controller),
 
-            if (isLoading)
-              const Center(
-                child: CircularProgressIndicator(),
-              ),
+            if (isLoading) const Center(child: CircularProgressIndicator()),
           ],
         ),
       ),

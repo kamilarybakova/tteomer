@@ -447,10 +447,85 @@ class AppLocalizationsTr extends AppLocalizations {
   String get teacherGroupsErrorTitle => 'Gruplar yüklenemedi';
 
   @override
+  String get teacherDocumentsErrorTitle => 'Materyaller yüklenemedi';
+
+  @override
+  String get noTeacherDocumentsTitle => 'Henüz materyal yok';
+
+  @override
+  String get noTeacherDocumentsSubtitle => 'Grubunuz için ilk belgeyi yükleyin, burada görünecektir.';
+
+  @override
+  String get teacherFoldersTitle => 'Klasörler';
+
+  @override
+  String get addedMaterialsTitle => 'Eklenen materyaller';
+
+  @override
+  String get addMaterialButton => 'Materyal ekle';
+
+  @override
+  String get editMaterialButton => 'Materyali düzenle';
+
+  @override
+  String get uploadMaterialButton => 'Materyali yükle';
+
+  @override
+  String get materialUploadedSuccess => 'Materyal yüklendi';
+
+  @override
+  String get materialUpdatedSuccess => 'Materyal başarıyla güncellendi';
+
+  @override
+  String get materialDeletedSuccess => 'Materyal başarıyla silindi';
+
+  @override
+  String get materialTitleLabel => 'Başlık';
+
+  @override
+  String get materialTitleValidation => 'Bir başlık girin';
+
+  @override
+  String get materialDescriptionLabel => 'Açıklama';
+
+  @override
+  String get materialFileLabel => 'Dosya';
+
+  @override
+  String get currentFileLabel => 'Mevcut dosya';
+
+  @override
+  String get selectFileButton => 'Dosya seç';
+
+  @override
+  String get replaceFileButton => 'Dosyayı değiştir';
+
+  @override
+  String get selectFileValidation => 'Bir dosya seçin';
+
+  @override
+  String get selectGroupLabel => 'Grup';
+
+  @override
+  String get selectGroupValidation => 'Bir grup seçin';
+
+  @override
+  String get visibleToStudentsLabel => 'Öğrencilere görünür';
+
+  @override
+  String get hiddenFromStudentsLabel => 'Gizli';
+
+  @override
+  String get visibleToStudentsHint => 'Seçilen grubun öğrencileri bu belgeyi görebilir.';
+
+  @override
   String get pendingStudentsTitle => 'Onay bekleyen öğrenciler';
 
   @override
   String get groupStudentsSectionTitle => 'Gruptaki öğrenciler';
+
+  @override
+  String get groupMaterialsTitle => 'Materyaller';
 
   @override
   String get noPendingStudentsTitle => 'Bekleyen istek yok';
@@ -463,6 +538,18 @@ class AppLocalizationsTr extends AppLocalizations {
 
   @override
   String get noGroupStudentsSubtitle => 'Bu grubun onaylanan öğrencileri burada görünecek.';
+
+  @override
+  String get noGroupMaterialsTitle => 'Bu grupta henüz materyal yok';
+
+  @override
+  String get noGroupMaterialsSubtitle => 'Bu grup için ilk materyali yükleyin, burada görünecektir.';
+
+  @override
+  String get deleteMaterialTitle => 'Materyal silinsin mi?';
+
+  @override
+  String get deleteMaterialMessage => 'Bu materyal kalıcı olarak silinecek.';
 
   @override
   String get requestedAtLabel => 'Talep zamanı';

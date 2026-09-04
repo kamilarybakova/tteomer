@@ -1,7 +1,9 @@
 sealed class MaterialsState {}
 
 class MaterialsInitial extends MaterialsState {}
+
 class MaterialsLoading extends MaterialsState {}
+
 class MaterialsError extends MaterialsState {
   final String message;
   MaterialsError(this.message);
@@ -15,12 +17,12 @@ class MaterialsLoaded extends MaterialsState {
   final bool isLoading;
 
   MaterialsLoaded(
-      this.materials,
-      this.categories, {
-        this.hasMore = false,
-        this.currentPage = 1,
-        this.isLoading = false,
-      });
+    this.materials,
+    this.categories, {
+    this.hasMore = false,
+    this.currentPage = 1,
+    this.isLoading = false,
+  });
 
   MaterialsLoaded copyWith({
     List? materials,

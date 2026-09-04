@@ -447,10 +447,85 @@ class AppLocalizationsRu extends AppLocalizations {
   String get teacherGroupsErrorTitle => 'Не удалось загрузить группы';
 
   @override
+  String get teacherDocumentsErrorTitle => 'Не удалось загрузить материалы';
+
+  @override
+  String get noTeacherDocumentsTitle => 'Материалов пока нет';
+
+  @override
+  String get noTeacherDocumentsSubtitle => 'Загрузите первый документ для своей группы, и он появится здесь.';
+
+  @override
+  String get teacherFoldersTitle => 'Папки';
+
+  @override
+  String get addedMaterialsTitle => 'Добавленные материалы';
+
+  @override
+  String get addMaterialButton => 'Добавить материал';
+
+  @override
+  String get editMaterialButton => 'Изменить материал';
+
+  @override
+  String get uploadMaterialButton => 'Загрузить материал';
+
+  @override
+  String get materialUploadedSuccess => 'Материал загружен';
+
+  @override
+  String get materialUpdatedSuccess => 'Материал успешно обновлен';
+
+  @override
+  String get materialDeletedSuccess => 'Материал успешно удален';
+
+  @override
+  String get materialTitleLabel => 'Название';
+
+  @override
+  String get materialTitleValidation => 'Введите название';
+
+  @override
+  String get materialDescriptionLabel => 'Описание';
+
+  @override
+  String get materialFileLabel => 'Файл';
+
+  @override
+  String get currentFileLabel => 'Текущий файл';
+
+  @override
+  String get selectFileButton => 'Выбрать файл';
+
+  @override
+  String get replaceFileButton => 'Заменить файл';
+
+  @override
+  String get selectFileValidation => 'Выберите файл';
+
+  @override
+  String get selectGroupLabel => 'Группа';
+
+  @override
+  String get selectGroupValidation => 'Выберите группу';
+
+  @override
+  String get visibleToStudentsLabel => 'Видно студентам';
+
+  @override
+  String get hiddenFromStudentsLabel => 'Скрыто';
+
+  @override
+  String get visibleToStudentsHint => 'Студенты выбранной группы смогут видеть этот документ.';
+
+  @override
   String get pendingStudentsTitle => 'Студенты на подтверждение';
 
   @override
   String get groupStudentsSectionTitle => 'Студенты в группе';
+
+  @override
+  String get groupMaterialsTitle => 'Материалы';
 
   @override
   String get noPendingStudentsTitle => 'Нет ожидающих заявок';
@@ -463,6 +538,18 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get noGroupStudentsSubtitle => 'Подтвержденные студенты этой группы будут отображаться здесь.';
+
+  @override
+  String get noGroupMaterialsTitle => 'В этой группе пока нет материалов';
+
+  @override
+  String get noGroupMaterialsSubtitle => 'Загрузите первый материал для этой группы, и он появится здесь.';
+
+  @override
+  String get deleteMaterialTitle => 'Удалить материал?';
+
+  @override
+  String get deleteMaterialMessage => 'Этот материал будет удален без возможности восстановления.';
 
   @override
   String get requestedAtLabel => 'Отправлено';

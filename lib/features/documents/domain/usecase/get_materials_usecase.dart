@@ -7,7 +7,7 @@ class GetMaterialsUseCase {
 
   Future<({List<MaterialModel> materials, bool hasMore})> call({
     String? level,
-    int? categoryId,
+    String? categoryId,
     int page = 1,
     int pageSize = 10,
   }) {

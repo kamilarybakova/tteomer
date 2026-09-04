@@ -15,9 +15,7 @@ class LevelCategoriesPage extends ConsumerWidget {
     final state = ref.watch(materialsNotifierProvider);
 
     if (state is! MaterialsLoaded) {
-      return const Scaffold(
-        body: Center(child: CircularProgressIndicator()),
-      );
+      return const Scaffold(body: Center(child: CircularProgressIndicator()));
     }
 
     final categories = state.categories;
@@ -91,7 +89,7 @@ class _CategoryItem extends StatelessWidget {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: color.withOpacity(0.12),
+              color: color.withValues(alpha: 0.12),
               blurRadius: 16,
               offset: const Offset(0, 6),
             ),
@@ -106,7 +104,7 @@ class _CategoryItem extends StatelessWidget {
                 width: 80,
                 height: 80,
                 decoration: BoxDecoration(
-                  color: color.withOpacity(0.08),
+                  color: color.withValues(alpha: 0.08),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -121,7 +119,7 @@ class _CategoryItem extends StatelessWidget {
                     width: 44,
                     height: 44,
                     decoration: BoxDecoration(
-                      color: color.withOpacity(0.12),
+                      color: color.withValues(alpha: 0.12),
                       borderRadius: BorderRadius.circular(14),
                     ),
                     child: Icon(Icons.folder_rounded, color: color, size: 24),

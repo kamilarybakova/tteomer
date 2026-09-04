@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../auth/presentation/provider/providers.dart';
 import '../widgets/documents_list.dart';
 
 class CategoryDocumentsPage extends ConsumerStatefulWidget {
-  final int? categoryId;
+  final String? categoryId;
   final String categoryName;
   final String? level;
 
@@ -20,8 +21,18 @@ class CategoryDocumentsPage extends ConsumerStatefulWidget {
       _CategoryDocumentsPageState();
 }
 
-class _CategoryDocumentsPageState
-    extends ConsumerState<CategoryDocumentsPage> {
+class _CategoryDocumentsPageState extends ConsumerState<CategoryDocumentsPage> {
+  @override
+  void initState() {
+    super.initState();
+    Future.microtask(() {
+      ref.read(materialsNotifierProvider.notifier).load(
+        level: widget.level,
+        categoryId: widget.categoryId,
+      );
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

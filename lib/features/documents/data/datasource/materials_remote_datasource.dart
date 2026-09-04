@@ -6,7 +6,7 @@ import '../model/material_model.dart';
 abstract class MaterialsRemoteDataSource {
   Future<({List<MaterialModel> materials, bool hasMore})> getMaterials({
     String? level,
-    int? categoryId,
+    String? categoryId,
     int page = 1,
     int pageSize = 10,
   });
@@ -21,15 +21,15 @@ class MaterialsRemoteDataSourceImpl implements MaterialsRemoteDataSource {
   @override
   Future<({List<MaterialModel> materials, bool hasMore})> getMaterials({
     String? level,
-    int? categoryId,
+    String? categoryId,
     int page = 1,
     int pageSize = 10,
   }) async {
     final res = await dio.get(
       '/api/v1/materials/',
       queryParameters: {
-        if (level != null) 'level': level,
-        if (categoryId != null) 'category': categoryId,
+        'level': level,
+        'category': categoryId,
         'page': page,
         'page_size': pageSize,
       },
@@ -55,9 +55,9 @@ class MaterialsRemoteDataSourceImpl implements MaterialsRemoteDataSource {
 
         final categories = group['categories'];
         if (categories is List) {
-          return categories
-              .whereType<Map>()
-              .expand((cat) => (cat['materials'] as List?) ?? const []);
+          return categories.whereType<Map>().expand(
+            (cat) => (cat['materials'] as List?) ?? const [],
+          );
         }
 
         return const [];
@@ -69,8 +69,8 @@ class MaterialsRemoteDataSourceImpl implements MaterialsRemoteDataSource {
     }
 
     return (
-    materials: results.map((e) => MaterialModel.fromJson(e)).toList(),
-    hasMore: hasMore,
+      materials: results.map((e) => MaterialModel.fromJson(e)).toList(),
+      hasMore: hasMore,
     );
   }
 

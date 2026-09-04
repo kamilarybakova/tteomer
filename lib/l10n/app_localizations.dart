@@ -927,6 +927,150 @@ abstract class AppLocalizations {
   /// **'Could not load groups'**
   String get teacherGroupsErrorTitle;
 
+  /// No description provided for @teacherDocumentsErrorTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load materials'**
+  String get teacherDocumentsErrorTitle;
+
+  /// No description provided for @noTeacherDocumentsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No materials yet'**
+  String get noTeacherDocumentsTitle;
+
+  /// No description provided for @noTeacherDocumentsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload the first document for your group and it will appear here.'**
+  String get noTeacherDocumentsSubtitle;
+
+  /// No description provided for @teacherFoldersTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Folders'**
+  String get teacherFoldersTitle;
+
+  /// No description provided for @addedMaterialsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Added materials'**
+  String get addedMaterialsTitle;
+
+  /// No description provided for @addMaterialButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Add material'**
+  String get addMaterialButton;
+
+  /// No description provided for @editMaterialButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit material'**
+  String get editMaterialButton;
+
+  /// No description provided for @uploadMaterialButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload material'**
+  String get uploadMaterialButton;
+
+  /// No description provided for @materialUploadedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Material uploaded'**
+  String get materialUploadedSuccess;
+
+  /// No description provided for @materialUpdatedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Material updated successfully'**
+  String get materialUpdatedSuccess;
+
+  /// No description provided for @materialDeletedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Material deleted successfully'**
+  String get materialDeletedSuccess;
+
+  /// No description provided for @materialTitleLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Title'**
+  String get materialTitleLabel;
+
+  /// No description provided for @materialTitleValidation.
+  ///
+  /// In en, this message translates to:
+  /// **'Enter a title'**
+  String get materialTitleValidation;
+
+  /// No description provided for @materialDescriptionLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Description'**
+  String get materialDescriptionLabel;
+
+  /// No description provided for @materialFileLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'File'**
+  String get materialFileLabel;
+
+  /// No description provided for @currentFileLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Current file'**
+  String get currentFileLabel;
+
+  /// No description provided for @selectFileButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Select file'**
+  String get selectFileButton;
+
+  /// No description provided for @replaceFileButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Replace file'**
+  String get replaceFileButton;
+
+  /// No description provided for @selectFileValidation.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a file'**
+  String get selectFileValidation;
+
+  /// No description provided for @selectGroupLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Group'**
+  String get selectGroupLabel;
+
+  /// No description provided for @selectGroupValidation.
+  ///
+  /// In en, this message translates to:
+  /// **'Select a group'**
+  String get selectGroupValidation;
+
+  /// No description provided for @visibleToStudentsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Visible to students'**
+  String get visibleToStudentsLabel;
+
+  /// No description provided for @hiddenFromStudentsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Hidden'**
+  String get hiddenFromStudentsLabel;
+
+  /// No description provided for @visibleToStudentsHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Students in the selected group will be able to see this document.'**
+  String get visibleToStudentsHint;
+
   /// No description provided for @pendingStudentsTitle.
   ///
   /// In en, this message translates to:
@@ -938,6 +1082,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Students in the group'**
   String get groupStudentsSectionTitle;
+
+  /// No description provided for @groupMaterialsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Materials'**
+  String get groupMaterialsTitle;
 
   /// No description provided for @noPendingStudentsTitle.
   ///
@@ -962,6 +1112,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Approved students for this group will appear here.'**
   String get noGroupStudentsSubtitle;
+
+  /// No description provided for @noGroupMaterialsTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No materials in this group yet'**
+  String get noGroupMaterialsTitle;
+
+  /// No description provided for @noGroupMaterialsSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Upload the first material for this group and it will appear here.'**
+  String get noGroupMaterialsSubtitle;
+
+  /// No description provided for @deleteMaterialTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete material?'**
+  String get deleteMaterialTitle;
+
+  /// No description provided for @deleteMaterialMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This material will be permanently removed.'**
+  String get deleteMaterialMessage;
 
   /// No description provided for @requestedAtLabel.
   ///

@@ -10,18 +10,18 @@ class MaterialsNotifier extends StateNotifier<MaterialsState> {
 
   static const _pageSize = 10;
 
-  MaterialsNotifier({
-    required this.getMaterials,
-    required this.getCategories,
-  }) : super(MaterialsInitial());
+  MaterialsNotifier({required this.getMaterials, required this.getCategories})
+    : super(MaterialsInitial());
 
   Future<void> load({
     String? level,
-    int? categoryId,
+    String? categoryId,
     bool reset = true,
   }) async {
     final current = state;
-    final page = reset ? 1 : (current is MaterialsLoaded ? current.currentPage + 1 : 1);
+    final page = reset
+        ? 1
+        : (current is MaterialsLoaded ? current.currentPage + 1 : 1);
 
     if (!reset && current is MaterialsLoaded && !current.hasMore) return;
     if (!reset && current is MaterialsLoaded && current.isLoading) return;
@@ -30,7 +30,12 @@ class MaterialsNotifier extends StateNotifier<MaterialsState> {
       if (reset) {
         state = MaterialsLoading();
 
-        final result = await getMaterials(level: level, categoryId: categoryId, page: 1, pageSize: _pageSize);
+        final result = await getMaterials(
+          level: level,
+          categoryId: categoryId,
+          page: 1,
+          pageSize: _pageSize,
+        );
         final categories = await getCategories();
 
         state = MaterialsLoaded(
@@ -42,7 +47,12 @@ class MaterialsNotifier extends StateNotifier<MaterialsState> {
         );
       } else if (current is MaterialsLoaded) {
         state = current.copyWith(isLoading: true);
-        final result = await getMaterials(level: level, categoryId: categoryId, page: page, pageSize: _pageSize);
+        final result = await getMaterials(
+          level: level,
+          categoryId: categoryId,
+          page: page,
+          pageSize: _pageSize,
+        );
         state = current.copyWith(
           materials: [...current.materials, ...result.materials],
           hasMore: result.hasMore,

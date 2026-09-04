@@ -8,7 +8,10 @@ import '../pages/level_categories_page.dart';
 import '../provider/materials_state.dart';
 
 class CategoriesSection extends ConsumerWidget {
-  const CategoriesSection({super.key});
+  final bool shrinkWrap;
+  final ScrollPhysics? physics;
+
+  const CategoriesSection({super.key, this.shrinkWrap = false, this.physics});
 
   static const _levelOrder = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2'];
 
@@ -33,6 +36,8 @@ class CategoriesSection extends ConsumerWidget {
       final visibleLevels = role == 'TEACHER' ? _levelOrder : orderedLevels;
 
       return GridView.builder(
+        shrinkWrap: shrinkWrap,
+        physics: physics,
         padding: const EdgeInsets.all(16),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
@@ -48,10 +53,10 @@ class CategoriesSection extends ConsumerWidget {
             icon: Icons.folder_copy_rounded,
             onTap: () async {
               await Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (_) => LevelCategoriesPage(level: level),
-              ),
+                context,
+                MaterialPageRoute(
+                  builder: (_) => LevelCategoriesPage(level: level),
+                ),
               );
             },
           );
@@ -62,6 +67,8 @@ class CategoriesSection extends ConsumerWidget {
     final categories = state.categories;
 
     return GridView.builder(
+      shrinkWrap: shrinkWrap,
+      physics: physics,
       padding: const EdgeInsets.all(16),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 2,
@@ -130,7 +137,7 @@ class _CategoryCard extends StatelessWidget {
           color: Colors.white,
           boxShadow: [
             BoxShadow(
-              color: color.withOpacity(0.12),
+              color: color.withValues(alpha: 0.12),
               blurRadius: 16,
               offset: const Offset(0, 6),
             ),
@@ -145,7 +152,7 @@ class _CategoryCard extends StatelessWidget {
                 width: 80,
                 height: 80,
                 decoration: BoxDecoration(
-                  color: color.withOpacity(0.08),
+                  color: color.withValues(alpha: 0.08),
                   shape: BoxShape.circle,
                 ),
               ),
@@ -160,7 +167,7 @@ class _CategoryCard extends StatelessWidget {
                     width: 44,
                     height: 44,
                     decoration: BoxDecoration(
-                      color: color.withOpacity(0.12),
+                      color: color.withValues(alpha: 0.12),
                       borderRadius: BorderRadius.circular(14),
                     ),
                     child: Icon(icon, color: color, size: 24),

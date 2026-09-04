@@ -10,7 +10,7 @@ class MaterialsRepositoryImpl implements MaterialsRepository {
   @override
   Future<({List<MaterialModel> materials, bool hasMore})> getMaterials({
     String? level,
-    int? categoryId,
+    String? categoryId,
     int page = 1,
     int pageSize = 10,
   }) {
