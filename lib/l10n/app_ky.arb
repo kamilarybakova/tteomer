@@ -92,6 +92,13 @@
   "dailyPracticePreparingSubtitle": "Деңгээлиңизге жараша сөз жана сүйлөм тандап жатабыз.",
   "dailyPracticeUnavailable": "Бүгүнкү машыгуу убактылуу жеткиликсиз",
   "dailyPracticeUnavailableSubtitle": "Бир аздан кийин бул экранды кайра ачып көрүңүз.",
+  "studentHomeworkBannerTitle": "Үй тапшырма",
+  "studentHomeworkDueDate": "{date} чейин",
+  "@studentHomeworkDueDate": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "levelBadge": "{level} деңгээли",
   "@levelBadge": {
     "placeholders": {
@@ -210,7 +217,36 @@
   "visibleToStudentsHint": "Тандалган топтун студенттери бул документти көрө алышат.",
   "pendingStudentsTitle": "Ырастоону күтүп жаткан студенттер",
   "groupStudentsSectionTitle": "Топтогу студенттер",
+  "groupHomeworkTitle": "Үй тапшырма",
   "groupMaterialsTitle": "Материалдар",
+  "addHomeworkButton": "Үй тапшырма кошуу",
+  "createHomeworkButton": "Үй тапшырма берүү",
+  "homeworkCreatedSuccess": "Үй тапшырма ийгиликтүү берилди",
+  "editHomeworkButton": "Үй тапшырманы өзгөртүү",
+  "homeworkUpdatedSuccess": "Үй тапшырма ийгиликтүү жаңыртылды",
+  "homeworkDeletedSuccess": "Үй тапшырма ийгиликтүү өчүрүлдү",
+  "homeworkDueDateLabel": "Тапшыруу мөөнөтү",
+  "homeworkFileOptionalHint": "Файл милдеттүү эмес",
+  "homeworkTargetGroupOption": "Бүт топко",
+  "homeworkTargetIndividualOption": "Айрым студенттерге",
+  "homeworkAssignedStudentsLabel": "Студенттер",
+  "homeworkAssignedStudentsHint": "Бул тапшырманы ала турган студенттерди тандаңыз.",
+  "homeworkStudentsValidation": "Кеминде бир студентти тандаңыз",
+  "homeworkActiveLabel": "Активдүү тапшырма",
+  "homeworkActiveHint": "Студенттерге активдүү тапшырмалар гана көрүнөт.",
+  "homeworkForGroupLabel": "Бүт топ үчүн",
+  "homeworkForStudentsLabel": "{count} студент үчүн",
+  "@homeworkForStudentsLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noGroupHomeworkTitle": "Бул топто азырынча үй тапшырма жок",
+  "noGroupHomeworkSubtitle": "Биринчи үй тапшырманы бериңиз, ал ушул жерде көрүнөт.",
+  "deleteHomeworkTitle": "Үй тапшырманы өчүрөсүзбү?",
+  "deleteHomeworkMessage": "Бул үй тапшырма толугу менен өчүрүлөт.",
   "noPendingStudentsTitle": "Күтүп жаткан өтүнмөлөр жок",
   "noPendingStudentsSubtitle": "Бул топ үчүн жаңы студенттик өтүнмөлөр ушул жерде көрүнөт.",
   "noGroupStudentsTitle": "Топто азырынча студенттер жок",

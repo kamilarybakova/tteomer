@@ -113,7 +113,9 @@ class AuthInterceptor extends Interceptor {
       );
 
       final data = response.data as Map<String, dynamic>;
-      final accessToken = data['access'] as String?;
+      final payload = data['data'] as Map<String, dynamic>?;
+      final accessToken =
+          data['access'] as String? ?? payload?['access'] as String?;
 
       if (accessToken == null || accessToken.isEmpty) {
         debugPrint('🔴 Refresh response did not contain access token');

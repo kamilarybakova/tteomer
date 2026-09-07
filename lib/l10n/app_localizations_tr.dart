@@ -236,6 +236,14 @@ class AppLocalizationsTr extends AppLocalizations {
   String get dailyPracticeUnavailableSubtitle => 'Lutfen bu ekrani biraz sonra tekrar acin.';
 
   @override
+  String get studentHomeworkBannerTitle => 'Ödev';
+
+  @override
+  String studentHomeworkDueDate(Object date) {
+    return 'Teslim $date';
+  }
+
+  @override
   String levelBadge(Object level) {
     return 'Seviye $level';
   }
@@ -525,7 +533,75 @@ class AppLocalizationsTr extends AppLocalizations {
   String get groupStudentsSectionTitle => 'Gruptaki öğrenciler';
 
   @override
+  String get groupHomeworkTitle => 'Ödevler';
+
+  @override
   String get groupMaterialsTitle => 'Materyaller';
+
+  @override
+  String get addHomeworkButton => 'Ödev ekle';
+
+  @override
+  String get createHomeworkButton => 'Ödev ata';
+
+  @override
+  String get homeworkCreatedSuccess => 'Ödev başarıyla atandı';
+
+  @override
+  String get editHomeworkButton => 'Ödevi düzenle';
+
+  @override
+  String get homeworkUpdatedSuccess => 'Ödev başarıyla güncellendi';
+
+  @override
+  String get homeworkDeletedSuccess => 'Ödev başarıyla silindi';
+
+  @override
+  String get homeworkDueDateLabel => 'Teslim tarihi';
+
+  @override
+  String get homeworkFileOptionalHint => 'Dosya isteğe bağlı';
+
+  @override
+  String get homeworkTargetGroupOption => 'Tüm gruba';
+
+  @override
+  String get homeworkTargetIndividualOption => 'Bireysel öğrencilere';
+
+  @override
+  String get homeworkAssignedStudentsLabel => 'Öğrenciler';
+
+  @override
+  String get homeworkAssignedStudentsHint => 'Bu ödevi alacak öğrencileri seçin.';
+
+  @override
+  String get homeworkStudentsValidation => 'En az bir öğrenci seçin';
+
+  @override
+  String get homeworkActiveLabel => 'Aktif ödev';
+
+  @override
+  String get homeworkActiveHint => 'Yalnızca aktif ödevler öğrencilere görünür.';
+
+  @override
+  String get homeworkForGroupLabel => 'Tüm grup için';
+
+  @override
+  String homeworkForStudentsLabel(int count) {
+    return '$count öğrenci için';
+  }
+
+  @override
+  String get noGroupHomeworkTitle => 'Bu grupta henüz ödev yok';
+
+  @override
+  String get noGroupHomeworkSubtitle => 'İlk ödevi atayın, burada görünecektir.';
+
+  @override
+  String get deleteHomeworkTitle => 'Ödev silinsin mi?';
+
+  @override
+  String get deleteHomeworkMessage => 'Bu ödev kalıcı olarak silinecek.';
 
   @override
   String get noPendingStudentsTitle => 'Bekleyen istek yok';

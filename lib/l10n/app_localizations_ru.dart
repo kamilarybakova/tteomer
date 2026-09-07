@@ -236,6 +236,14 @@ class AppLocalizationsRu extends AppLocalizations {
   String get dailyPracticeUnavailableSubtitle => 'Попробуйте открыть экран ещё раз чуть позже.';
 
   @override
+  String get studentHomeworkBannerTitle => 'Домашнее задание';
+
+  @override
+  String studentHomeworkDueDate(Object date) {
+    return 'До $date';
+  }
+
+  @override
   String levelBadge(Object level) {
     return 'Уровень $level';
   }
@@ -525,7 +533,75 @@ class AppLocalizationsRu extends AppLocalizations {
   String get groupStudentsSectionTitle => 'Студенты в группе';
 
   @override
+  String get groupHomeworkTitle => 'Домашнее задание';
+
+  @override
   String get groupMaterialsTitle => 'Материалы';
+
+  @override
+  String get addHomeworkButton => 'Добавить домашку';
+
+  @override
+  String get createHomeworkButton => 'Назначить домашку';
+
+  @override
+  String get homeworkCreatedSuccess => 'Домашнее задание успешно назначено';
+
+  @override
+  String get editHomeworkButton => 'Изменить домашку';
+
+  @override
+  String get homeworkUpdatedSuccess => 'Домашнее задание успешно обновлено';
+
+  @override
+  String get homeworkDeletedSuccess => 'Домашнее задание успешно удалено';
+
+  @override
+  String get homeworkDueDateLabel => 'Срок сдачи';
+
+  @override
+  String get homeworkFileOptionalHint => 'Файл необязателен';
+
+  @override
+  String get homeworkTargetGroupOption => 'Всей группе';
+
+  @override
+  String get homeworkTargetIndividualOption => 'Отдельным студентам';
+
+  @override
+  String get homeworkAssignedStudentsLabel => 'Студенты';
+
+  @override
+  String get homeworkAssignedStudentsHint => 'Выберите студентов, которым нужно назначить это задание.';
+
+  @override
+  String get homeworkStudentsValidation => 'Выберите хотя бы одного студента';
+
+  @override
+  String get homeworkActiveLabel => 'Активное задание';
+
+  @override
+  String get homeworkActiveHint => 'Только активные задания видны студентам.';
+
+  @override
+  String get homeworkForGroupLabel => 'Для всей группы';
+
+  @override
+  String homeworkForStudentsLabel(int count) {
+    return 'Для $count студентов';
+  }
+
+  @override
+  String get noGroupHomeworkTitle => 'В этой группе пока нет домашних заданий';
+
+  @override
+  String get noGroupHomeworkSubtitle => 'Назначьте первое домашнее задание, и оно появится здесь.';
+
+  @override
+  String get deleteHomeworkTitle => 'Удалить домашнее задание?';
+
+  @override
+  String get deleteHomeworkMessage => 'Это домашнее задание будет удалено без возможности восстановления.';
 
   @override
   String get noPendingStudentsTitle => 'Нет ожидающих заявок';

@@ -537,6 +537,18 @@ abstract class AppLocalizations {
   /// **'Please try opening this screen again a bit later.'**
   String get dailyPracticeUnavailableSubtitle;
 
+  /// No description provided for @studentHomeworkBannerTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Homework'**
+  String get studentHomeworkBannerTitle;
+
+  /// No description provided for @studentHomeworkDueDate.
+  ///
+  /// In en, this message translates to:
+  /// **'Due {date}'**
+  String studentHomeworkDueDate(Object date);
+
   /// No description provided for @levelBadge.
   ///
   /// In en, this message translates to:
@@ -1083,11 +1095,143 @@ abstract class AppLocalizations {
   /// **'Students in the group'**
   String get groupStudentsSectionTitle;
 
+  /// No description provided for @groupHomeworkTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Homework'**
+  String get groupHomeworkTitle;
+
   /// No description provided for @groupMaterialsTitle.
   ///
   /// In en, this message translates to:
   /// **'Materials'**
   String get groupMaterialsTitle;
+
+  /// No description provided for @addHomeworkButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Add homework'**
+  String get addHomeworkButton;
+
+  /// No description provided for @createHomeworkButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Assign homework'**
+  String get createHomeworkButton;
+
+  /// No description provided for @homeworkCreatedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Homework assigned successfully'**
+  String get homeworkCreatedSuccess;
+
+  /// No description provided for @editHomeworkButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Edit homework'**
+  String get editHomeworkButton;
+
+  /// No description provided for @homeworkUpdatedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Homework updated successfully'**
+  String get homeworkUpdatedSuccess;
+
+  /// No description provided for @homeworkDeletedSuccess.
+  ///
+  /// In en, this message translates to:
+  /// **'Homework deleted successfully'**
+  String get homeworkDeletedSuccess;
+
+  /// No description provided for @homeworkDueDateLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Due date'**
+  String get homeworkDueDateLabel;
+
+  /// No description provided for @homeworkFileOptionalHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Optional file'**
+  String get homeworkFileOptionalHint;
+
+  /// No description provided for @homeworkTargetGroupOption.
+  ///
+  /// In en, this message translates to:
+  /// **'Whole group'**
+  String get homeworkTargetGroupOption;
+
+  /// No description provided for @homeworkTargetIndividualOption.
+  ///
+  /// In en, this message translates to:
+  /// **'Individual students'**
+  String get homeworkTargetIndividualOption;
+
+  /// No description provided for @homeworkAssignedStudentsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Students'**
+  String get homeworkAssignedStudentsLabel;
+
+  /// No description provided for @homeworkAssignedStudentsHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Select the students who should receive this homework.'**
+  String get homeworkAssignedStudentsHint;
+
+  /// No description provided for @homeworkStudentsValidation.
+  ///
+  /// In en, this message translates to:
+  /// **'Select at least one student'**
+  String get homeworkStudentsValidation;
+
+  /// No description provided for @homeworkActiveLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'Active homework'**
+  String get homeworkActiveLabel;
+
+  /// No description provided for @homeworkActiveHint.
+  ///
+  /// In en, this message translates to:
+  /// **'Only active homework is visible to students.'**
+  String get homeworkActiveHint;
+
+  /// No description provided for @homeworkForGroupLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'For the whole group'**
+  String get homeworkForGroupLabel;
+
+  /// No description provided for @homeworkForStudentsLabel.
+  ///
+  /// In en, this message translates to:
+  /// **'For {count} students'**
+  String homeworkForStudentsLabel(int count);
+
+  /// No description provided for @noGroupHomeworkTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'No homework in this group yet'**
+  String get noGroupHomeworkTitle;
+
+  /// No description provided for @noGroupHomeworkSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Assign the first homework and it will appear here.'**
+  String get noGroupHomeworkSubtitle;
+
+  /// No description provided for @deleteHomeworkTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Delete homework?'**
+  String get deleteHomeworkTitle;
+
+  /// No description provided for @deleteHomeworkMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'This homework will be permanently removed.'**
+  String get deleteHomeworkMessage;
 
   /// No description provided for @noPendingStudentsTitle.
   ///

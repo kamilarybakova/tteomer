@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:intl/intl.dart' hide TextDirection;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:tteomer/core/theme/app_colors.dart';
 import 'package:tteomer/features/main/presentation/pages/setting_screen.dart';
+import 'package:tteomer/features/main/presentation/provider/student_homework_provider.dart';
+import 'package:tteomer/features/teacher/data/models/teacher_homework_model.dart';
 import 'package:tteomer/l10n/app_localizations.dart';
 import '../../../auth/presentation/provider/providers.dart';
 import '../state/main_state.dart';
@@ -64,6 +67,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final roleAsync = ref.watch(userRoleProvider);
     final role = roleAsync.valueOrNull?.trim().toUpperCase();
     final isTeacher = role == 'TEACHER';
+    final homeworkAsync = ref.watch(studentHomeworkProvider);
 
     return SafeArea(
       child: Scaffold(
@@ -150,6 +154,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             if (!isTeacher) ...[
               _DailyLearningSection(state: newsState),
               const SizedBox(height: 20),
+              _StudentHomeworkBanner(homeworkAsync: homeworkAsync),
             ],
             // Шиммер пока грузятся новости
             if (newsState.status == NewsStatus.loading) ...[
@@ -416,6 +421,154 @@ class _DailyLearningSection extends StatelessWidget {
           },
         ),
       ],
+    );
+  }
+}
+
+class _StudentHomeworkBanner extends StatelessWidget {
+  final AsyncValue<List<TeacherHomeworkModel>> homeworkAsync;
+
+  const _StudentHomeworkBanner({required this.homeworkAsync});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
+    return homeworkAsync.when(
+      loading: () => const _StudentHomeworkSkeleton(),
+      error: (_, _) => const SizedBox.shrink(),
+      data: (homework) {
+        final visibleHomework = homework.where((item) => item.isActive).toList()
+          ..sort((a, b) {
+            final left = a.dueDate ?? DateTime.fromMillisecondsSinceEpoch(0);
+            final right = b.dueDate ?? DateTime.fromMillisecondsSinceEpoch(0);
+            return left.compareTo(right);
+          });
+
+        if (visibleHomework.isEmpty) {
+          return const SizedBox.shrink();
+        }
+
+        final item = visibleHomework.first;
+        final dueDate = item.dueDate?.toLocal();
+
+        return Padding(
+          padding: const EdgeInsets.only(bottom: 20),
+          child: Container(
+            padding: const EdgeInsets.all(18),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(24),
+              boxShadow: [
+                BoxShadow(
+                  color: const Color(0xFF4C63D2).withValues(alpha: 0.10),
+                  blurRadius: 18,
+                  offset: const Offset(0, 8),
+                ),
+              ],
+            ),
+            child: Row(
+              children: [
+                Container(
+                  width: 50,
+                  height: 50,
+                  decoration: BoxDecoration(
+                    color: const Color(0xFF4C63D2).withValues(alpha: 0.12),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: const Icon(
+                    Icons.assignment_outlined,
+                    color: Color(0xFF4C63D2),
+                  ),
+                ),
+                const SizedBox(width: 14),
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        l10n.studentHomeworkBannerTitle,
+                        style: const TextStyle(
+                          color: Color(0xFF6B7280),
+                          fontSize: 12,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      const SizedBox(height: 5),
+                    Text(
+                      item.title,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                          color: Color(0xFF171923),
+                          fontSize: 16,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    if (item.description.trim().isNotEmpty) ...[
+                      const SizedBox(height: 6),
+                      Text(
+                        item.description.trim(),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          color: Color(0xFF6B7280),
+                          fontSize: 13,
+                          height: 1.35,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                    if (dueDate != null) ...[
+                      const SizedBox(height: 8),
+                      Row(
+                          children: [
+                            const Icon(
+                              Icons.schedule_rounded,
+                              size: 16,
+                              color: Color(0xFF4C63D2),
+                            ),
+                            const SizedBox(width: 6),
+                            Text(
+                              l10n.studentHomeworkDueDate(
+                                DateFormat('dd.MM.yyyy HH:mm').format(dueDate),
+                              ),
+                              style: const TextStyle(
+                                color: Color(0xFF4C63D2),
+                                fontSize: 13,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+class _StudentHomeworkSkeleton extends StatelessWidget {
+  const _StudentHomeworkSkeleton();
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20),
+      child: Container(
+        height: 86,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(24),
+        ),
+        child: const Center(child: CircularProgressIndicator()),
+      ),
     );
   }
 }

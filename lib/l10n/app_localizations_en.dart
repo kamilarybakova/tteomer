@@ -236,6 +236,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get dailyPracticeUnavailableSubtitle => 'Please try opening this screen again a bit later.';
 
   @override
+  String get studentHomeworkBannerTitle => 'Homework';
+
+  @override
+  String studentHomeworkDueDate(Object date) {
+    return 'Due $date';
+  }
+
+  @override
   String levelBadge(Object level) {
     return 'Level $level';
   }
@@ -525,7 +533,75 @@ class AppLocalizationsEn extends AppLocalizations {
   String get groupStudentsSectionTitle => 'Students in the group';
 
   @override
+  String get groupHomeworkTitle => 'Homework';
+
+  @override
   String get groupMaterialsTitle => 'Materials';
+
+  @override
+  String get addHomeworkButton => 'Add homework';
+
+  @override
+  String get createHomeworkButton => 'Assign homework';
+
+  @override
+  String get homeworkCreatedSuccess => 'Homework assigned successfully';
+
+  @override
+  String get editHomeworkButton => 'Edit homework';
+
+  @override
+  String get homeworkUpdatedSuccess => 'Homework updated successfully';
+
+  @override
+  String get homeworkDeletedSuccess => 'Homework deleted successfully';
+
+  @override
+  String get homeworkDueDateLabel => 'Due date';
+
+  @override
+  String get homeworkFileOptionalHint => 'Optional file';
+
+  @override
+  String get homeworkTargetGroupOption => 'Whole group';
+
+  @override
+  String get homeworkTargetIndividualOption => 'Individual students';
+
+  @override
+  String get homeworkAssignedStudentsLabel => 'Students';
+
+  @override
+  String get homeworkAssignedStudentsHint => 'Select the students who should receive this homework.';
+
+  @override
+  String get homeworkStudentsValidation => 'Select at least one student';
+
+  @override
+  String get homeworkActiveLabel => 'Active homework';
+
+  @override
+  String get homeworkActiveHint => 'Only active homework is visible to students.';
+
+  @override
+  String get homeworkForGroupLabel => 'For the whole group';
+
+  @override
+  String homeworkForStudentsLabel(int count) {
+    return 'For $count students';
+  }
+
+  @override
+  String get noGroupHomeworkTitle => 'No homework in this group yet';
+
+  @override
+  String get noGroupHomeworkSubtitle => 'Assign the first homework and it will appear here.';
+
+  @override
+  String get deleteHomeworkTitle => 'Delete homework?';
+
+  @override
+  String get deleteHomeworkMessage => 'This homework will be permanently removed.';
 
   @override
   String get noPendingStudentsTitle => 'No pending requests';

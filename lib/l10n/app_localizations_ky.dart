@@ -236,6 +236,14 @@ class AppLocalizationsKy extends AppLocalizations {
   String get dailyPracticeUnavailableSubtitle => 'Бир аздан кийин бул экранды кайра ачып көрүңүз.';
 
   @override
+  String get studentHomeworkBannerTitle => 'Үй тапшырма';
+
+  @override
+  String studentHomeworkDueDate(Object date) {
+    return '$date чейин';
+  }
+
+  @override
   String levelBadge(Object level) {
     return '$level деңгээли';
   }
@@ -525,7 +533,75 @@ class AppLocalizationsKy extends AppLocalizations {
   String get groupStudentsSectionTitle => 'Топтогу студенттер';
 
   @override
+  String get groupHomeworkTitle => 'Үй тапшырма';
+
+  @override
   String get groupMaterialsTitle => 'Материалдар';
+
+  @override
+  String get addHomeworkButton => 'Үй тапшырма кошуу';
+
+  @override
+  String get createHomeworkButton => 'Үй тапшырма берүү';
+
+  @override
+  String get homeworkCreatedSuccess => 'Үй тапшырма ийгиликтүү берилди';
+
+  @override
+  String get editHomeworkButton => 'Үй тапшырманы өзгөртүү';
+
+  @override
+  String get homeworkUpdatedSuccess => 'Үй тапшырма ийгиликтүү жаңыртылды';
+
+  @override
+  String get homeworkDeletedSuccess => 'Үй тапшырма ийгиликтүү өчүрүлдү';
+
+  @override
+  String get homeworkDueDateLabel => 'Тапшыруу мөөнөтү';
+
+  @override
+  String get homeworkFileOptionalHint => 'Файл милдеттүү эмес';
+
+  @override
+  String get homeworkTargetGroupOption => 'Бүт топко';
+
+  @override
+  String get homeworkTargetIndividualOption => 'Айрым студенттерге';
+
+  @override
+  String get homeworkAssignedStudentsLabel => 'Студенттер';
+
+  @override
+  String get homeworkAssignedStudentsHint => 'Бул тапшырманы ала турган студенттерди тандаңыз.';
+
+  @override
+  String get homeworkStudentsValidation => 'Кеминде бир студентти тандаңыз';
+
+  @override
+  String get homeworkActiveLabel => 'Активдүү тапшырма';
+
+  @override
+  String get homeworkActiveHint => 'Студенттерге активдүү тапшырмалар гана көрүнөт.';
+
+  @override
+  String get homeworkForGroupLabel => 'Бүт топ үчүн';
+
+  @override
+  String homeworkForStudentsLabel(int count) {
+    return '$count студент үчүн';
+  }
+
+  @override
+  String get noGroupHomeworkTitle => 'Бул топто азырынча үй тапшырма жок';
+
+  @override
+  String get noGroupHomeworkSubtitle => 'Биринчи үй тапшырманы бериңиз, ал ушул жерде көрүнөт.';
+
+  @override
+  String get deleteHomeworkTitle => 'Үй тапшырманы өчүрөсүзбү?';
+
+  @override
+  String get deleteHomeworkMessage => 'Бул үй тапшырма толугу менен өчүрүлөт.';
 
   @override
   String get noPendingStudentsTitle => 'Күтүп жаткан өтүнмөлөр жок';

@@ -91,6 +91,13 @@
   "dailyPracticePreparingSubtitle": "Seviyenize uygun kelime ve cumle seciyoruz.",
   "dailyPracticeUnavailable": "Bugunun calismasi gecici olarak kullanilamiyor",
   "dailyPracticeUnavailableSubtitle": "Lutfen bu ekrani biraz sonra tekrar acin.",
+  "studentHomeworkBannerTitle": "Ödev",
+  "studentHomeworkDueDate": "Teslim {date}",
+  "@studentHomeworkDueDate": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "levelBadge": "Seviye {level}",
   "@levelBadge": {
     "placeholders": {
@@ -210,7 +217,36 @@
   "visibleToStudentsHint": "Seçilen grubun öğrencileri bu belgeyi görebilir.",
   "pendingStudentsTitle": "Onay bekleyen öğrenciler",
   "groupStudentsSectionTitle": "Gruptaki öğrenciler",
+  "groupHomeworkTitle": "Ödevler",
   "groupMaterialsTitle": "Materyaller",
+  "addHomeworkButton": "Ödev ekle",
+  "createHomeworkButton": "Ödev ata",
+  "homeworkCreatedSuccess": "Ödev başarıyla atandı",
+  "editHomeworkButton": "Ödevi düzenle",
+  "homeworkUpdatedSuccess": "Ödev başarıyla güncellendi",
+  "homeworkDeletedSuccess": "Ödev başarıyla silindi",
+  "homeworkDueDateLabel": "Teslim tarihi",
+  "homeworkFileOptionalHint": "Dosya isteğe bağlı",
+  "homeworkTargetGroupOption": "Tüm gruba",
+  "homeworkTargetIndividualOption": "Bireysel öğrencilere",
+  "homeworkAssignedStudentsLabel": "Öğrenciler",
+  "homeworkAssignedStudentsHint": "Bu ödevi alacak öğrencileri seçin.",
+  "homeworkStudentsValidation": "En az bir öğrenci seçin",
+  "homeworkActiveLabel": "Aktif ödev",
+  "homeworkActiveHint": "Yalnızca aktif ödevler öğrencilere görünür.",
+  "homeworkForGroupLabel": "Tüm grup için",
+  "homeworkForStudentsLabel": "{count} öğrenci için",
+  "@homeworkForStudentsLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noGroupHomeworkTitle": "Bu grupta henüz ödev yok",
+  "noGroupHomeworkSubtitle": "İlk ödevi atayın, burada görünecektir.",
+  "deleteHomeworkTitle": "Ödev silinsin mi?",
+  "deleteHomeworkMessage": "Bu ödev kalıcı olarak silinecek.",
   "noPendingStudentsTitle": "Bekleyen istek yok",
   "noPendingStudentsSubtitle": "Bu grup için yeni öğrenci istekleri burada görünecek.",
   "noGroupStudentsTitle": "Grupta henüz öğrenci yok",

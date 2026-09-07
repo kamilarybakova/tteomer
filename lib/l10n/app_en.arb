@@ -97,6 +97,13 @@
   "dailyPracticePreparingSubtitle": "We’re selecting a word and sentence for your level.",
   "dailyPracticeUnavailable": "Today’s practice is temporarily unavailable",
   "dailyPracticeUnavailableSubtitle": "Please try opening this screen again a bit later.",
+  "studentHomeworkBannerTitle": "Homework",
+  "studentHomeworkDueDate": "Due {date}",
+  "@studentHomeworkDueDate": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "levelBadge": "Level {level}",
   "@levelBadge": {
     "placeholders": {
@@ -214,7 +221,36 @@
   "visibleToStudentsHint": "Students in the selected group will be able to see this document.",
   "pendingStudentsTitle": "Pending students",
   "groupStudentsSectionTitle": "Students in the group",
+  "groupHomeworkTitle": "Homework",
   "groupMaterialsTitle": "Materials",
+  "addHomeworkButton": "Add homework",
+  "createHomeworkButton": "Assign homework",
+  "homeworkCreatedSuccess": "Homework assigned successfully",
+  "editHomeworkButton": "Edit homework",
+  "homeworkUpdatedSuccess": "Homework updated successfully",
+  "homeworkDeletedSuccess": "Homework deleted successfully",
+  "homeworkDueDateLabel": "Due date",
+  "homeworkFileOptionalHint": "Optional file",
+  "homeworkTargetGroupOption": "Whole group",
+  "homeworkTargetIndividualOption": "Individual students",
+  "homeworkAssignedStudentsLabel": "Students",
+  "homeworkAssignedStudentsHint": "Select the students who should receive this homework.",
+  "homeworkStudentsValidation": "Select at least one student",
+  "homeworkActiveLabel": "Active homework",
+  "homeworkActiveHint": "Only active homework is visible to students.",
+  "homeworkForGroupLabel": "For the whole group",
+  "homeworkForStudentsLabel": "For {count} students",
+  "@homeworkForStudentsLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noGroupHomeworkTitle": "No homework in this group yet",
+  "noGroupHomeworkSubtitle": "Assign the first homework and it will appear here.",
+  "deleteHomeworkTitle": "Delete homework?",
+  "deleteHomeworkMessage": "This homework will be permanently removed.",
   "noPendingStudentsTitle": "No pending requests",
   "noPendingStudentsSubtitle": "New student requests for this group will appear here.",
   "noGroupStudentsTitle": "No students in the group yet",

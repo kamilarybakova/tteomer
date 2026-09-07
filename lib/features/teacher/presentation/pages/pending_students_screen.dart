@@ -2,15 +2,19 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart';
+import 'package:tteomer/core/utils/app_config.dart';
 import 'package:tteomer/core/widgets/app_toast.dart';
 import 'package:tteomer/features/documents/data/model/teacher_document_model.dart';
 import 'package:tteomer/features/documents/presentation/pages/document_webview_page.dart';
 import 'package:tteomer/features/documents/presentation/pages/teacher_documents_screen.dart';
 import 'package:tteomer/features/documents/presentation/provider/teacher_documents_provider.dart';
 import 'package:tteomer/features/teacher/data/models/group_student_model.dart';
+import 'package:tteomer/features/teacher/data/models/teacher_homework_model.dart';
 import 'package:tteomer/features/teacher/data/models/pending_student_model.dart';
 import 'package:tteomer/features/teacher/data/models/teacher_group_model.dart';
+import 'package:tteomer/features/teacher/presentation/providers/teacher_homework_provider.dart';
 import 'package:tteomer/features/teacher/presentation/providers/teacher_providers.dart';
+import 'package:tteomer/features/teacher/presentation/widgets/add_homework_sheet.dart';
 import 'package:tteomer/l10n/app_localizations.dart';
 
 class PendingStudentsScreen extends ConsumerStatefulWidget {
@@ -25,6 +29,62 @@ class PendingStudentsScreen extends ConsumerStatefulWidget {
 
 class _PendingStudentsScreenState extends ConsumerState<PendingStudentsScreen> {
   final Set<int> _processingStudents = <int>{};
+
+  Future<void> _editHomework(
+    TeacherHomeworkModel homework,
+    List<GroupStudentModel> students,
+  ) async {
+    await showModalBottomSheet<void>(
+      context: context,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      builder: (_) => AddHomeworkSheet(
+        groupId: widget.group.id,
+        groupName: widget.group.name,
+        students: students,
+        initialHomework: homework,
+      ),
+    );
+
+    ref.invalidate(teacherHomeworkProvider);
+  }
+
+  Future<void> _deleteHomework(TeacherHomeworkModel homework) async {
+    final l10n = AppLocalizations.of(context)!;
+    final shouldDelete = await showDialog<bool>(
+      context: context,
+      builder: (dialogContext) => AlertDialog(
+        title: Text(l10n.deleteHomeworkTitle),
+        content: Text(l10n.deleteHomeworkMessage),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, false),
+            child: Text(l10n.cancel),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(dialogContext, true),
+            child: Text(l10n.delete),
+          ),
+        ],
+      ),
+    );
+
+    if (shouldDelete != true || !mounted) return;
+
+    try {
+      await ref
+          .read(teacherHomeworkRemoteDataSourceProvider)
+          .deleteTeacherHomework(homework.id);
+      ref.invalidate(teacherHomeworkProvider);
+      if (mounted) {
+        AppToast.show(context, l10n.homeworkDeletedSuccess);
+      }
+    } catch (error) {
+      if (mounted) {
+        AppToast.show(context, _extractError(error));
+      }
+    }
+  }
 
   Future<void> _editDocument(TeacherDocumentModel document) async {
     await showModalBottomSheet<void>(
@@ -144,7 +204,9 @@ class _PendingStudentsScreenState extends ConsumerState<PendingStudentsScreen> {
     final activeAsync = ref.watch(
       teacherGroupStudentsProvider(widget.group.id),
     );
+    final activeStudents = activeAsync.valueOrNull ?? const <GroupStudentModel>[];
     final documentsAsync = ref.watch(teacherDocumentsProvider);
+    final homeworkAsync = ref.watch(teacherHomeworkProvider);
 
     return Scaffold(
       backgroundColor: const Color(0xFFF3F3F3),
@@ -164,6 +226,7 @@ class _PendingStudentsScreenState extends ConsumerState<PendingStudentsScreen> {
             ref.read(teacherPendingStudentsProvider(widget.group.id).future),
             ref.read(teacherGroupStudentsProvider(widget.group.id).future),
             ref.read(teacherDocumentsProvider.future),
+            ref.read(teacherHomeworkProvider.future),
           ]);
         },
         child: ListView(
@@ -268,6 +331,66 @@ class _PendingStudentsScreenState extends ConsumerState<PendingStudentsScreen> {
                             for (var i = 0; i < students.length; i++) ...[
                               _GroupStudentCard(student: students[i]),
                               if (i != students.length - 1)
+                                const SizedBox(height: 12),
+                            ],
+                          ],
+                        ),
+                );
+              },
+            ),
+            const SizedBox(height: 18),
+            homeworkAsync.when(
+              loading: () => const _SectionLoader(),
+              error: (error, _) => _SectionError(message: error.toString()),
+              data: (homework) {
+                final groupHomework = homework
+                    .where((item) => item.groupId == widget.group.id)
+                    .toList()
+                  ..sort((a, b) {
+                    final left = a.dueDate ?? DateTime.fromMillisecondsSinceEpoch(0);
+                    final right =
+                        b.dueDate ?? DateTime.fromMillisecondsSinceEpoch(0);
+                    return right.compareTo(left);
+                  });
+
+                return _SectionCard(
+                  title: l10n.groupHomeworkTitle,
+                  headerAction: TextButton.icon(
+                    onPressed: () async {
+                      await showModalBottomSheet<void>(
+                        context: context,
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        builder: (_) => AddHomeworkSheet(
+                          groupId: widget.group.id,
+                          groupName: widget.group.name,
+                          students: activeStudents,
+                        ),
+                      );
+                      ref.invalidate(teacherHomeworkProvider);
+                    },
+                    icon: const Icon(Icons.assignment_outlined),
+                    label: Text(l10n.addHomeworkButton),
+                  ),
+                  child: groupHomework.isEmpty
+                      ? _SectionEmpty(
+                          title: l10n.noGroupHomeworkTitle,
+                          subtitle: l10n.noGroupHomeworkSubtitle,
+                        )
+                      : Column(
+                          children: [
+                            for (var i = 0; i < groupHomework.length; i++) ...[
+                              _GroupHomeworkCard(
+                                homework: groupHomework[i],
+                                onEdit: () => _editHomework(
+                                  groupHomework[i],
+                                  activeStudents,
+                                ),
+                                onDelete: () => _deleteHomework(
+                                  groupHomework[i],
+                                ),
+                              ),
+                              if (i != groupHomework.length - 1)
                                 const SizedBox(height: 12),
                             ],
                           ],
@@ -758,6 +881,175 @@ class _GroupDocumentCard extends StatelessWidget {
   }
 }
 
+class _GroupHomeworkCard extends StatelessWidget {
+  final TeacherHomeworkModel homework;
+  final VoidCallback onEdit;
+  final VoidCallback onDelete;
+
+  const _GroupHomeworkCard({
+    required this.homework,
+    required this.onEdit,
+    required this.onDelete,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    final canOpenFile = homework.file != null && homework.file!.isNotEmpty;
+
+    return InkWell(
+      borderRadius: BorderRadius.circular(18),
+      onTap: !canOpenFile
+          ? null
+          : () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => DocumentWebViewPage(
+                    url: _resolveFileUrl(homework.file!),
+                    title: homework.title,
+                  ),
+                ),
+              );
+            },
+      child: Ink(
+        padding: const EdgeInsets.all(16),
+        decoration: BoxDecoration(
+          color: const Color(0xFFF8F9FD),
+          borderRadius: BorderRadius.circular(18),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: 48,
+              height: 48,
+              decoration: BoxDecoration(
+                color: const Color(0xFF4C63D2).withValues(alpha: 0.10),
+                borderRadius: BorderRadius.circular(16),
+              ),
+              child: const Icon(
+                Icons.assignment_outlined,
+                color: Color(0xFF4C63D2),
+              ),
+            ),
+            const SizedBox(width: 14),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    homework.title,
+                    style: const TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w700,
+                      color: Color(0xFF171923),
+                    ),
+                  ),
+                  if (homework.description.isNotEmpty) ...[
+                    const SizedBox(height: 4),
+                    Text(
+                      homework.description,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: const TextStyle(
+                        color: Color(0xFF6B7280),
+                        height: 1.35,
+                      ),
+                    ),
+                  ],
+                  const SizedBox(height: 10),
+                  Wrap(
+                    spacing: 8,
+                    runSpacing: 8,
+                    children: [
+                      _HomeworkChip(
+                        icon: Icons.schedule_rounded,
+                        label: homework.dueDate == null
+                            ? '-'
+                            : DateFormat(
+                                'dd.MM.yyyy HH:mm',
+                              ).format(homework.dueDate!.toLocal()),
+                      ),
+                      _HomeworkChip(
+                        icon: homework.isIndividual
+                            ? Icons.person_outline_rounded
+                            : Icons.groups_rounded,
+                        label: homework.isIndividual
+                            ? l10n.homeworkForStudentsLabel(
+                                homework.assignedStudentIds.length,
+                              )
+                            : l10n.homeworkForGroupLabel,
+                      ),
+                      if (canOpenFile)
+                        _HomeworkChip(
+                          icon: Icons.attach_file_rounded,
+                          label: homework.fileSizeMb != null
+                              ? '${homework.fileSizeMb} MB'
+                              : l10n.materialFileLabel,
+                        ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(width: 10),
+            Column(
+              children: [
+                _DecisionButton(
+                  icon: Icons.edit_outlined,
+                  color: const Color(0xFF4C63D2),
+                  onTap: onEdit,
+                  tooltip: l10n.editHomeworkButton,
+                ),
+                const SizedBox(height: 8),
+                _DecisionButton(
+                  icon: Icons.delete_outline_rounded,
+                  color: const Color(0xFFEF4444),
+                  onTap: onDelete,
+                  tooltip: l10n.delete,
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class _HomeworkChip extends StatelessWidget {
+  final IconData icon;
+  final String label;
+
+  const _HomeworkChip({required this.icon, required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+      decoration: BoxDecoration(
+        color: const Color(0xFF4C63D2).withValues(alpha: 0.08),
+        borderRadius: BorderRadius.circular(999),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 16, color: const Color(0xFF4C63D2)),
+          const SizedBox(width: 8),
+          Text(
+            label,
+            style: const TextStyle(
+              color: Color(0xFF171923),
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class _StudentAvatar extends StatelessWidget {
   const _StudentAvatar();
 
@@ -819,4 +1111,12 @@ String _formatRequestedAt(String raw) {
   } catch (_) {
     return raw;
   }
+}
+
+String _resolveFileUrl(String file) {
+  if (file.startsWith('http://') || file.startsWith('https://')) {
+    return file;
+  }
+
+  return '${AppConfig.apiBaseUrl}$file';
 }

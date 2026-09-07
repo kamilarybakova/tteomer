@@ -95,6 +95,13 @@
   "dailyPracticePreparingSubtitle": "Сейчас подготовим слово и предложение под ваш уровень.",
   "dailyPracticeUnavailable": "Сегодняшняя практика временно недоступна",
   "dailyPracticeUnavailableSubtitle": "Попробуйте открыть экран ещё раз чуть позже.",
+  "studentHomeworkBannerTitle": "Домашнее задание",
+  "studentHomeworkDueDate": "До {date}",
+  "@studentHomeworkDueDate": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "levelBadge": "Уровень {level}",
   "@levelBadge": {
     "placeholders": {
@@ -215,7 +222,36 @@
   "visibleToStudentsHint": "Студенты выбранной группы смогут видеть этот документ.",
   "pendingStudentsTitle": "Студенты на подтверждение",
   "groupStudentsSectionTitle": "Студенты в группе",
+  "groupHomeworkTitle": "Домашнее задание",
   "groupMaterialsTitle": "Материалы",
+  "addHomeworkButton": "Добавить домашку",
+  "createHomeworkButton": "Назначить домашку",
+  "homeworkCreatedSuccess": "Домашнее задание успешно назначено",
+  "editHomeworkButton": "Изменить домашку",
+  "homeworkUpdatedSuccess": "Домашнее задание успешно обновлено",
+  "homeworkDeletedSuccess": "Домашнее задание успешно удалено",
+  "homeworkDueDateLabel": "Срок сдачи",
+  "homeworkFileOptionalHint": "Файл необязателен",
+  "homeworkTargetGroupOption": "Всей группе",
+  "homeworkTargetIndividualOption": "Отдельным студентам",
+  "homeworkAssignedStudentsLabel": "Студенты",
+  "homeworkAssignedStudentsHint": "Выберите студентов, которым нужно назначить это задание.",
+  "homeworkStudentsValidation": "Выберите хотя бы одного студента",
+  "homeworkActiveLabel": "Активное задание",
+  "homeworkActiveHint": "Только активные задания видны студентам.",
+  "homeworkForGroupLabel": "Для всей группы",
+  "homeworkForStudentsLabel": "Для {count} студентов",
+  "@homeworkForStudentsLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noGroupHomeworkTitle": "В этой группе пока нет домашних заданий",
+  "noGroupHomeworkSubtitle": "Назначьте первое домашнее задание, и оно появится здесь.",
+  "deleteHomeworkTitle": "Удалить домашнее задание?",
+  "deleteHomeworkMessage": "Это домашнее задание будет удалено без возможности восстановления.",
   "noPendingStudentsTitle": "Нет ожидающих заявок",
   "noPendingStudentsSubtitle": "Новые заявки студентов для этой группы появятся здесь.",
   "noGroupStudentsTitle": "В группе пока нет студентов",
