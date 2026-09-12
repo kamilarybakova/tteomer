@@ -354,6 +354,21 @@ class AppLocalizationsTr extends AppLocalizations {
   String get categoryAll => 'Tümü';
 
   @override
+  String get sharedDictionaryTitle => 'Kurs sözlüğü';
+
+  @override
+  String get sharedDictionaryHomeSubtitle => 'Seviyeniz için resmi kelimeler';
+
+  @override
+  String get sharedDictionaryEmpty => 'Kelime bulunamadı';
+
+  @override
+  String get sharedDictionaryEmptySubtitle => 'Aramayı veya filtreleri değiştirmeyi deneyin.';
+
+  @override
+  String get sharedDictionaryError => 'Sözlük yüklenemedi';
+
+  @override
   String get clearDictionary => 'Sözlüğü temizle?';
 
   @override

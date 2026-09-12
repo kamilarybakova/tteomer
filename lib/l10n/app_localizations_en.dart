@@ -354,6 +354,21 @@ class AppLocalizationsEn extends AppLocalizations {
   String get categoryAll => 'All';
 
   @override
+  String get sharedDictionaryTitle => 'Course dictionary';
+
+  @override
+  String get sharedDictionaryHomeSubtitle => 'Official vocabulary for your level';
+
+  @override
+  String get sharedDictionaryEmpty => 'No words found';
+
+  @override
+  String get sharedDictionaryEmptySubtitle => 'Try changing the search or filters.';
+
+  @override
+  String get sharedDictionaryError => 'Could not load the dictionary';
+
+  @override
   String get clearDictionary => 'Clear dictionary?';
 
   @override

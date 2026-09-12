@@ -3,8 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:intl/intl.dart' hide TextDirection;
 import 'package:url_launcher/url_launcher.dart';
 import 'package:tteomer/core/theme/app_colors.dart';
+import 'package:tteomer/core/utils/app_config.dart';
+import 'package:tteomer/features/documents/presentation/pages/document_webview_page.dart';
 import 'package:tteomer/features/main/presentation/pages/setting_screen.dart';
 import 'package:tteomer/features/main/presentation/provider/student_homework_provider.dart';
+import 'package:tteomer/features/shared_dictionary/presentation/pages/shared_dictionary_screen.dart';
 import 'package:tteomer/features/teacher/data/models/teacher_homework_model.dart';
 import 'package:tteomer/l10n/app_localizations.dart';
 import '../../../auth/presentation/provider/providers.dart';
@@ -67,6 +70,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final roleAsync = ref.watch(userRoleProvider);
     final role = roleAsync.valueOrNull?.trim().toUpperCase();
     final isTeacher = role == 'TEACHER';
+    final userLevel = ref.watch(userLevelProvider).valueOrNull;
+    final canOpenSharedDictionary = !isTeacher && userLevel == 'A1';
     final homeworkAsync = ref.watch(studentHomeworkProvider);
 
     return SafeArea(
@@ -153,6 +158,17 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
             if (!isTeacher) ...[
               _DailyLearningSection(state: newsState),
+              if (canOpenSharedDictionary) ...[
+                const SizedBox(height: 20),
+                _SharedDictionaryBanner(
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => const SharedDictionaryScreen(),
+                    ),
+                  ),
+                ),
+              ],
               const SizedBox(height: 20),
               _StudentHomeworkBanner(homeworkAsync: homeworkAsync),
             ],
@@ -362,6 +378,68 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   }
 }
 
+class _SharedDictionaryBanner extends StatelessWidget {
+  final VoidCallback onTap;
+
+  const _SharedDictionaryBanner({required this.onTap});
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+    return Material(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(24),
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(24),
+        child: Padding(
+          padding: const EdgeInsets.all(18),
+          child: Row(
+            children: [
+              Container(
+                width: 52,
+                height: 52,
+                decoration: BoxDecoration(
+                  color: const Color(0xFF6C63FF).withValues(alpha: 0.12),
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: const Icon(
+                  Icons.auto_stories_rounded,
+                  color: Color(0xFF6C63FF),
+                ),
+              ),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      l10n.sharedDictionaryTitle,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w800,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      l10n.sharedDictionaryHomeSubtitle,
+                      style: const TextStyle(
+                        color: Color(0xFF6B7280),
+                        fontSize: 13,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const Icon(Icons.chevron_right_rounded, color: Color(0xFF6C63FF)),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
 class _DailyLearningSection extends StatelessWidget {
   final NewsState state;
 
@@ -451,6 +529,8 @@ class _StudentHomeworkBanner extends StatelessWidget {
 
         final item = visibleHomework.first;
         final dueDate = item.dueDate?.toLocal();
+        final file = item.file?.trim();
+        final hasFile = file != null && file.isNotEmpty;
 
         return Padding(
           padding: const EdgeInsets.only(bottom: 20),
@@ -495,33 +575,33 @@ class _StudentHomeworkBanner extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 5),
-                    Text(
-                      item.title,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                          color: Color(0xFF171923),
-                          fontSize: 16,
-                        fontWeight: FontWeight.w800,
-                      ),
-                    ),
-                    if (item.description.trim().isNotEmpty) ...[
-                      const SizedBox(height: 6),
                       Text(
-                        item.description.trim(),
+                        item.title,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: const TextStyle(
-                          color: Color(0xFF6B7280),
-                          fontSize: 13,
-                          height: 1.35,
-                          fontWeight: FontWeight.w500,
+                          color: Color(0xFF171923),
+                          fontSize: 16,
+                          fontWeight: FontWeight.w800,
                         ),
                       ),
-                    ],
-                    if (dueDate != null) ...[
-                      const SizedBox(height: 8),
-                      Row(
+                      if (item.description.trim().isNotEmpty) ...[
+                        const SizedBox(height: 6),
+                        Text(
+                          item.description.trim(),
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: const TextStyle(
+                            color: Color(0xFF6B7280),
+                            fontSize: 13,
+                            height: 1.35,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                      if (dueDate != null) ...[
+                        const SizedBox(height: 8),
+                        Row(
                           children: [
                             const Icon(
                               Icons.schedule_rounded,
@@ -545,6 +625,40 @@ class _StudentHomeworkBanner extends StatelessWidget {
                     ],
                   ),
                 ),
+                if (hasFile) ...[
+                  const SizedBox(width: 10),
+                  Tooltip(
+                    message: l10n.materialFileLabel,
+                    child: InkWell(
+                      borderRadius: BorderRadius.circular(14),
+                      onTap: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute<void>(
+                            builder: (_) => DocumentWebViewPage(
+                              url: _resolveHomeworkFileUrl(file),
+                              title: item.title,
+                            ),
+                          ),
+                        );
+                      },
+                      child: Ink(
+                        width: 44,
+                        height: 44,
+                        decoration: BoxDecoration(
+                          color: const Color(
+                            0xFF4C63D2,
+                          ).withValues(alpha: 0.10),
+                          borderRadius: BorderRadius.circular(14),
+                        ),
+                        child: const Icon(
+                          Icons.insert_drive_file_outlined,
+                          color: Color(0xFF4C63D2),
+                          size: 23,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ],
             ),
           ),
@@ -552,6 +666,14 @@ class _StudentHomeworkBanner extends StatelessWidget {
       },
     );
   }
+}
+
+String _resolveHomeworkFileUrl(String file) {
+  if (file.startsWith('http://') || file.startsWith('https://')) {
+    return file;
+  }
+
+  return '${AppConfig.apiBaseUrl}$file';
 }
 
 class _StudentHomeworkSkeleton extends StatelessWidget {

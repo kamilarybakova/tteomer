@@ -1,6 +1,6 @@
 class AppConfig {
-  // static const apiBaseUrl = 'https://tteomer.dev';
-  static const apiBaseUrl = 'https://dev.tteomer.dev';
+  static const apiBaseUrl = 'https://tteomer.dev';
+  // static const apiBaseUrl = 'https://dev.tteomer.dev';
   static const googleTranslateApiKey =
       'AIzaSyAWCZzT2CHSqekjsRSanndUX236DYwvKKc';
   static const geminiApiKey = String.fromEnvironment(

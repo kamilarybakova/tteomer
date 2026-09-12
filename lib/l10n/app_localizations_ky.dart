@@ -354,6 +354,21 @@ class AppLocalizationsKy extends AppLocalizations {
   String get categoryAll => 'Баары';
 
   @override
+  String get sharedDictionaryTitle => 'Курстун сөздүгү';
+
+  @override
+  String get sharedDictionaryHomeSubtitle => 'Деңгээлиңизге ылайык расмий сөздөр';
+
+  @override
+  String get sharedDictionaryEmpty => 'Сөздөр табылган жок';
+
+  @override
+  String get sharedDictionaryEmptySubtitle => 'Издөөнү же чыпкаларды өзгөртүп көрүңүз.';
+
+  @override
+  String get sharedDictionaryError => 'Сөздүктү жүктөө мүмкүн болгон жок';
+
+  @override
   String get clearDictionary => 'Сөздүктү тазалоо?';
 
   @override

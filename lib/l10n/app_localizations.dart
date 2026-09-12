@@ -741,6 +741,36 @@ abstract class AppLocalizations {
   /// **'All'**
   String get categoryAll;
 
+  /// No description provided for @sharedDictionaryTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Course dictionary'**
+  String get sharedDictionaryTitle;
+
+  /// No description provided for @sharedDictionaryHomeSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Official vocabulary for your level'**
+  String get sharedDictionaryHomeSubtitle;
+
+  /// No description provided for @sharedDictionaryEmpty.
+  ///
+  /// In en, this message translates to:
+  /// **'No words found'**
+  String get sharedDictionaryEmpty;
+
+  /// No description provided for @sharedDictionaryEmptySubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Try changing the search or filters.'**
+  String get sharedDictionaryEmptySubtitle;
+
+  /// No description provided for @sharedDictionaryError.
+  ///
+  /// In en, this message translates to:
+  /// **'Could not load the dictionary'**
+  String get sharedDictionaryError;
+
   /// No description provided for @clearDictionary.
   ///
   /// In en, this message translates to:

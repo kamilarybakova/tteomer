@@ -79,6 +79,12 @@ final userRoleProvider = FutureProvider<String?>((ref) async {
   return storage.read(key: 'user_role');
 });
 
+final userLevelProvider = FutureProvider<String?>((ref) async {
+  final storage = ref.read(secureStorageProvider);
+  final level = await storage.read(key: 'user_level');
+  return level?.trim().toUpperCase();
+});
+
 final materialsRemoteDataSourceProvider = Provider(
   (ref) => MaterialsRemoteDataSourceImpl(ref.read(dioProvider)),
 );

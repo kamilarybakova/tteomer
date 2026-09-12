@@ -354,6 +354,21 @@ class AppLocalizationsRu extends AppLocalizations {
   String get categoryAll => 'Все';
 
   @override
+  String get sharedDictionaryTitle => 'Словарь курса';
+
+  @override
+  String get sharedDictionaryHomeSubtitle => 'Официальные слова для вашего уровня';
+
+  @override
+  String get sharedDictionaryEmpty => 'Слова не найдены';
+
+  @override
+  String get sharedDictionaryEmptySubtitle => 'Попробуйте изменить поиск или фильтры.';
+
+  @override
+  String get sharedDictionaryError => 'Не удалось загрузить словарь';
+
+  @override
   String get clearDictionary => 'Очистить словарь?';
 
   @override
