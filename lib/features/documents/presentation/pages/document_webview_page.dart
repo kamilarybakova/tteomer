@@ -1,5 +1,45 @@
 import 'package:flutter/material.dart';
+import 'package:tteomer/core/utils/app_config.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+
+Uri resolveDocumentUrl(String rawUrl) {
+  final value = rawUrl.trim();
+  final parsed = Uri.parse(value);
+
+  if (parsed.hasScheme) return parsed;
+
+  return Uri.parse(AppConfig.apiBaseUrl).resolve(value);
+}
+
+Uri buildDocumentViewerUrl(String rawUrl) {
+  final documentUrl = resolveDocumentUrl(rawUrl);
+  final path = documentUrl.path.toLowerCase();
+
+  final isPresentationFile = path.endsWith('.pptx') || path.endsWith('.ppt');
+  final isGoogleViewerFile =
+      path.endsWith('.pdf') ||
+      path.endsWith('.doc') ||
+      path.endsWith('.docx') ||
+      path.endsWith('.xls') ||
+      path.endsWith('.xlsx');
+
+  if (isPresentationFile) {
+    return Uri.https('view.officeapps.live.com', '/op/embed.aspx', {
+      'src': documentUrl.toString(),
+    });
+  }
+
+  // Android WebView cannot render PDF files by itself. Google Viewer also
+  // gives Word and Excel files a consistent in-app preview on both platforms.
+  if (isGoogleViewerFile) {
+    return Uri.https('docs.google.com', '/gview', {
+      'embedded': 'true',
+      'url': documentUrl.toString(),
+    });
+  }
+
+  return documentUrl;
+}
 
 class DocumentWebViewPage extends StatefulWidget {
   final String url;
@@ -19,35 +59,11 @@ class _DocumentWebViewPageState extends State<DocumentWebViewPage> {
   late final WebViewController controller;
   bool isLoading = true;
 
-  String _buildViewerUrl(String url) {
-    final lower = url.toLowerCase();
-
-    final isPresentationFile =
-        lower.endsWith('.pptx') || lower.endsWith('.ppt');
-
-    final isOfficeFile =
-        isPresentationFile ||
-        lower.endsWith('.doc') ||
-        lower.endsWith('.docx') ||
-        lower.endsWith('.xls') ||
-        lower.endsWith('.xlsx');
-
-    if (isPresentationFile) {
-      return 'https://view.officeapps.live.com/op/embed.aspx?src=${Uri.encodeComponent(url)}';
-    }
-
-    if (isOfficeFile) {
-      return 'https://docs.google.com/gview?embedded=true&url=${Uri.encodeComponent(url)}';
-    }
-
-    return url;
-  }
-
   @override
   void initState() {
     super.initState();
 
-    final viewerUrl = _buildViewerUrl(widget.url);
+    final viewerUrl = buildDocumentViewerUrl(widget.url);
 
     controller = WebViewController()
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
@@ -73,7 +89,7 @@ class _DocumentWebViewPageState extends State<DocumentWebViewPage> {
           },
         ),
       )
-      ..loadRequest(Uri.parse(viewerUrl));
+      ..loadRequest(viewerUrl);
   }
 
   @override
@@ -92,34 +108,20 @@ class _DocumentWebViewPageState extends State<DocumentWebViewPage> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        await controller.runJavaScript('''
-          document.querySelectorAll("audio, video").forEach(media => {
-            media.pause();
-            media.currentTime = 0;
-          });
-        ''');
-
-        await controller.loadHtmlString('<html><body></body></html>');
-
-        return true;
-      },
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          title: Text(
-            widget.title,
-            style: const TextStyle(fontWeight: FontWeight.w600),
-          ),
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: Text(
+          widget.title,
+          style: const TextStyle(fontWeight: FontWeight.w600),
         ),
-        body: Stack(
-          children: [
-            WebViewWidget(controller: controller),
+      ),
+      body: Stack(
+        children: [
+          WebViewWidget(controller: controller),
 
-            if (isLoading) const Center(child: CircularProgressIndicator()),
-          ],
-        ),
+          if (isLoading) const Center(child: CircularProgressIndicator()),
+        ],
       ),
     );
   }

@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -32,35 +31,17 @@ class _GroupCodeScreenState extends ConsumerState<GroupCodeScreen> {
   final TextEditingController controller = TextEditingController();
   final FocusNode focusNode = FocusNode();
 
-  int secondsLeft = 60;
-  Timer? timer;
-
   @override
   void initState() {
     super.initState();
-    _startTimer();
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       focusNode.requestFocus();
     });
   }
 
-  void _startTimer() {
-    timer?.cancel();
-    secondsLeft = 60;
-
-    timer = Timer.periodic(const Duration(seconds: 1), (t) {
-      if (secondsLeft == 0) {
-        t.cancel();
-      } else {
-        setState(() => secondsLeft--);
-      }
-    });
-  }
-
   @override
   void dispose() {
-    timer?.cancel();
     controller.dispose();
     focusNode.dispose();
     super.dispose();
@@ -173,17 +154,6 @@ class _GroupCodeScreenState extends ConsumerState<GroupCodeScreen> {
                   filled: true,
                   onTap: controller.text.isNotEmpty ? _onSend : null,
                 ),
-              ),
-
-              const SizedBox(height: 24),
-
-              Text(
-                secondsLeft > 0
-                    ? t.resendWithTimer(
-                        '00:${secondsLeft.toString().padLeft(2, '0')}',
-                      )
-                    : t.resendCode,
-                style: const TextStyle(color: Colors.grey),
               ),
             ],
           ),

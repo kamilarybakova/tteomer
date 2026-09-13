@@ -19,15 +19,17 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>4.4.0</string>
+	<string>1.0.1</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>12</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Используется для сканирования текста</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>Геопозиция может использоваться при выборе фотографий для обработки текста и чтения данных о месте съёмки.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Используется для записи звука</string>
 	<key>NSPhotoLibraryUsageDescription</key>

@@ -22,10 +22,7 @@ class DictionaryScreen extends ConsumerWidget {
           child: CircularProgressIndicator(color: AppColors.accent),
         ),
         DictionaryError(:final message) => Center(
-          child: Text(
-            message,
-            style: const TextStyle(color: Colors.red),
-          ),
+          child: Text(message, style: const TextStyle(color: Colors.red)),
         ),
         DictionaryData(:final words, :final topics, :final isUpdating) => Stack(
           children: [
@@ -47,7 +44,7 @@ class DictionaryScreen extends ConsumerWidget {
   }
 }
 
-class DictionaryContent extends ConsumerWidget {
+class DictionaryContent extends ConsumerStatefulWidget {
   const DictionaryContent({
     super.key,
     required this.words,
@@ -58,38 +55,10 @@ class DictionaryContent extends ConsumerWidget {
   final List<String?> topics;
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final l10n = AppLocalizations.of(context)!;
-
-    final categories = [l10n.categoryAll, ...topics.whereType<String>()];
-
-    return Column(
-      children: [
-        const SizedBox(height: 20),
-        const _SearchField(),
-        const SizedBox(height: 28),
-        _CategoriesChips(categories: categories),
-        const SizedBox(height: 12),
-        Expanded(
-          child: words.isEmpty
-              ? const _EmptyState()
-              : _WordsList(words: words),
-        ),
-        const SizedBox(height: 100),
-      ],
-    );
-  }
+  ConsumerState<DictionaryContent> createState() => _DictionaryContentState();
 }
 
-class _WordsList extends ConsumerStatefulWidget {
-  const _WordsList({required this.words});
-  final List<Word> words;
-
-  @override
-  ConsumerState<_WordsList> createState() => _WordsListState();
-}
-
-class _WordsListState extends ConsumerState<_WordsList> {
+class _DictionaryContentState extends ConsumerState<DictionaryContent> {
   final _scrollController = ScrollController();
 
   @override
@@ -99,8 +68,10 @@ class _WordsListState extends ConsumerState<_WordsList> {
   }
 
   void _onScroll() {
-    final pos = _scrollController.position;
-    if (pos.pixels >= pos.maxScrollExtent - 200) {
+    final position = _scrollController.position;
+    if (position.pixels <= 0) return;
+
+    if (position.pixels >= position.maxScrollExtent - 200) {
       ref.read(wordsVmProvider.notifier).loadWords(reset: false);
     }
   }
@@ -113,30 +84,58 @@ class _WordsListState extends ConsumerState<_WordsList> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final state = ref.watch(wordsVmProvider);
     final hasMore = state is DictionaryData ? state.hasMore : false;
+    final categories = [l10n.categoryAll, ...widget.topics.whereType<String>()];
+    final itemCount = widget.words.length + (hasMore ? 1 : 0);
 
-    return ListView.separated(
+    return CustomScrollView(
       controller: _scrollController,
-      padding: const EdgeInsets.all(16),
-      itemCount: widget.words.length + (hasMore ? 1 : 0),
-      separatorBuilder: (_, __) => const SizedBox(height: 12),
-      itemBuilder: (_, i) {
-        if (i == widget.words.length) {
-          return const Center(
-            child: Padding(
-              padding: EdgeInsets.all(16),
-              child: CircularProgressIndicator(),
+      physics: const AlwaysScrollableScrollPhysics(
+        parent: BouncingScrollPhysics(),
+      ),
+      slivers: [
+        SliverToBoxAdapter(
+          child: Column(
+            children: [
+              const SizedBox(height: 20),
+              const _SearchField(),
+              const SizedBox(height: 28),
+              _CategoriesChips(categories: categories),
+              const SizedBox(height: 12),
+            ],
+          ),
+        ),
+        if (widget.words.isEmpty)
+          const SliverFillRemaining(hasScrollBody: false, child: _EmptyState())
+        else
+          SliverPadding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            sliver: SliverList(
+              delegate: SliverChildBuilderDelegate((context, index) {
+                if (index == widget.words.length) {
+                  return const Padding(
+                    padding: EdgeInsets.all(16),
+                    child: Center(child: CircularProgressIndicator()),
+                  );
+                }
+
+                final word = widget.words[index];
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: WordTile(
+                    word: word,
+                    onDelete: () => ref
+                        .read(wordsVmProvider.notifier)
+                        .deleteWord(word.wordId),
+                  ),
+                );
+              }, childCount: itemCount),
             ),
-          );
-        }
-        final word = widget.words[i];
-        return WordTile(
-          word: word,
-          onDelete: () =>
-              ref.read(wordsVmProvider.notifier).deleteWord(word.wordId),
-        );
-      },
+          ),
+        const SliverToBoxAdapter(child: SizedBox(height: 100)),
+      ],
     );
   }
 }
@@ -168,18 +167,12 @@ class _EmptyState extends StatelessWidget {
           const SizedBox(height: 16),
           Text(
             l10n.dictionaryEmpty,
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w700,
-            ),
+            style: TextStyle(fontSize: 18, fontWeight: FontWeight.w700),
           ),
           const SizedBox(height: 8),
           Text(
             l10n.dictionaryEmptySubtitle,
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.grey.shade500,
-            ),
+            style: TextStyle(fontSize: 14, color: Colors.grey.shade500),
           ),
         ],
       ),
@@ -227,9 +220,7 @@ class _SearchFieldState extends ConsumerState<_SearchField> {
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
           border: Border.all(
-            color: isFocused
-                ? AppColors.accent
-                : Colors.grey.withOpacity(0.2),
+            color: isFocused ? AppColors.accent : Colors.grey.withOpacity(0.2),
             width: isFocused ? 1.5 : 1,
           ),
           boxShadow: [
@@ -362,10 +353,7 @@ class _CategoriesChipsState extends ConsumerState<_CategoriesChips> {
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 200),
               curve: Curves.easeInOut,
-              padding: const EdgeInsets.symmetric(
-                horizontal: 16,
-                vertical: 10,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
               decoration: BoxDecoration(
                 color: isSelected ? color : color.withOpacity(0.12),
                 borderRadius: BorderRadius.circular(20),

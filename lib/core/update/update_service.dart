@@ -89,18 +89,14 @@ class UpdateService {
 
   Uri getStoreUri() {
     if (Platform.isAndroid) {
-      const packageName = 'com.kasoft.tteomer.app';
-      return Uri.parse('market://details?id=$packageName');
+      return Uri.parse(AppConfig.androidPlayStoreUrl);
     }
     return Uri.parse(AppConfig.iosAppStoreUrl);
   }
 
   Uri getStoreFallbackUri() {
     if (Platform.isAndroid) {
-      const packageName = 'com.kasoft.tteomer.app';
-      return Uri.parse(
-        'https://play.google.com/store/apps/details?id=$packageName',
-      );
+      return Uri.parse(AppConfig.androidPlayStoreUrl);
     }
     return Uri.parse(AppConfig.iosAppStoreUrl);
   }

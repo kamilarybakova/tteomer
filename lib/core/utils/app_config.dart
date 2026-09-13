@@ -19,4 +19,9 @@ class AppConfig {
     'IOS_APP_STORE_URL',
     defaultValue: 'https://apps.apple.com/us/app/tteomer/id6764529479',
   );
+  static const androidPlayStoreUrl = String.fromEnvironment(
+    'ANDROID_PLAY_STORE_URL',
+    defaultValue:
+        'https://play.google.com/store/apps/details?id=com.kasoft.tteomer.app',
+  );
 }

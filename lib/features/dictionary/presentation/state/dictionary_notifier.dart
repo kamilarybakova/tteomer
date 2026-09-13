@@ -11,13 +11,22 @@ class WordsVM extends StateNotifier<DictionaryState> {
   final DeleteWord deleteWordUseCase;
 
   static const _pageSize = 10;
+  String? _activeTopic;
+  String? _activeSearch;
 
   WordsVM(this.getWords, this.deleteAllWords, this.deleteWordUseCase)
-      : super(DictionaryInitialLoading());
+    : super(DictionaryInitialLoading());
 
   Future<void> loadWords({bool reset = true}) async {
     final current = state;
-    final page = reset ? 1 : (current is DictionaryData ? current.currentPage + 1 : 1);
+    final page = reset
+        ? 1
+        : (current is DictionaryData ? current.currentPage + 1 : 1);
+
+    if (reset) {
+      _activeTopic = null;
+      _activeSearch = null;
+    }
 
     if (!reset && current is DictionaryData && !current.hasMore) return;
     if (!reset && current is DictionaryData) {
@@ -25,8 +34,15 @@ class WordsVM extends StateNotifier<DictionaryState> {
     }
 
     try {
-      final result = await getWords(page: page, pageSize: _pageSize);
-      final existingWords = (!reset && current is DictionaryData) ? current.words : <Word>[];
+      final result = await getWords(
+        topic: _activeTopic,
+        search: _activeSearch,
+        page: page,
+        pageSize: _pageSize,
+      );
+      final existingWords = (!reset && current is DictionaryData)
+          ? current.words
+          : <Word>[];
       final allWords = [...existingWords, ...result.words];
       final topics = allWords.map((e) => e.topic).toSet().toList();
 
@@ -45,6 +61,8 @@ class WordsVM extends StateNotifier<DictionaryState> {
   Future<void> loadByTopic(String topic) async {
     final current = state;
     if (current is! DictionaryData) return;
+    _activeTopic = topic;
+    _activeSearch = null;
     state = current.copyWith(isUpdating: true);
 
     try {
@@ -85,12 +103,46 @@ class WordsVM extends StateNotifier<DictionaryState> {
   Future<void> searchWords(String query) async {
     final current = state;
     if (current is! DictionaryData) return;
+    _activeTopic = null;
+    _activeSearch = query.isEmpty ? null : query;
     state = current.copyWith(isUpdating: true);
 
     try {
-      final result = await getWords(search: query, page: 1, pageSize: _pageSize);
+      final result = await getWords(
+        search: _activeSearch,
+        page: 1,
+        pageSize: _pageSize,
+      );
       state = current.copyWith(
         words: result.words,
+        isUpdating: false,
+        hasMore: result.hasMore,
+        currentPage: 1,
+      );
+    } catch (e) {
+      state = DictionaryError(e.toString());
+    }
+  }
+
+  Future<void> refreshWords() async {
+    final current = state;
+
+    try {
+      final result = await getWords(
+        topic: _activeTopic,
+        search: _activeSearch,
+        page: 1,
+        pageSize: _pageSize,
+      );
+      final topics = result.words.map((word) => word.topic).toSet().toList();
+
+      state = DictionaryData(
+        words: result.words,
+        topics:
+            current is DictionaryData &&
+                (_activeTopic != null || _activeSearch != null)
+            ? current.topics
+            : topics,
         isUpdating: false,
         hasMore: result.hasMore,
         currentPage: 1,
@@ -106,7 +158,11 @@ class WordsVM extends StateNotifier<DictionaryState> {
 
     final updatedWords = current.words.where((w) => w.wordId != id).toList();
     final updatedTopics = updatedWords.map((e) => e.topic).toSet().toList();
-    state = current.copyWith(words: updatedWords, topics: updatedTopics, isUpdating: true);
+    state = current.copyWith(
+      words: updatedWords,
+      topics: updatedTopics,
+      isUpdating: true,
+    );
 
     try {
       await deleteWordUseCase(id);

@@ -71,7 +71,7 @@ class _DictionaryScreenState extends ConsumerState<DictionaryScreen> {
       backgroundColor: const Color(0xFFF3F3F3),
       appBar: AppBar(
         backgroundColor: Colors.transparent,
-        elevation: 0, 
+        elevation: 0,
         centerTitle: true,
         title: Text(
           l10n.tabDictionary,
@@ -81,7 +81,7 @@ class _DictionaryScreenState extends ConsumerState<DictionaryScreen> {
           if (hasWords)
             IconButton(
               tooltip: 'Очистить словарь',
-              icon: Container(
+              icon: SizedBox(
                 width: 36,
                 height: 36,
                 child: const Icon(
@@ -113,34 +113,59 @@ class _DictionaryScreenState extends ConsumerState<DictionaryScreen> {
 class DictionaryBody extends ConsumerWidget {
   const DictionaryBody({super.key});
 
+  Future<void> _refresh(WidgetRef ref) {
+    return ref.read(wordsVmProvider.notifier).refreshWords();
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final state = ref.watch(wordsVmProvider);
 
     return switch (state) {
-      DictionaryInitialLoading() =>
-      const Center(child: CircularProgressIndicator()),
+      DictionaryInitialLoading() => const Center(
+        child: CircularProgressIndicator(),
+      ),
 
-      DictionaryError(:final message) =>
-          Center(child: Text(message)),
+      DictionaryError(:final message) => RefreshIndicator(
+        color: AppColors.accent,
+        onRefresh: () => _refresh(ref),
+        child: CustomScrollView(
+          physics: const AlwaysScrollableScrollPhysics(),
+          slivers: [
+            SliverFillRemaining(
+              hasScrollBody: false,
+              child: Center(child: Text(message)),
+            ),
+          ],
+        ),
+      ),
 
-      DictionaryData(:final words, :final topics, :final isUpdating) =>
-          Stack(
-            children: [
-              words.isEmpty
-                  ? const EmptyDictionary()
-                  : DictionaryContent(words: words, topics: topics),
-              if (isUpdating)
-                const Positioned(
-                  top: 0,
-                  left: 0,
-                  right: 0,
-                  child: LinearProgressIndicator(color: AppColors.accent),
-                ),
-            ],
+      DictionaryData(:final words, :final topics, :final isUpdating) => Stack(
+        children: [
+          RefreshIndicator(
+            color: AppColors.accent,
+            onRefresh: () => _refresh(ref),
+            child: words.isEmpty
+                ? const CustomScrollView(
+                    physics: AlwaysScrollableScrollPhysics(),
+                    slivers: [
+                      SliverFillRemaining(
+                        hasScrollBody: false,
+                        child: EmptyDictionary(),
+                      ),
+                    ],
+                  )
+                : DictionaryContent(words: words, topics: topics),
           ),
-
-      _ => const SizedBox.shrink(),
+          if (isUpdating)
+            const Positioned(
+              top: 0,
+              left: 0,
+              right: 0,
+              child: LinearProgressIndicator(color: AppColors.accent),
+            ),
+        ],
+      ),
     };
   }
 }
